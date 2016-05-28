@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
     <artifactId>mentor-sherpa</artifactId>
-    <groupId>com.snapit.solutions.slantfree.mentor.sherpa</groupId>
+    <groupId>com.snapit.solutions.mentor.sherpa</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-    <groupId>com.snapit.solutions.slantfree.mentor.sherpa</groupId>
+    <groupId>com.snapit.solutions.mentor.sherpa</groupId>
     <artifactId>mentor-sherpa-ejb</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>ejb</packaging>

@@ -6,6 +6,28 @@ The configuration is intended to be shared among all the users of project and
 therefore it is assumed to be part of version control checkout.
 Without this configuration present, some functionality in the IDE may be limited or fail altogether.
 -->
+    <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1">
+        <library name="twitter-bootstrap" version="4.0.0-alpha.2">
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/css/bootstrap.css" path="css/bootstrap.css"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/css/bootstrap.css.map" path="css/bootstrap.css.map"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/css/bootstrap.min.css" path="css/bootstrap.min.css"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/css/bootstrap.min.css.map" path="css/bootstrap.min.css.map"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/bootstrap.js" path="js/bootstrap.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/bootstrap.min.js" path="js/bootstrap.min.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/npm.js" path="js/npm.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/alert.js" path="js/umd/alert.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/button.js" path="js/umd/button.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/carousel.js" path="js/umd/carousel.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/collapse.js" path="js/umd/collapse.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/dropdown.js" path="js/umd/dropdown.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/modal.js" path="js/umd/modal.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/popover.js" path="js/umd/popover.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/scrollspy.js" path="js/umd/scrollspy.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/tab.js" path="js/umd/tab.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/tooltip.js" path="js/umd/tooltip.js"/>
+            <file localPath="src/main/webapp/js/libs/twitter-bootstrap/js/umd/util.js" path="js/umd/util.js"/>
+        </library>
+    </libraries>
     <properties xmlns="http://www.netbeans.org/ns/maven-properties-data/1">
         <!--
 Properties that influence various parts of the IDE, especially code formatting and the like. 
@@ -15,5 +37,13 @@ Any value defined here will override the pom.xml file value but is only applicab
 -->
         <org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_j2eeVersion>1.7-web</org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_j2eeVersion>
         <org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>gfv3ee6</org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>
+        <org-netbeans-modules-css-prep.less_2e_mappings>/less:/css</org-netbeans-modules-css-prep.less_2e_mappings>
+        <org-netbeans-modules-css-prep.less_2e_enabled>false</org-netbeans-modules-css-prep.less_2e_enabled>
+        <org-netbeans-modules-css-prep.sass_2e_enabled>false</org-netbeans-modules-css-prep.sass_2e_enabled>
+        <org-netbeans-modules-css-prep.sass_2e_compiler_2e_options/>
+        <org-netbeans-modules-css-prep.less_2e_compiler_2e_options/>
+        <org-netbeans-modules-css-prep.sass_2e_mappings>/scss:/css</org-netbeans-modules-css-prep.sass_2e_mappings>
+        <org-netbeans-modules-javascript2-requirejs.enabled>true</org-netbeans-modules-javascript2-requirejs.enabled>
+        <org-netbeans-modules-web-clientproject-api.js_2e_libs_2e_folder>js/libs</org-netbeans-modules-web-clientproject-api.js_2e_libs_2e_folder>
     </properties>
 </project-shared-configuration>

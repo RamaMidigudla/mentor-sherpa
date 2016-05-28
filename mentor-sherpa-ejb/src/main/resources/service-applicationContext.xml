@@ -8,6 +8,6 @@
   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 <beans>
    <import resource="classpath*:MongoDBConnection.xml" />
-   <context:component-scan base-package="com.snapit.solutions.slantfree" />  
+   <context:component-scan base-package="com.snapit.solutions.mentor.sherpa" />  
 </beans>
 </beans>
