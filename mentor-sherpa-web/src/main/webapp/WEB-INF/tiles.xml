@@ -10,7 +10,11 @@
         <put-attribute name="leftnav" value="/jsp/leftNav.jsp"></put-attribute>
         <put-attribute name="body" value=""></put-attribute>
         <put-attribute name="footer" value="/jsp/footer.jsp"></put-attribute>
-        <put-attribute name="scriptjs" value="/js/scriptjs.jsp"></put-attribute>
+        <put-attribute name="scriptjs" value="/jsp/scriptjs.jsp"></put-attribute>
+    </definition>
+    <definition name="home" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa"></put-attribute>
+        <put-attribute name="body" value="index.html"></put-attribute>
     </definition>
     <definition name="organization.registration" extends="base.definition">
         <put-attribute name="title" value="Organization Registration"></put-attribute>

@@ -14,11 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
 @Controller
-@RequestMapping("/organization")
-public class OrganizationController {
+@RequestMapping("/")
+public class WelcomeController {
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView register(Model model) {
-        return new ModelAndView("organization.registration");
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView home(Model model) {
+        return new ModelAndView("home");
     }
+
 }

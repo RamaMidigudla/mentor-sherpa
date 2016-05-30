@@ -18,8 +18,8 @@ import org.mongodb.morphia.Morphia;
 public class DatabaseConnector {
 
     private static final Logger LOG = LogManager.getLogger(DatabaseConnector.class);
-    private static final String DB_CONNECTION_URI = "mongodb://slantfreeAdmin:10152009@localhost:27017/slantfree-vendor-db";
-    private static final String DB_NAME = "slantfree-vendor-db";
+    private static final String DB_CONNECTION_URI = "mongodb://ms-admin:msPass@localhost:27017/mentor-sherpa-db";
+    private static final String DB_NAME = "mentor-sherpa-db";
 
     /**
      * Simple Database Connector - Connects to MongoDB
@@ -57,7 +57,7 @@ public class DatabaseConnector {
 
         // tell Morphia where to find your classes
        // can be called multiple times with different packages or classes
-        morphia.mapPackage("com.snapit.solutions.slantfree.entity");
+        morphia.mapPackage("com.snapit.solutions.mentor.sherpa.entity");
 
         // create the Datastore connecting to the default port on the local host
         final Datastore datastore = morphia.createDatastore(getMongoClient(), DB_NAME);

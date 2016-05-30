@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Built-By: sudheerparasker
+Class-Path: . lib/spring-context-4.1.6.RELEASE.jar lib/spring-aop-4.1.
+ 6.RELEASE.jar lib/aopalliance-1.0.jar lib/spring-core-4.1.6.RELEASE.j
+ ar lib/spring-expression-4.1.6.RELEASE.jar lib/spring-context-support
+ -4.1.6.RELEASE.jar lib/spring-webmvc-4.1.6.RELEASE.jar lib/spring-web
+ -4.1.6.RELEASE.jar lib/spring-beans-4.1.6.RELEASE.jar lib/tiles-jsp-3
+ .0.3.jar lib/tiles-servlet-3.0.3.jar lib/tiles-request-servlet-1.0.3.
+ jar lib/tiles-template-3.0.3.jar lib/tiles-autotag-core-runtime-1.1.0
+ .jar lib/tiles-request-jsp-1.0.3.jar lib/tiles-core-3.0.3.jar lib/com
+ mons-digester-2.0.jar lib/commons-beanutils-1.8.0.jar lib/jcl-over-sl
+ f4j-1.5.8.jar lib/tiles-api-3.0.3.jar lib/tiles-request-api-1.0.6.jar
+  lib/log4j-core-2.5.jar lib/log4j-api-2.5.jar lib/slf4j-simple-1.7.21
+ .jar lib/slf4j-api-1.7.21.jar lib/jstl-1.2.jar
+Created-By: Apache Maven 3.0.5
+Build-Jdk: 1.8.0_91
+
