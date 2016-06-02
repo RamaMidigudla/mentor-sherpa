@@ -36,7 +36,6 @@
                 <configuration>
                     <version>6</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
-                    <skinnyWars>true</skinnyWars>
                 </configuration>
             </plugin>
         </plugins>
@@ -55,10 +54,25 @@
             <type>war</type>
         </dependency>
         <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-api</artifactId>
+        </dependency>
+
+        <!-- uncoment for GlassFish to work locally - Skinny WAR Solution
+        <dependency>
             <groupId>com.snapit.solutions.mentor.sherpa</groupId>
             <artifactId>mentor-sherpa-web</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>pom</type>
         </dependency>
+        -->
     </dependencies>
 </project>

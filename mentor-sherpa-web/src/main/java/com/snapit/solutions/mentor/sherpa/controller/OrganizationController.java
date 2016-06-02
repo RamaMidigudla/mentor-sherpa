@@ -17,8 +17,19 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/organization")
 public class OrganizationController {
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register(Model model) {
         return new ModelAndView("organization.registration");
     }
+    
+    @RequestMapping(value = "/programs", method = RequestMethod.GET)
+    public ModelAndView programs(Model model) {
+        return new ModelAndView("");
+    }
+    
+    @RequestMapping(value = "/programs/add", method = RequestMethod.GET)
+    public ModelAndView addPrograms(Model model) {
+        return new ModelAndView("");
+    }
+    
 }

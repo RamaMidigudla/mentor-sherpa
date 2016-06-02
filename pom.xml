@@ -29,19 +29,16 @@
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-core</artifactId>
             <version>3.0.3</version>
-             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-api</artifactId>
             <version>3.0.3</version>
-             <scope>compile</scope>
         </dependency>        
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-request-api</artifactId>
             <version>1.0.6</version>
-            <scope>compile</scope>
         </dependency>
       <dependency>
             <groupId>org.apache.tiles</groupId>
