@@ -19,27 +19,18 @@ import org.mongodb.morphia.annotations.Entity;
 @XmlRootElement
 public class Parent implements Serializable  {
     
-     private String userName;
-     
-     private String password;
+    @Embedded("parentLogin")
+    private User parentLoginCredentials;
     
-     @Embedded("child")
-     private List<Child> childList;
+    @Embedded("child")
+    private List<Child> childList;
 
-    public String getUserName() {
-        return userName;
+    public User getParentLoginCredentials() {
+        return parentLoginCredentials;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setParentLoginCredentials(User parentLoginCredentials) {
+        this.parentLoginCredentials = parentLoginCredentials;
     }
 
     public List<Child> getChildList() {
@@ -48,14 +39,6 @@ public class Parent implements Serializable  {
 
     public void setChildList(List<Child> childList) {
         this.childList = childList;
-    }
-     
-     
-    
-   
-     
-     
-    
-    
+    }   
     
 }

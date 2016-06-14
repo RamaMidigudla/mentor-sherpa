@@ -4,8 +4,10 @@
 package com.snapit.solutions.mentor.sherpa.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -13,17 +15,24 @@ import org.mongodb.morphia.annotations.Id;
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
-@Entity
+@Entity("organizations")
 @XmlRootElement
 public class Organization implements Serializable {
     @Id
     private ObjectId id;
-    private String name;
-    private String address1;
-    private String address2;
-    private String state;
-    private String city;
-    private String zip;
+    
+    private String organizationName;
+   
+    @Embedded("superUser")
+    private User superUser;
+    
+    @Embedded("subUser")
+    private List<User> subUsers;
+    
+    @Embedded("program")
+    private List<Program> programs;
+    
+    
 
     public ObjectId getId() {
         return id;
@@ -33,54 +42,37 @@ public class Organization implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+    
+    public List<Program> getPrograms() {
+        return programs;
     }
 
-    public String getAddress1() {
-        return address1;
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
     }
 
-    public void setAddress1(String address1) {
-        this.address1 = address1;
+    public User getSuperUser() {
+        return superUser;
     }
 
-    public String getAddress2() {
-        return address2;
+    public void setSuperUser(User superUser) {
+        this.superUser = superUser;
     }
 
-    public void setAddress2(String address2) {
-        this.address2 = address2;
+    public List<User> getSubUsers() {
+        return subUsers;
     }
 
-    public String getState() {
-        return state;
+    public void setSubUsers(List<User> subUsers) {
+        this.subUsers = subUsers;
     }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
     
     @Override
     public int hashCode() {
@@ -101,11 +93,5 @@ public class Organization implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "com.snapit.solutions.slantfree.mentor.sherpa.entity.Organization[ id=" + id + " ]";
-    }
-    
     
 }
