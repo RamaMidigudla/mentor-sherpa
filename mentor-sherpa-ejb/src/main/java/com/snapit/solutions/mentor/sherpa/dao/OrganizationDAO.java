@@ -41,8 +41,6 @@ public interface OrganizationDAO extends DAO<Organization, ObjectId> {
     public void deleteOrganizationById(Organization organization);
     
     public List<Organization> findAll();
-   
-    //public void saveSubUsers(ObjectId organizationId, SubUser subUser);
     
 }
 
