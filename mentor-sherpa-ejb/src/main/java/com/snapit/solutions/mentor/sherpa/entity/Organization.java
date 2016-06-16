@@ -3,9 +3,12 @@
  */
 package com.snapit.solutions.mentor.sherpa.entity;
 
+import com.snapit.solutions.securtiy.entity.User;
 import java.io.Serializable;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -16,6 +19,7 @@ import org.mongodb.morphia.annotations.Id;
 @Entity
 @XmlRootElement
 public class Organization implements Serializable {
+
     @Id
     private ObjectId id;
     private String name;
@@ -24,6 +28,15 @@ public class Organization implements Serializable {
     private String state;
     private String city;
     private String zip;
+
+    @Embedded
+    private User superUser;
+
+    @Embedded("subUser")
+    private List<User> subUsers;
+
+    @Embedded("program")
+    private List<Program> programs;
 
     public ObjectId getId() {
         return id;
@@ -81,12 +94,35 @@ public class Organization implements Serializable {
         this.zip = zip;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
+    }
+
+    public User getSuperUser() {
+        return superUser;
+    }
+
+    public void setSuperUser(User superUser) {
+        this.superUser = superUser;
+    }
+
+    public List<User> getSubUsers() {
+        return subUsers;
+    }
+
+    public void setSubUsers(List<User> subUsers) {
+        this.subUsers = subUsers;
+    }
+
+    public List<Program> getPrograms() {
+        return programs;
+    }
+
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
     }
 
     @Override
@@ -106,6 +142,5 @@ public class Organization implements Serializable {
     public String toString() {
         return "com.snapit.solutions.slantfree.mentor.sherpa.entity.Organization[ id=" + id + " ]";
     }
-    
-    
+
 }

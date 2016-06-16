@@ -20,10 +20,10 @@ import org.springframework.stereotype.Repository;
 public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implements OrganizationDAO {
     
     @Autowired
-    public OrganizationDAOImpl(Datastore ds) {
-        super(ds);
-        ds.ensureIndexes(); //creates all defined with @Indexed
-        ds.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
+    public OrganizationDAOImpl(Datastore datastore) {
+        super(datastore);
+        datastore.ensureIndexes(); //creates all defined with @Indexed
+        datastore.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
     }
     
     /**

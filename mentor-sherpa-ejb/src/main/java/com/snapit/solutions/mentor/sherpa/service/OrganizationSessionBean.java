@@ -20,10 +20,10 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
-@Stateless
+@Stateless(name="OrganizationService", mappedName = "com/snapit/solutions/mentor/sherpa/service/organizationservice/ejb/OrganizationService")
 @Interceptors(SpringBeanAutowiringInterceptor.class)
 @Path("/organization/")
-public class OrganizationSessionBean implements OrganizationSessionBeanLocal {
+public class OrganizationSessionBean implements OrganizationService {
 
    private static final Logger LOG = LogManager.getLogger(OrganizationSessionBean.class);
    @Autowired
