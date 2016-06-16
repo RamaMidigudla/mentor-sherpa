@@ -1,12 +1,10 @@
 /*
- * Property of SnapIT Solutions.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.snapit.solutions.mentor.sherpa.entity;
 
-/**
- *
- * @author Sudheer.Parasker@SnapIT.Solutions
- */
 import java.io.Serializable;
 import java.util.List;
 import org.mongodb.morphia.annotations.Embedded;
@@ -17,11 +15,11 @@ import org.mongodb.morphia.annotations.Embedded;
  */
 @Embedded
 class Child implements Serializable {
-
+    
     private String name;
-
+    
     private Integer age;
-
+    
     private List<String> intrests;
 
     public String getName() {
@@ -47,5 +45,4 @@ class Child implements Serializable {
     public void setIntrests(List<String> intrests) {
         this.intrests = intrests;
     }
-
 }

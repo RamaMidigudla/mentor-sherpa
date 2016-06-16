@@ -1,12 +1,10 @@
 /*
- * Property of SnapIT Solutions.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.snapit.solutions.mentor.sherpa.entity;
 
-/**
- *
- * @author Sudheer.Parasker@SnapIT.Solutions
- */
 import java.io.Serializable;
 import org.mongodb.morphia.annotations.Embedded;
 
@@ -15,9 +13,9 @@ import org.mongodb.morphia.annotations.Embedded;
  * @author Ram
  */
 @Embedded
-public class OrganizationAdminUser implements Serializable {
+public class User implements Serializable {
     
-     private String userName;
+    private String userName;
      
      private String password;
 
@@ -36,4 +34,5 @@ public class OrganizationAdminUser implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
- }
+    
+}

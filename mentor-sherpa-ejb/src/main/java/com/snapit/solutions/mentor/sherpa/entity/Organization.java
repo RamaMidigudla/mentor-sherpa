@@ -16,27 +16,25 @@ import org.mongodb.morphia.annotations.Id;
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
-@Entity
+@Entity("organizations")
 @XmlRootElement
 public class Organization implements Serializable {
 
     @Id
     private ObjectId id;
-    private String name;
-    private String address1;
-    private String address2;
-    private String state;
-    private String city;
-    private String zip;
-
-    @Embedded
+    
+    private String organizationName;
+   
+    @Embedded("superUser")
     private User superUser;
-
+    
     @Embedded("subUser")
     private List<User> subUsers;
-
+    
     @Embedded("program")
     private List<Program> programs;
+    
+    
 
     public ObjectId getId() {
         return id;
@@ -46,59 +44,20 @@ public class Organization implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+    
+    public List<Program> getPrograms() {
+        return programs;
     }
 
-    public String getAddress1() {
-        return address1;
-    }
-
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
-
-    public String getAddress2() {
-        return address2;
-    }
-
-    public void setAddress2(String address2) {
-        this.address2 = address2;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
     }
 
     public User getSuperUser() {
@@ -115,14 +74,6 @@ public class Organization implements Serializable {
 
     public void setSubUsers(List<User> subUsers) {
         this.subUsers = subUsers;
-    }
-
-    public List<Program> getPrograms() {
-        return programs;
-    }
-
-    public void setPrograms(List<Program> programs) {
-        this.programs = programs;
     }
 
     @Override
@@ -142,5 +93,4 @@ public class Organization implements Serializable {
     public String toString() {
         return "com.snapit.solutions.slantfree.mentor.sherpa.entity.Organization[ id=" + id + " ]";
     }
-
 }
