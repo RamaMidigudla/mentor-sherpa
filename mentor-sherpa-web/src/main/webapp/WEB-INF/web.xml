@@ -12,15 +12,15 @@
         </param-value>
     </context-param>
     
-<context-param>
-   <param-name>locatorFactorySelector</param-name>
-   <param-value>classpath:beanRefContext.xml</param-value>
-</context-param>
+    <context-param>
+        <param-name>locatorFactorySelector</param-name>
+        <param-value>classpath:beanRefContext.xml</param-value>
+    </context-param>
 	       
-<context-param>
-   <param-name>parentContextKey</param-name>
-    <param-value>ejb.context</param-value>
-</context-param>
+    <context-param>
+        <param-name>parentContextKey</param-name>
+        <param-value>ejb.context</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -48,4 +48,17 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <security-constraint> 
+        <web-resource-collection> 
+            <web-resource-name>Deny Direct Access</web-resource-name> 
+            <description></description> 
+            <url-pattern>*.jsp</url-pattern> 
+        </web-resource-collection> 
+        <auth-constraint> 
+            <role-name>Denied</role-name> 
+        </auth-constraint> 
+    </security-constraint> 
+    <security-role> 
+        <role-name>Denied</role-name> 
+    </security-role>
 </web-app>
