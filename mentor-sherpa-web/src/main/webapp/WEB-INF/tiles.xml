@@ -16,8 +16,10 @@
         <put-attribute name="title" value="Mentor Sherpa"></put-attribute>
         <put-attribute name="body" value="index.html"></put-attribute>
     </definition>
-    <definition name="organization.registration" extends="base.definition">
-        <put-attribute name="title" value="Organization Registration"></put-attribute>
-        <put-attribute name="body" value="/jsp/organization/signup.jsp"></put-attribute>
+    <definition name="registration" template="/jsp/site/register.jsp">
+        <put-attribute name="title" value="Mentor Sherpa | Registration"></put-attribute>
+    </definition>
+    <definition name="login" template="/jsp/site/login.jsp">
+        <put-attribute name="title" value="Mentor Sherpa | Login"></put-attribute>
     </definition>
 </tiles-definitions>

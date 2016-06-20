@@ -6,8 +6,12 @@ package com.snapit.solutions.securtiy.entity;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -16,15 +20,13 @@ import org.mongodb.morphia.annotations.Id;
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
-@Entity
+@Entity("user")
 @XmlRootElement
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private String userId;
 
     private String password;
 
@@ -37,11 +39,12 @@ public class User implements Serializable {
     private String state = UserStatus.ACTIVE.getState();
 
 //    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "APP_USER_USER_PROFILE",
+  //  @JoinTable(name = "APP_USER_USER_PROFILE",
 //            joinColumns = {
 //                @JoinColumn(name = "USER_ID")},
 //            inverseJoinColumns = {
 //                @JoinColumn(name = "USER_PROFILE_ID")})
+    
     private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
     public int getId() {
@@ -50,14 +53,6 @@ public class User implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getPassword() {
@@ -113,7 +108,7 @@ public class User implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + id;
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
         return result;
     }
 
@@ -132,11 +127,11 @@ public class User implements Serializable {
         if (id != other.id) {
             return false;
         }
-        if (userId == null) {
-            if (other.userId != null) {
+        if (email == null) {
+            if (other.email != null) {
                 return false;
             }
-        } else if (!userId.equals(other.userId)) {
+        } else if (!email.equals(other.email)) {
             return false;
         }
         return true;
@@ -144,7 +139,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", ssoId=" + userId + ", password=" + password
+        return "User [id=" + id + ", ssoId=" + email + ", password=" + password
                 + ", firstName=" + firstName + ", lastName=" + lastName
                 + ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + "]";
     }

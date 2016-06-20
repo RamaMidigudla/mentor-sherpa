@@ -19,7 +19,7 @@ public class OrganizationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register(Model model) {
-        return new ModelAndView("organization.registration");
+        return new ModelAndView("registration");
     }
     
     @RequestMapping(value = "/programs", method = RequestMethod.GET)

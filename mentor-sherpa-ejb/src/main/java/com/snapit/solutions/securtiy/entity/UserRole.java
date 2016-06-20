@@ -11,8 +11,8 @@ public enum UserRole {
     PARENT("PARENT"),
     CHILD("CHILD"),
     MENTOR("MENTOR"),
-    ORG_ADMIN("ADMIN"),
-    ORG_USER("USER");
+    ORG_ADMIN("ORG_ADMIN"),
+    ORG_USER("ORG_USER");
      
     String userProfileType;
      
