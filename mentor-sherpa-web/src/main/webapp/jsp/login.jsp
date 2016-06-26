@@ -34,20 +34,20 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="${pageContext.request.contextPath}/themes/AdminLTE/index2.html"><b>Mentor</b>Sherpa</a>
+    <a href="${pageContext.request.contextPath}/"><b>Mentor</b>Sherpa</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="${pageContext.request.contextPath}/themes/AdminLTE/index2.html" method="post">
+    <form action="login" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="text" name="username" class="form-control" placeholder="Username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

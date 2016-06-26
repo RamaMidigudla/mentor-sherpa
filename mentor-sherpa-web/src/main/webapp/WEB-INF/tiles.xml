@@ -16,10 +16,13 @@
         <put-attribute name="title" value="Mentor Sherpa"></put-attribute>
         <put-attribute name="body" value="index.html"></put-attribute>
     </definition>
-    <definition name="registration" template="/jsp/site/register.jsp">
+    <definition name="registration" template="/jsp/register.jsp">
         <put-attribute name="title" value="Mentor Sherpa | Registration"></put-attribute>
     </definition>
-    <definition name="login" template="/jsp/site/login.jsp">
+    <definition name="login" template="/jsp/login.jsp">
         <put-attribute name="title" value="Mentor Sherpa | Login"></put-attribute>
+    </definition>
+    <definition name="accessDenied" template="/jsp/403.jsp">
+        <put-attribute name="title" value="Mentor Sherpa | Aceess Denied"></put-attribute>
     </definition>
 </tiles-definitions>
