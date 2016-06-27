@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -30,28 +29,10 @@ public class User implements Serializable {
     private String lastName;
 
     private String email;
-
-//    private String state = UserStatus.ACTIVE.getState();
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-  //  @JoinTable(name = "APP_USER_USER_PROFILE",
-//            joinColumns = {
-//                @JoinColumn(name = "USER_ID")},
-//            inverseJoinColumns = {
-//                @JoinColumn(name = "USER_PROFILE_ID")})
     
-//    private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
-    @Embedded("userRole")
-    private List<UserRole> userRole;
-
-    public List<UserRole> getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(List<UserRole> userRole) {
-        this.userRole = userRole;
-    }
-
+    private List<String> userRole;
+    
+    
     public ObjectId getId() {
         return id;
     }
@@ -92,21 +73,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
-//    public String getState() {
-//        return state;
-//    }
-//
-//    public void setState(String state) {
-//        this.state = state;
-//    }
+    public List<String> getUserRole() {
+        return userRole;
+    }
 
-//    public Set<UserProfile> getUserProfiles() {
-//        return userProfiles;
-//    }
-//
-//    public void setUserProfiles(Set<UserProfile> userProfiles) {
-//        this.userProfiles = userProfiles;
-//    }
+    public void setUserRole(List<String> userRole) {
+        this.userRole = userRole;
+    }
+    
 
     @Override
     public int hashCode() {

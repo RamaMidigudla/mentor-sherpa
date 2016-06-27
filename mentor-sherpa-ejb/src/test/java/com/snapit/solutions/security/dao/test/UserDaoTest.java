@@ -26,7 +26,7 @@ public class UserDaoTest {
 
     @Autowired
     private UserDAO userDAO;
-    private static final String ORG_TEST_USERNAME = "org@hello.com";
+    private static final String ORG_TEST_USERNAME = "s.p@gmail.com";
 
     public UserDaoTest() {
     }
@@ -59,15 +59,18 @@ public class UserDaoTest {
 
         Assert.assertNotNull(userDAO);
         User user = null;
-        try {
-         user = userDAO.findUserByUserName(ORG_TEST_USERNAME);
-        } catch (Exception e) {
-            e.printStackTrace();
-        System.out.println("###############################Exceprtion : " + e.getMessage());
-        }
-        Assert.assertNotNull(user);
-        System.out.println("###############################User : " + user);
-        Assert.assertEquals(ORG_TEST_USERNAME, user.getEmail());
+//        try {
+//         user = userDAO.findUserByUserName(ORG_TEST_USERNAME);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        System.out.println("###############################Exceprtion : " + e.getMessage());
+//        }
+//        Assert.assertNotNull(user);
+//        System.out.println("###############################User : " + user);
+//        Assert.assertEquals(ORG_TEST_USERNAME, user.getEmail());
+          user = userDAO.findUserByUserName(ORG_TEST_USERNAME);
+          Assert.assertNotNull(user);
+
 
     }
 }
