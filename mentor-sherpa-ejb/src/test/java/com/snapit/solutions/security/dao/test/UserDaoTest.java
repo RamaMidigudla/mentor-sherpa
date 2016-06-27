@@ -26,7 +26,7 @@ public class UserDaoTest {
 
     @Autowired
     private UserDAO userDAO;
-    private static final String ORG_TEST_USERNAME = "s.p@gmail.com";
+    private static final String ORG_TEST_USERNAME = "org@hello.com";
 
     public UserDaoTest() {
     }

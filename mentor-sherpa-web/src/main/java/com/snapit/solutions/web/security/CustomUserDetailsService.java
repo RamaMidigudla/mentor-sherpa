@@ -42,19 +42,17 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 //        return new org.springframework.security.core.userdetails.User(myUser.getEmail(), myUser.getPassword(),
 //                myUser.getState().equals(UserStatus.ACTIVE), true, true, true, getGrantedAuthorities(myUser));
-         return new org.springframework.security.core.userdetails.User(userId, "password", getGrantedAuthorities(myUser));
+         return new org.springframework.security.core.userdetails.User(myUser.getEmail(), myUser.getPassword(), getGrantedAuthorities(myUser));
    }
 
     private List<GrantedAuthority> getGrantedAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 
-//        for (UserProfile userProfile : user.getUserProfiles()) {
-//            System.out.println("UserProfile : " + userProfile);
-//            authorities.add(new SimpleGrantedAuthority("ROLE_" + userProfile.getType()));ORG_ADMIN
-            authorities.add(new SimpleGrantedAuthority("ORG_ADMIN"));
-            authorities.add(new SimpleGrantedAuthority("ROLE_ORG_ADMIN"));
-//        }
+        for (String userProfile : user.getUserRole()) {
+            System.out.println("UserProfile : " + userProfile);
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + userProfile));
+        }
         System.out.println("authorities :" + authorities);
         return authorities;
     }
