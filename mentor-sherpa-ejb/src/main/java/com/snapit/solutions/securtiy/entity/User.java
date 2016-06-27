@@ -4,15 +4,11 @@
 package com.snapit.solutions.securtiy.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import java.util.List;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -25,8 +21,7 @@ import org.mongodb.morphia.annotations.Id;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private ObjectId id;
 
     private String password;
 
@@ -36,7 +31,7 @@ public class User implements Serializable {
 
     private String email;
 
-    private String state = UserStatus.ACTIVE.getState();
+//    private String state = UserStatus.ACTIVE.getState();
 
 //    @ManyToMany(fetch = FetchType.EAGER)
   //  @JoinTable(name = "APP_USER_USER_PROFILE",
@@ -45,13 +40,23 @@ public class User implements Serializable {
 //            inverseJoinColumns = {
 //                @JoinColumn(name = "USER_PROFILE_ID")})
     
-    private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+//    private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+    @Embedded("userRole")
+    private List<UserRole> userRole;
 
-    public int getId() {
+    public List<UserRole> getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(List<UserRole> userRole) {
+        this.userRole = userRole;
+    }
+
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -87,29 +92,29 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getState() {
-        return state;
-    }
+//    public String getState() {
+//        return state;
+//    }
+//
+//    public void setState(String state) {
+//        this.state = state;
+//    }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public Set<UserProfile> getUserProfiles() {
-        return userProfiles;
-    }
-
-    public void setUserProfiles(Set<UserProfile> userProfiles) {
-        this.userProfiles = userProfiles;
-    }
+//    public Set<UserProfile> getUserProfiles() {
+//        return userProfiles;
+//    }
+//
+//    public void setUserProfiles(Set<UserProfile> userProfiles) {
+//        this.userProfiles = userProfiles;
+//    }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
-        return result;
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.email);
+//        hash = 97 * hash + Objects.hashCode(this.userProfiles);
+        return hash;
     }
 
     @Override
@@ -120,28 +125,40 @@ public class User implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof User)) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        User other = (User) obj;
-        if (id != other.id) {
+        final User other = (User) obj;
+        if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (email == null) {
-            if (other.email != null) {
-                return false;
-            }
-        } else if (!email.equals(other.email)) {
+        if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+//        if (!Objects.equals(this.state, other.state)) {
+//            return false;
+//        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+//        if (!Objects.equals(this.userProfiles, other.userProfiles)) {
+//            return false;
+//        }
         return true;
     }
+
 
     @Override
     public String toString() {
         return "User [id=" + id + ", ssoId=" + email + ", password=" + password
                 + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + "]";
+                + ", email=" + email +  "]";
     }
 
 }

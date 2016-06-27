@@ -35,6 +35,5 @@
         <beans:constructor-arg name="strength" value="11" />
     </beans:bean>
       
-    <beans:bean id="customUserDetailsService" class="com.snapit.solutions.web.security.CustomUserDetailsService" />
      
 </beans:beans>

@@ -8,8 +8,6 @@ package com.snapit.solutions.web.security;
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
 import com.snapit.solutions.securtiy.entity.User;
-import com.snapit.solutions.securtiy.entity.UserProfile;
-import com.snapit.solutions.securtiy.entity.UserStatus;
 import com.snapit.solutions.securtiy.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,21 +18,23 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String userId)
             throws UsernameNotFoundException {
-//        User myUser = userService.findByUserId(userId);
-        User myUser = new User();
-        myUser.setEmail("admin@hello.com");
-        myUser.setPassword("password");    
+        User myUser = userService.findByUserId(userId);
+//        User myUser = new User();
+//        myUser.setEmail("admin@hello.com");
+//        myUser.setPassword("password");    
         System.out.println("User : " + myUser);
         if (myUser == null) {
             System.out.println("User not found");

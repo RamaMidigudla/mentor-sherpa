@@ -9,16 +9,29 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
+@Repository("userDAO")
 public class UserDAOImpl extends BasicDAO<User, ObjectId>implements UserDAO {
+    
     @Autowired
     public UserDAOImpl(Datastore ds) {
         super(ds);
         ds.ensureIndexes(); //creates all defined with @Indexed
         ds.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
+    }
+    
+    @Override
+    public User findUserByUserName(String userId) {
+        return getDatastore().find(User.class).field("email").equal(userId).get();
+//            return getDatastore().find(
+//                    User.class, 
+//                    "email", 
+//                    userId).get();      
+//        
     }
 }

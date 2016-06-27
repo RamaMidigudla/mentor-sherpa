@@ -3,24 +3,32 @@
  */
 package com.snapit.solutions.securtiy.entity;
 
+import java.io.Serializable;
+import org.mongodb.morphia.annotations.Embedded;
+
 /**
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
-public enum UserRole {
-    PARENT("PARENT"),
-    CHILD("CHILD"),
-    MENTOR("MENTOR"),
-    ORG_ADMIN("ORG_ADMIN"),
-    ORG_USER("ORG_USER");
+@Embedded
+public class UserRole implements Serializable {
+//    PARENT("PARENT"),
+//    CHILD("CHILD"),
+//    MENTOR("MENTOR"),
+//    ORG_ADMIN("ORG_ADMIN"),
+//    ORG_USER("ORG_USER");
      
-    String userProfileType;
-     
-    private UserRole(String userProfileType){
-        this.userProfileType = userProfileType;
+    private String role;
+
+    public void setRole(String aRole) {
+        this.role = aRole;
     }
      
-    public String getUserProfileType(){
-        return userProfileType;
+//    private UserRole(String role){
+//        this.role = role;
+//    }
+     
+    public String getRole(){
+        return role;
     }
 }

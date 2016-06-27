@@ -22,7 +22,7 @@ public class UserProfile implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String type = UserRole.ORG_USER.getUserProfileType();
+    private String type = "ORG_USER";
 
     public int getId() {
         return id;
