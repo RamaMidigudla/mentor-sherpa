@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
     @Autowired
     private UserService userService;
+    static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder(11);
     
     @Autowired
     RegisterValidator registerValidator;
@@ -82,7 +85,7 @@ public class LoginController {
             user = new User();
             List<String> role = Arrays.asList("ORG-ADMIN");
             user.setEmail(registerForm.getEmailId());
-            user.setPassword(registerForm.getPassword());
+            user.setPassword(PASSWORD_ENCODER.encode(registerForm.getPassword()));
             user.setFirstName(registerForm.getFirstName());
             user.setLastName(registerForm.getLastName());
             user.setUserRole(role);

@@ -36,6 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 //        myUser.setEmail("admin@hello.com");
 //        myUser.setPassword("password");    
         System.out.println("User : " + myUser);
+        //get the encoded password
         if (myUser == null) {
             System.out.println("User not found");
             throw new UsernameNotFoundException("Username not found");

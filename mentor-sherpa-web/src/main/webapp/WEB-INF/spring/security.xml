@@ -27,8 +27,9 @@
     </http>
   
     <authentication-manager >
-        <authentication-provider user-service-ref="customUserDetailsService"/>
-        <!-- <password-encoder ref="encoder" /> -->
+        <authentication-provider user-service-ref="customUserDetailsService">
+            <password-encoder ref="encoder" />
+        </authentication-provider>
     </authentication-manager>
     <beans:bean id="encoder" 
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
