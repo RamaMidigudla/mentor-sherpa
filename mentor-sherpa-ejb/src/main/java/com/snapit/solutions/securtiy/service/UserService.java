@@ -13,4 +13,5 @@ import javax.ejb.Remote;
 @Remote
 public interface UserService {
     public User findByUserId(String userId);
+    public void registerUser(User user);
 }
