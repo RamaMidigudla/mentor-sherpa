@@ -7,6 +7,7 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.securtiy.entity.User;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -36,11 +37,8 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
     }
 
     @Override
-    public Mentor findMentorByUserName(Mentor mentor) {
-         return getDatastore().find(
-                    Mentor.class, 
-                    "mentorLogin.userName", 
-                    mentor.getMentorLoginCredentials().getUserName()).get(); 
+    public Mentor findMentorByUserName(ObjectId userObjectId) {
+         return getDatastore().find(Mentor.class).field("user_id").equal(userObjectId).get();
     }
 
     @Override

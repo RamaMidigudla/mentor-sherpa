@@ -41,7 +41,7 @@ public class ParentDAOImpl extends BasicDAO<Parent, ObjectId> implements ParentD
          return getDatastore().find(
                     Parent.class, 
                     "parentLogin.userName", 
-                    parent.getParentLoginCredentials().getUserName()).get();  
+                    parent.getParentLoginCredentials().getEmail()).get();  
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ParentDAOImpl extends BasicDAO<Parent, ObjectId> implements ParentD
                 getDatastore().createQuery(Parent.class).field("_id").equal(parent.getId());
      
            UpdateOperations<Parent> ops = dataStore.createUpdateOperations(Parent.class).
-            set("parentLogin.userName", parent.getParentLoginCredentials().getUserName()).
+            set("parentLogin.userName", parent.getParentLoginCredentials().getEmail()).
             set("parentLogin.password", parent.getParentLoginCredentials().getPassword()).
             set("child", parent.getChildList());
             dataStore.update(updateQuery, ops);

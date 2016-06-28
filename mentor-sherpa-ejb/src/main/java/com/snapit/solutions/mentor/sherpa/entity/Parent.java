@@ -5,6 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.entity;
 
+import com.snapit.solutions.securtiy.entity.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;

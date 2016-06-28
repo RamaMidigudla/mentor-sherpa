@@ -5,7 +5,8 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
-import com.snapit.solutions.mentor.sherpa.entity.User;
+import com.snapit.solutions.securtiy.entity.User;
+
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -41,7 +42,7 @@ public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implem
             return getDatastore().find(
                     Organization.class, 
                     "superUser.userName", 
-                    superUser.getUserName()).get();      
+                    superUser.getEmail()).get();      
         
     } 
     

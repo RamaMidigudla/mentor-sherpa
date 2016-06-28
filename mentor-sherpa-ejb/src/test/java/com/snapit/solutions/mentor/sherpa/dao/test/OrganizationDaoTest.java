@@ -3,8 +3,13 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao.test;
 
+import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.dao.ParentDAO;
+import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.Organization;
+import com.snapit.solutions.securtiy.entity.User;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -29,6 +34,9 @@ public class OrganizationDaoTest {
     
     @Autowired
     private ParentDAO parentDAO;
+    
+    @Autowired
+    private MentorDAO mentorDAO;
     
     
     
@@ -56,6 +64,13 @@ public class OrganizationDaoTest {
      
    Assert.assertNotNull(organizationDAO);
    Assert.assertNotNull(parentDAO);
+   Assert.assertNotNull(mentorDAO);
+   
+   List<Mentor> mentorList = mentorDAO.findAll();
+   Assert.assertNotNull(mentorList);
+   
+   
+   
    
     }
  }

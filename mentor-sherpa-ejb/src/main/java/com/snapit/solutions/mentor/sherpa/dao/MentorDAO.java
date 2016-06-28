@@ -20,10 +20,10 @@ public interface MentorDAO extends DAO<Mentor, ObjectId> {
     
      /**
      * Retrieves  mentor doc in mentor collection by username.
-     * @param mentor 
+     * @param userObjectId 
      * @return Mentor doc 
      */
-    public Mentor findMentorByUserName(Mentor mentor);
+    public Mentor findMentorByUserName(ObjectId userObjectId);
     
     /**
      * Updates existing mentor doc in mentor collection.
