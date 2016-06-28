@@ -66,8 +66,34 @@ public class OrganizationDaoTest {
    Assert.assertNotNull(parentDAO);
    Assert.assertNotNull(mentorDAO);
    
-   List<Mentor> mentorList = mentorDAO.findAll();
-   Assert.assertNotNull(mentorList);
+//   List<Mentor> mentorList = mentorDAO.findAll();
+//   Assert.assertNotNull(mentorList);
+//   {
+//    "_id" : ObjectId("574a265d0243e21a831d66e5"),
+//    "userObjectId" : ObjectId("576850c33008228a61fdc339"),
+//    "name" : "Rama",
+//    "age" : "22",
+//    "gender" : "F",
+//    "education" : "cs",
+//    "interestedOrganizations" : [ 
+//        {
+//            "orgId" : ObjectId("574b5a9c38bc199501921768"),
+//            "programs" : [ 
+//                "Learn to Code"
+//            ]
+//        }, 
+//        {
+//            "orgId" : ObjectId("574b5a9c38bc199501921769"),
+//            "programs" : [ 
+//                "Learn to bake"
+//            ]
+//        }
+//    ],
+//    "interests" : [ 
+//        "coding", 
+//        "soccer"
+//    ]
+//}
    
    
    

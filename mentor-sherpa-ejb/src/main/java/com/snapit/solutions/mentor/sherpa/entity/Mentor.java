@@ -12,7 +12,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-import com.snapit.solutions.securtiy.entity.User;
 
 
 /**
@@ -26,16 +25,22 @@ public class Mentor implements Serializable {
     @Id
     private ObjectId id;
     
-    private List<String> intrests;
+    @Embedded("userObjectId")
+    private ObjectId userObjectId;
     
     private String name;
     
-    private Integer age;
+    private int age;
     
     private String gender;
     
-    @Embedded("mentorLogin")
-    private User mentorLoginCredentials;
+    private String education;
+    
+    private List<InterestedOrganizations>  interestedOrganizations;
+    
+    private List<String>  interests;
+    
+  
 
     public ObjectId getId() {
         return id;
@@ -43,14 +48,6 @@ public class Mentor implements Serializable {
 
     public void setId(ObjectId id) {
         this.id = id;
-    }
-
-    public List<String> getIntrests() {
-        return intrests;
-    }
-
-    public void setIntrests(List<String> intrests) {
-        this.intrests = intrests;
     }
 
     public String getName() {
@@ -61,11 +58,11 @@ public class Mentor implements Serializable {
         this.name = name;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -77,11 +74,38 @@ public class Mentor implements Serializable {
         this.gender = gender;
     }
 
-    public User getMentorLoginCredentials() {
-        return mentorLoginCredentials;
+    public ObjectId getUserObjectId() {
+        return userObjectId;
     }
 
-    public void setMentorLoginCredentials(User mentorLoginCredentials) {
-        this.mentorLoginCredentials = mentorLoginCredentials;
+    public void setUserObjectId(ObjectId userObjectId) {
+        this.userObjectId = userObjectId;
     }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public List<InterestedOrganizations> getInterestedOrganizations() {
+        return interestedOrganizations;
+    }
+
+    public void setInterestedOrganizations(List<InterestedOrganizations> interestedOrganizations) {
+        this.interestedOrganizations = interestedOrganizations;
+    }
+
+    public List<String> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
+    }
+
+    
+   
 }
