@@ -70,10 +70,10 @@ public class LoginController {
     }
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView register(@Valid @ModelAttribute("registerForm") RegisterForm registerForm, BindingResult result, Model model) {
+    public String register(@Valid @ModelAttribute("registerForm") RegisterForm registerForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute(registerForm);
-            return new ModelAndView("register");            
+            return "register";            
         }
         User user;
         user = userService.findByUserId(registerForm.getEmailId());
@@ -87,11 +87,11 @@ public class LoginController {
             user.setLastName(registerForm.getLastName());
             user.setUserRole(role);
             userService.registerUser(user);
-            return new ModelAndView("login");
+            return "redirect:login";
         } else {
             result.reject("Oops! that email already exists. Try logging in!");
         }
-        return new ModelAndView("register");
+        return "register";
     }
 
 }
