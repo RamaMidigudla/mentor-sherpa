@@ -3,7 +3,6 @@
  */
 package com.snapit.solutions.mentor.sherpa.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.service.ChildService;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +24,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class OrganizationController {
     @Autowired
     MentorService mentorService;
+    
+    @Autowired
+    ChildService childService;
+    
+    
+    
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView organization(Model model) {
@@ -104,64 +110,64 @@ public class OrganizationController {
     
     @RequestMapping(value = "/child/list", method = RequestMethod.GET)
     public ModelAndView showChildList(Model model) {
-        List<Child> childList = new ArrayList<Child>();
-        List<String> interestsList = new ArrayList<String>();
-        interestsList.add("Baking");
-        Child child = new Child();
-        child.setAge(10);
-        child.setName("John Doe");
-        child.setGender("Male");
-        child.setIntrests(interestsList);
-        childList.add(child);
-
-        child = new Child();
-        child.setAge(8);
-        child.setName("John Doe");
-        child.setGender("Male");
-        childList.add(child);
-        child.setIntrests(interestsList);
-
-        child = new Child();
-        child.setAge(12);
-        child.setName("John Doe");
-        childList.add(child);
-        child.setGender("Male");
-        child.setIntrests(interestsList);
-
-        child = new Child();
-        child.setAge(16);
-        child.setName("John Doe");
-        childList.add(child);
-        child.setGender("Male");
-        child.setIntrests(interestsList);
-
-        child = new Child();
-        child.setAge(13);
-        child.setName("John Doe");
-        childList.add(child);
-        child.setGender("Male");
-        child.setIntrests(interestsList);
-
-        child = new Child();
-        child.setAge(14);
-        child.setName("John Doe");
-        childList.add(child);
-        child.setGender("Male");
-        child.setIntrests(interestsList);
-
-        child = new Child();
-        child.setAge(11);
-        child.setName("John Doe");
-        childList.add(child);
-        child.setGender("Male");
-        child.setIntrests(interestsList);
-
-        child = new Child();
-        child.setAge(12);
-        child.setName("John Doe");
-        child.setGender("Male");
-        child.setIntrests(interestsList);
-        childList.add(child);
+        List<Child> childList = childService.findall();
+        
+//        interestsList.add("Baking");
+//        Child child = new Child();
+//        child.setAge(10);
+//        child.setName("John Doe");
+//        child.setGender("Male");
+//        child.setIntrests(interestsList);
+//        childList.add(child);
+//
+//        child = new Child();
+//        child.setAge(8);
+//        child.setName("John Doe");
+//        child.setGender("Male");
+//        childList.add(child);
+//        child.setIntrests(interestsList);
+//
+//        child = new Child();
+//        child.setAge(12);
+//        child.setName("John Doe");
+//        childList.add(child);
+//        child.setGender("Male");
+//        child.setIntrests(interestsList);
+//
+//        child = new Child();
+//        child.setAge(16);
+//        child.setName("John Doe");
+//        childList.add(child);
+//        child.setGender("Male");
+//        child.setIntrests(interestsList);
+//
+//        child = new Child();
+//        child.setAge(13);
+//        child.setName("John Doe");
+//        childList.add(child);
+//        child.setGender("Male");
+//        child.setIntrests(interestsList);
+//
+//        child = new Child();
+//        child.setAge(14);
+//        child.setName("John Doe");
+//        childList.add(child);
+//        child.setGender("Male");
+//        child.setIntrests(interestsList);
+//
+//        child = new Child();
+//        child.setAge(11);
+//        child.setName("John Doe");
+//        childList.add(child);
+//        child.setGender("Male");
+//        child.setIntrests(interestsList);
+//
+//        child = new Child();
+//        child.setAge(12);
+//        child.setName("John Doe");
+//        child.setGender("Male");
+//        child.setIntrests(interestsList);
+//        childList.add(child);
         
         model.addAttribute(childList);
         return new ModelAndView("childList");

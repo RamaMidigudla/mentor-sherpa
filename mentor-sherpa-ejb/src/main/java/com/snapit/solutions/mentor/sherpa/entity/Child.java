@@ -7,20 +7,31 @@ package com.snapit.solutions.mentor.sherpa.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 /**
  *
  * @author Ram
  */
-@Embedded
+@Entity("child")
 public class Child implements Serializable {
+    
+    @Id
+    private ObjectId id;
+    
+    @Embedded("userObjectId")
+    private ObjectId userObjectId;
     
     private String name;
     
     private int age;
     
     private String gender;
+    
+    private List<String> interests;
 
     public String getGender() {
         return gender;
@@ -30,7 +41,6 @@ public class Child implements Serializable {
         this.gender = gender;
     }
     
-    private List<String> intrests;
 
     public String getName() {
         return name;
@@ -48,11 +58,28 @@ public class Child implements Serializable {
         this.age = age;
     }
 
-    public List<String> getIntrests() {
-        return intrests;
+    public List<String> getInterests() {
+        return interests;
     }
 
-    public void setIntrests(List<String> intrests) {
-        this.intrests = intrests;
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public ObjectId getUserObjectId() {
+        return userObjectId;
+    }
+
+    public void setUserObjectId(ObjectId userObjectId) {
+        this.userObjectId = userObjectId;
+    }
+    
 }
