@@ -14,11 +14,21 @@ import org.mongodb.morphia.annotations.Embedded;
  * @author Ram
  */
 @Embedded
-class Child implements Serializable {
+public class Child implements Serializable {
     
     private String name;
     
-    private Integer age;
+    private int age;
+    
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
     
     private List<String> intrests;
 
@@ -30,11 +40,11 @@ class Child implements Serializable {
         this.name = name;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
