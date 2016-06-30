@@ -9,11 +9,13 @@ import com.snapit.solutions.mentor.sherpa.dao.ChildDAO;
 import com.snapit.solutions.mentor.sherpa.entity.Child;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Ram
  */
+@Service("childService")
 public class ChildServiceImpl implements ChildService {
     
     @Autowired
