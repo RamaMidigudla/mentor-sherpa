@@ -5,7 +5,7 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
-import com.snapit.solutions.securtiy.entity.User;
+import com.snapit.solutions.securtiy.entity.CustomUser;
 
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -38,7 +38,7 @@ public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implem
     
     //can find orgs by any field of our choice
     @Override
-    public Organization findOrganizationByUserName(User superUser) {
+    public Organization findOrganizationByUserName(CustomUser superUser) {
             return getDatastore().find(
                     Organization.class, 
                     "superUser.userName", 

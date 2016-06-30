@@ -3,13 +3,10 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao.test;
 
+import com.snapit.solutions.mentor.sherpa.dao.ChildDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.dao.ParentDAO;
-import com.snapit.solutions.mentor.sherpa.entity.Mentor;
-import com.snapit.solutions.mentor.sherpa.entity.Organization;
-import com.snapit.solutions.securtiy.entity.User;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -33,10 +30,13 @@ public class OrganizationDaoTest {
     private OrganizationDAO organizationDAO;
     
     @Autowired
-    private ParentDAO parentDAO;
+    private ParentDAO parentDAO; 
     
     @Autowired
     private MentorDAO mentorDAO;
+    
+    @Autowired
+    private ChildDAO childDAO;
     
     
     
@@ -65,7 +65,8 @@ public class OrganizationDaoTest {
    Assert.assertNotNull(organizationDAO);
    Assert.assertNotNull(parentDAO);
    Assert.assertNotNull(mentorDAO);
-   
+   Assert.assertNotNull(childDAO);
+    
 //   List<Mentor> mentorList = mentorDAO.findAll();
 //   Assert.assertNotNull(mentorList);
 //   {
@@ -95,7 +96,20 @@ public class OrganizationDaoTest {
 //    ]
 //}
    
-   
+//  List<Child> childList = childDAO.findAll();
+//  Assert.assertNotNull(childList); 
+//  {
+//    "_id" : ObjectId("574a265d0243e21a831d66e5"),
+//    "userObjectId" : ObjectId("576850c33008228a61fdc339"),
+//    "name" : "Jahnavi",
+//    "age" : "10",
+//    "gender" : "Female",
+//    "interests" : [ 
+//        "coding", 
+//        "soccer"
+//    ]
+//}
+  
    
    
     }

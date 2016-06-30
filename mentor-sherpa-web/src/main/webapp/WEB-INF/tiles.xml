@@ -25,4 +25,16 @@
     <definition name="accessDenied" template="/jsp/403.jsp">
         <put-attribute name="title" value="Mentor Sherpa | Aceess Denied"></put-attribute>
     </definition>
+    <definition name="mentorList" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- Mentor List"></put-attribute>
+        <put-attribute name="body" value="/jsp/mentor/list.jsp"></put-attribute>
+    </definition>
+    <definition name="childList" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- Student List"></put-attribute>
+        <put-attribute name="body" value="/jsp/child/list.jsp"></put-attribute>
+    </definition>
+    <definition name="bobby" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- Bobby Flay"></put-attribute>
+        <put-attribute name="body" value="/jsp/mentor/bobby.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>

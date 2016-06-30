@@ -4,7 +4,7 @@
 package com.snapit.solutions.security.dao.impl;
 
 import com.snapit.solutions.security.dao.UserDAO;
-import com.snapit.solutions.securtiy.entity.User;
+import com.snapit.solutions.securtiy.entity.CustomUser;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
 @Repository("userDAO")
-public class UserDAOImpl extends BasicDAO<User, ObjectId>implements UserDAO {
+public class UserDAOImpl extends BasicDAO<CustomUser, ObjectId>implements UserDAO {
     
     @Autowired
     public UserDAOImpl(Datastore ds) {
@@ -26,12 +26,7 @@ public class UserDAOImpl extends BasicDAO<User, ObjectId>implements UserDAO {
     }
     
     @Override
-    public User findUserByUserName(String userId) {
-        return getDatastore().find(User.class).field("email").equal(userId).get();
-//            return getDatastore().find(
-//                    User.class, 
-//                    "email", 
-//                    userId).get();      
-//        
+    public CustomUser findUserByUserName(String userId) {
+        return getDatastore().find(CustomUser.class).field("email").equal(userId).get();
     }
 }

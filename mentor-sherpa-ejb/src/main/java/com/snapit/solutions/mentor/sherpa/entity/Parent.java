@@ -5,7 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.entity;
 
-import com.snapit.solutions.securtiy.entity.User;
+import com.snapit.solutions.securtiy.entity.CustomUser;
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,16 +26,16 @@ public class Parent implements Serializable  {
     private ObjectId id;
     
     @Embedded("parentLogin")
-    private User parentLoginCredentials;
+    private CustomUser parentLoginCredentials;
     
     @Embedded("child")
     private List<Child> childList;
 
-    public User getParentLoginCredentials() {
+    public CustomUser getParentLoginCredentials() {
         return parentLoginCredentials;
     }
 
-    public void setParentLoginCredentials(User parentLoginCredentials) {
+    public void setParentLoginCredentials(CustomUser parentLoginCredentials) {
         this.parentLoginCredentials = parentLoginCredentials;
     }
 
