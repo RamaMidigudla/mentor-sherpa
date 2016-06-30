@@ -3,7 +3,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.entity;
 
-import com.snapit.solutions.securtiy.entity.CustomUser;
+import com.snapit.solutions.securtiy.entity.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,10 +26,10 @@ public class Organization implements Serializable {
     private String organizationName;
    
     @Embedded("superUser")
-    private CustomUser superUser;
+    private User superUser;
     
     @Embedded("subUser")
-    private List<CustomUser> subUsers;
+    private List<User> subUsers;
     
     @Embedded("program")
     private List<Program> programs;
@@ -60,19 +60,19 @@ public class Organization implements Serializable {
         this.programs = programs;
     }
 
-    public CustomUser getSuperUser() {
+    public User getSuperUser() {
         return superUser;
     }
 
-    public void setSuperUser(CustomUser superUser) {
+    public void setSuperUser(User superUser) {
         this.superUser = superUser;
     }
 
-    public List<CustomUser> getSubUsers() {
+    public List<User> getSubUsers() {
         return subUsers;
     }
 
-    public void setSubUsers(List<CustomUser> subUsers) {
+    public void setSubUsers(List<User> subUsers) {
         this.subUsers = subUsers;
     }
 

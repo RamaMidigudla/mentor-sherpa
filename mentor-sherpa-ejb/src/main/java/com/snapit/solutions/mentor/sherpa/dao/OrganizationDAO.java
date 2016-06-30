@@ -4,7 +4,7 @@
 package com.snapit.solutions.mentor.sherpa.dao;
 
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
-import com.snapit.solutions.securtiy.entity.CustomUser;
+import com.snapit.solutions.securtiy.entity.User;
 
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -27,7 +27,7 @@ public interface OrganizationDAO extends DAO<Organization, ObjectId> {
      * @param superUser
      * @return 
      */
-    public Organization findOrganizationByUserName(CustomUser superUser);
+    public Organization findOrganizationByUserName(User superUser);
      
     /**
      * Updates existing organization doc in organizations collection.

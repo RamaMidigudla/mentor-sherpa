@@ -4,7 +4,7 @@
 package com.snapit.solutions.security.dao.test;
 
 import com.snapit.solutions.security.dao.UserDAO;
-import com.snapit.solutions.securtiy.entity.CustomUser;
+import com.snapit.solutions.securtiy.entity.User;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -26,7 +26,7 @@ public class UserDaoTest {
 
     @Autowired
     private UserDAO userDAO;
-    private static final String ORG_TEST_USERNAME = "hello@hell.com";
+    private static final String ORG_TEST_USERNAME = "org@hello.com";
 
     public UserDaoTest() {
     }
@@ -58,7 +58,7 @@ public class UserDaoTest {
     public void find() {
 
         Assert.assertNotNull(userDAO);
-        CustomUser user = null;
+        User user = null;
 //        try {
 //         user = userDAO.findUserByUserName(ORG_TEST_USERNAME);
 //        } catch (Exception e) {
@@ -66,7 +66,7 @@ public class UserDaoTest {
 //        System.out.println("###############################Exceprtion : " + e.getMessage());
 //        }
 //        Assert.assertNotNull(user);
-//        System.out.println("###############################CustomUser : " + user);
+//        System.out.println("###############################User : " + user);
 //        Assert.assertEquals(ORG_TEST_USERNAME, user.getEmail());
           user = userDAO.findUserByUserName(ORG_TEST_USERNAME);
           Assert.assertNotNull(user);

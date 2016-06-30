@@ -3,7 +3,7 @@
  */
 package com.snapit.solutions.securtiy.service;
 
-import com.snapit.solutions.securtiy.entity.CustomUser;
+import com.snapit.solutions.securtiy.entity.User;
 import javax.ejb.Remote;
 
 /**
@@ -12,6 +12,6 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface UserService {
-    public CustomUser findByUserId(String userId);
-    public void registerUser(CustomUser user);
+    public User findByUserId(String userId);
+    public void registerUser(User user);
 }
