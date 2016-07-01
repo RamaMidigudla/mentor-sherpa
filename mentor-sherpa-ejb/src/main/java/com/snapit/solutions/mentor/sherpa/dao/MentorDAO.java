@@ -42,5 +42,7 @@ public interface MentorDAO extends DAO<Mentor, ObjectId> {
      * @param mentor 
      */
     public void deleteMentorById(Mentor mentor);
+    
+        public Mentor findByPageName(String pageName);
       
 }

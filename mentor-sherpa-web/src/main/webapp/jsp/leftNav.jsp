@@ -3,6 +3,8 @@
     Created on : May 28, 2016, 5:32:06 PM
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
@@ -32,7 +34,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
+        <!--<li class="active treeview">
           <a href="#">
             <i class="fa fa-list-alt"></i> <span>Programs</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
@@ -40,15 +42,23 @@
             <li><a href="index.html"><i class="fa fa-circle-o"></i> Search Programs</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Add Program</a></li>
           </ul>
-        </li>
-        <li class="treeview">
+        </li>-->
+        <li class="active treeview">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Mentors</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Search Mentors</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Add Mentor</a></li>
+            <li><a href="${contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Students</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="${contextPath}/organization/child/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
           </ul>
         </li>
       </ul>

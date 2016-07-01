@@ -40,8 +40,8 @@ public class Mentor implements Serializable {
     
     private List<String>  interests;
     
-  
-
+    private String pageName;
+    
     public ObjectId getId() {
         return id;
     }
@@ -106,6 +106,12 @@ public class Mentor implements Serializable {
         this.interests = interests;
     }
 
-    
+    public String getPageName() {
+        return pageName;
+    }
+
+    public void setPageName(String pageName) {
+        this.pageName = pageName;
+    }    
    
 }

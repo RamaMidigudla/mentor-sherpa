@@ -4,6 +4,7 @@
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
         <div class="row">
             <div class="col-xs-12">          
                 <div class="box box-primary">
@@ -25,7 +26,7 @@
                             <tbody>
                             <c:forEach items="${mentorList}" var="mentor">
                                 <tr>
-                                    <td>${mentor.name}</td>
+                                    <td><a href="${contextPath}/organization/mentor/${mentor.name}">${mentor.name}</a></td>
                                     <td>${mentor.age}</td>
                                     <td>${mentor.gender}</td>
                                     <td>${mentor.education}</td>

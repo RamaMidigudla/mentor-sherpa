@@ -7,13 +7,15 @@ import com.snapit.solutions.mentor.sherpa.model.RegisterForm;
 import com.snapit.solutions.mentor.sherpa.validator.RegisterValidator;
 import com.snapit.solutions.securtiy.entity.User;
 import com.snapit.solutions.securtiy.service.UserService;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -82,19 +84,33 @@ public class LoginController {
         user = userService.findByUserId(registerForm.getEmailId());
         
         if (user == null) {
+            List<String> roles = new ArrayList<>();
+            roles.add("ORG_ADMIN");
             user = new User();
-            List<String> role = Arrays.asList("ORG_ADMIN");
+//            user = new CustomUser(registerForm.getEmailId(), PASSWORD_ENCODER.encode(registerForm.getPassword()), getGrantedAuthorities());
+//            Role role = new Role();
+//            role.setName("ORG_ADMIN");
             user.setEmail(registerForm.getEmailId());
             user.setPassword(PASSWORD_ENCODER.encode(registerForm.getPassword()));
             user.setFirstName(registerForm.getFirstName());
             user.setLastName(registerForm.getLastName());
-            user.setUserRole(role);
+            user.setUserRole(roles);
+//            List<Role> roles = new ArrayList<Role>();
+//            roles.add(role);
+//            user.setAuthorities(roles);
             userService.registerUser(user);
             return "redirect:login";
         } else {
             result.reject("Oops! that email already exists. Try logging in!");
         }
         return "register";
+    }
+
+        private List<GrantedAuthority> getGrantedAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+
+        authorities.add(new SimpleGrantedAuthority("ROLE_ORG_ADMIN"));
+        return authorities;
     }
 
 }

@@ -36,6 +36,11 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
     }
 
     @Override
+    public Mentor findByPageName(String pageName) {
+        return getDatastore().find( Mentor.class ).field("pageName").equal(pageName).get();
+    }
+
+    @Override
     public Mentor findMentorByUserName(ObjectId userObjectId) {
          return getDatastore().find(Mentor.class).field("user_id").equal(userObjectId).get();
     }
@@ -56,8 +61,5 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
         Query<Mentor> deleteQuery = 
                 dataStore.createQuery(Mentor.class).field("_id").equal(mentor.getId());
             dataStore.delete(deleteQuery);
-    }
-    
-    
-    
+    }   
 }

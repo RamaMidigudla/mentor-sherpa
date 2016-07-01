@@ -3,7 +3,7 @@
     Created on : May 28, 2016, 5:26:50 PM
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
   <header class="main-header">
 
     <!-- Logo -->
@@ -217,22 +217,23 @@
             </ul>
           </li> --%>
           <!-- User Account: style can be found in dropdown.less -->
+         <sec:authentication var="user" property="principal" />
+         <sec:authorize access="isAuthenticated()">
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/LeslieScott.jpeg" class="user-image" alt="User Image">
+              <span class="hidden-xs">Leslie Scott</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/LeslieScott.jpeg" class="img-circle" alt="User Image">
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                    Leslie Scott
+                    </sec:authorize>
                 </p>
               </li>
-              <!-- Menu Body -->
+              <!-- Menu Body 
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
@@ -244,7 +245,7 @@
                   <div class="col-xs-4 text-center">
                     <a href="#">Friends</a>
                   </div>
-                </div>
+                </div>-->
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
@@ -253,7 +254,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

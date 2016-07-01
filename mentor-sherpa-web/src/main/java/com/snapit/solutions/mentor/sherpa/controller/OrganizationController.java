@@ -14,6 +14,7 @@ import com.snapit.solutions.mentor.sherpa.entity.Child;
 import com.snapit.solutions.mentor.sherpa.service.ChildService;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -27,9 +28,6 @@ public class OrganizationController {
     
     @Autowired
     ChildService childService;
-    
-    
-    
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView organization(Model model) {
@@ -50,7 +48,12 @@ public class OrganizationController {
     public ModelAndView addPrograms(Model model) {
         return new ModelAndView("");
     }
-    
+    @RequestMapping(value = "/mentor/{name}", method = RequestMethod.GET)
+    public String showMentor(@PathVariable String name, Model model) {
+        Mentor mentor = mentorService.findByPageName(name);
+        return mentor.getPageName();
+    }   
+        
     @RequestMapping(value = "/mentor/list", method = RequestMethod.GET)
     public ModelAndView showMentorList(Model model) {
 //        List<Mentor> mentorList = new ArrayList<Mentor>();
