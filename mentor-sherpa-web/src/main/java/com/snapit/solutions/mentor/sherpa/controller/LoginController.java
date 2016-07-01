@@ -83,7 +83,7 @@ public class LoginController {
         
         if (user == null) {
             user = new User();
-            List<String> role = Arrays.asList("ORG-ADMIN");
+            List<String> role = Arrays.asList("ORG_ADMIN");
             user.setEmail(registerForm.getEmailId());
             user.setPassword(PASSWORD_ENCODER.encode(registerForm.getPassword()));
             user.setFirstName(registerForm.getFirstName());

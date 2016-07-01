@@ -7,7 +7,6 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
-import com.snapit.solutions.securtiy.entity.User;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
