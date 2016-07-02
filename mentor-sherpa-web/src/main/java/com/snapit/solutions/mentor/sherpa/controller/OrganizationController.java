@@ -50,8 +50,9 @@ public class OrganizationController {
     }
     @RequestMapping(value = "/mentor/{name}", method = RequestMethod.GET)
     public String showMentor(@PathVariable String name, Model model) {
-        Mentor mentor = mentorService.findByPageName(name);
-        return mentor.getPageName();
+        Mentor mentor = mentorService.findByMentorName(name);
+        model.addAttribute(mentor);
+        return "mentorProfile";
     }   
         
     @RequestMapping(value = "/mentor/list", method = RequestMethod.GET)

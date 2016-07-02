@@ -12,11 +12,11 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/bobbyflay.jpeg" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/${mentor.imageName}.jpeg" alt="User profile picture">
 
-              <h3 class="profile-username text-center">Bobby Flay</h3>
+              <h3 class="profile-username text-center">${mentor.name}</h3>
 
-              <p class="text-muted text-center">Iron Chef</p>
+              <p class="text-muted text-center">${mentor.title}</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
@@ -46,7 +46,7 @@
               <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
 
               <p class="text-muted">
-                International Culinary Center (1983)
+                ${mentor.education}
               </p>
 
               <hr>
@@ -57,14 +57,15 @@
 
               <hr>
 
+              <c:forEach items="${mentor.interests}" var="skill">
               <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
               <p>
-                <span class="label label-danger">Cooking</span>
-                <span class="label label-success">TV Show Host</span>
-                <span class="label label-info">Grilling</span>
-                <span class="label label-warning">Iron Chef</span>
+                <span class="label label-danger">${skill}</span>
+                <span class="label label-success">${skill}</span>
+                <span class="label label-info">${skill}</span>
+                <span class="label label-warning">${skill}</span>
               </p>
+              </c:forEach>
 
               <hr>
 

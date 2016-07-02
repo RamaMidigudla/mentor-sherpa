@@ -18,5 +18,5 @@ public interface MentorService {
     
     public List<Mentor> findall();
     
-    public Mentor findByPageName(String pageName);
+    public Mentor findByMentorName(String mentorName);
 }

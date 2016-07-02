@@ -30,6 +30,8 @@ public class Mentor implements Serializable {
     
     private String name;
     
+    private String title;
+
     private int age;
     
     private String gender;
@@ -40,7 +42,7 @@ public class Mentor implements Serializable {
     
     private List<String>  interests;
     
-    private String pageName;
+    private String imageName;
     
     public ObjectId getId() {
         return id;
@@ -58,6 +60,14 @@ public class Mentor implements Serializable {
         this.name = name;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
     public int getAge() {
         return age;
     }
@@ -106,12 +116,12 @@ public class Mentor implements Serializable {
         this.interests = interests;
     }
 
-    public String getPageName() {
-        return pageName;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setPageName(String pageName) {
-        this.pageName = pageName;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }    
    
 }

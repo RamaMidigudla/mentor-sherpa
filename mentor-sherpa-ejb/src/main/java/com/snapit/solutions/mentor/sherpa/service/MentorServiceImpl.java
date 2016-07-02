@@ -32,8 +32,8 @@ public class MentorServiceImpl implements MentorService {
     }
     
     @Override
-    public Mentor findByPageName(String pageName) {
-        return mentorDAO.findByPageName(pageName);
+    public Mentor findByMentorName(String mentorName) {
+        return mentorDAO.findByMentorName(mentorName);
     }
     
 }
