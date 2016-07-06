@@ -40,7 +40,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="login" method="post">
+    <form always-use-default-target="true" action="login" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <div class="form-group has-feedback">
         <input type="text" name="username" class="form-control" placeholder="Username">

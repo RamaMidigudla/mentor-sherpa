@@ -58,14 +58,19 @@ public class LoginController {
     public ModelAndView accessDenied(Model model) {
         return new ModelAndView("accessDenied");
     }
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){    
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/login?logout";
-    }
+//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+//    public String logout(HttpServletRequest request, HttpServletResponse response) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null){    
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//        return "redirect:/login?logout";
+//    }
+    
+@RequestMapping(value="/logout")
+    public String logout(){
+        return "logout";
+    }    
     
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView showRegister(Model model) {

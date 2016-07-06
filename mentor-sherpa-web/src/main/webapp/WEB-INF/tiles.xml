@@ -14,7 +14,7 @@
     </definition>
     <definition name="home" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa"></put-attribute>
-        <put-attribute name="body" value="index.html"></put-attribute>
+        <put-attribute name="body" value="/jsp/home.jsp"></put-attribute>
     </definition>
     <definition name="register" template="/jsp/register.jsp">
         <put-attribute name="title" value="Mentor Sherpa | Registration"></put-attribute>

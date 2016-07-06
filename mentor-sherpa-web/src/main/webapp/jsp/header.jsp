@@ -4,10 +4,12 @@
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-  <header class="main-header">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
+<header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="${pageContext.request.contextPath}/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>M</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -253,8 +255,12 @@
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
+                  <c:url var="logoutAction" value="/logout"></c:url>
                 <div class="pull-right">
-                  <a href="logout" class="btn btn-default btn-flat">Sign out</a>
+                    <form action="${logoutAction}" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input class="btn btn-default btn-flat" type="submit" value="Sign out" />
+                    </form>
                 </div>
               </li>
             </ul>

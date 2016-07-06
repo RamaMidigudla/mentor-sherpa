@@ -14,14 +14,17 @@
         <intercept-url pattern="/themes/**" access="permitAll" />
         <intercept-url pattern="/login" access="permitAll" />
         <intercept-url pattern="/register" access="permitAll" />
+        <intercept-url pattern="/**" access="hasRole('ORG_ADMIN') OR hasRole('MENTOR') OR hasRole('PARENT')" />
         <intercept-url pattern="/mentor/**" access="hasRole('MENTOR')" />
         <intercept-url pattern="/organization/**" access="hasRole('ORG_ADMIN')" />
         <intercept-url pattern="/organization/user/**" access="hasRole('ORG_USER')" />
         <intercept-url pattern="/parent/**" access="hasRole('PARENT')" />
         <intercept-url pattern="/parent/child**" access="hasRole('CHILD')" />
         <form-login login-page="/login" default-target-url="/" authentication-failure-url="/accessDenied" />
-        <session-management session-fixation-protection="migrateSession" invalid-session-url="/invalidSession.html">
-            <concurrency-control max-sessions="1" expired-url="/sessionExpired.html" />
+        <logout invalidate-session="true" logout-success-url="/login"
+            logout-url="/logout" />
+        <session-management session-fixation-protection="migrateSession">
+            <concurrency-control max-sessions="1" expired-url="/login" />
         </session-management>
         <csrf/>
     </http>
