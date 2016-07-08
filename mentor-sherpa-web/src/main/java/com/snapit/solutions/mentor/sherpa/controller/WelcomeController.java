@@ -3,6 +3,8 @@
  */
 package com.snapit.solutions.mentor.sherpa.controller;
 
+import com.snapit.solutions.web.security.AuthUser;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

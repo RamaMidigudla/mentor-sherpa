@@ -16,12 +16,12 @@
         <intercept-url pattern="/register" access="permitAll" />
         <intercept-url pattern="/register/mentor" access="permitAll" />
         <intercept-url pattern="/register/student" access="permitAll" />
-        <intercept-url pattern="/**" access="hasRole('ORG_ADMIN') OR hasRole('MENTOR') OR hasRole('PARENT')" />
         <intercept-url pattern="/mentor/**" access="hasRole('MENTOR')" />
         <intercept-url pattern="/organization/**" access="hasRole('ORG_ADMIN')" />
         <intercept-url pattern="/organization/user/**" access="hasRole('ORG_USER')" />
         <intercept-url pattern="/parent/**" access="hasRole('PARENT')" />
         <intercept-url pattern="/parent/child**" access="hasRole('CHILD')" />
+        <intercept-url pattern="/" access="hasRole('ORG_ADMIN') OR hasRole('MENTOR') OR hasRole('PARENT')" />
         <form-login login-page="/login" default-target-url="/" authentication-failure-url="/accessDenied" />
         <logout invalidate-session="true" logout-success-url="/login"
             logout-url="/logout" />

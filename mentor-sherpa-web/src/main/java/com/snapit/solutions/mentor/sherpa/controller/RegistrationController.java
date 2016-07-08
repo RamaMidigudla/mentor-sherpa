@@ -85,12 +85,12 @@ public class RegistrationController {
     
     @RequestMapping(value = "/mentor", method = RequestMethod.POST)
     public String mentorRegistration(@Validated @ModelAttribute("mentorRegisterForm") MentorRegisterForm mentorRegisterForm, BindingResult result, Model model) {
-        return register(mentorRegisterForm, result, model, "mentor");
+        return register(mentorRegisterForm, result, model, "MENTOR");
     }
     
     @RequestMapping(value = "/student", method = RequestMethod.POST)
     public String studentRegistration(@Validated @ModelAttribute("studentRegisterForm") StudentRegisterForm studentRegisterForm, BindingResult result, Model model) {
-        return register(studentRegisterForm, result, model, "student");
+        return register(studentRegisterForm, result, model, "STUDENT");
     }
     
     private String register(RegisterForm registerForm, BindingResult result, Model model, String role) {

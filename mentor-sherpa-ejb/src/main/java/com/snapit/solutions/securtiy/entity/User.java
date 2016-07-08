@@ -154,5 +154,4 @@ public class User implements Serializable {
                 + ", firstName=" + firstName + ", lastName=" + lastName
                 + ", email=" + email +  "]";
     }
-
 }
