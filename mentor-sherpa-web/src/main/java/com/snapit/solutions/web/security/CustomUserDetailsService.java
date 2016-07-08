@@ -42,6 +42,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         AuthUser authUser = new AuthUser(myUser.getEmail(), myUser.getPassword(), getGrantedAuthorities(myUser));
         authUser.setFullName(myUser.getFirstName() + " " + myUser.getLastName());
+        authUser.setUserId(myUser.getId().toString());
 //        UserDetails details = new CustomUser(myUser.getEmail(), myUser.getPassword(), getGrantedAuthorities(myUser));
 //        return new org.springframework.security.core.userdetails.CustomUser(myUser.getEmail(), myUser.getPassword(),
 //                myUser.getState().equals(UserStatus.ACTIVE), true, true, true, getGrantedAuthorities(myUser));

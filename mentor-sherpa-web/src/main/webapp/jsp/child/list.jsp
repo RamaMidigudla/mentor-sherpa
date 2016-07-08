@@ -22,12 +22,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${childList}" var="child">
+                            <c:forEach items="${studentList}" var="student">
                                 <tr>
-                                    <td>${child.name}</td>
-                                    <td>${child.age}</td>
-                                    <td>${child.gender}</td>
-                                    <td><c:forEach items="${child.intrests}" var="interest">${interest}</br></c:forEach></td>
+                                    <td>${student.name}</td>
+                                    <td>${student.age}</td>
+                                    <td>${student.gender}</td>
+                                    <td><c:forEach items="${student.intrests}" var="interest">${interest}</br></c:forEach></td>
                                 </tr>
                             </c:forEach>
                                

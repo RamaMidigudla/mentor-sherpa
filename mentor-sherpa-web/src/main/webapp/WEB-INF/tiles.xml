@@ -29,7 +29,7 @@
         <put-attribute name="title" value="Mentor Sherpa -- Mentor List"></put-attribute>
         <put-attribute name="body" value="/jsp/mentor/list.jsp"></put-attribute>
     </definition>
-    <definition name="childList" extends="base.definition">
+    <definition name="studentList" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa -- Student List"></put-attribute>
         <put-attribute name="body" value="/jsp/child/list.jsp"></put-attribute>
     </definition>

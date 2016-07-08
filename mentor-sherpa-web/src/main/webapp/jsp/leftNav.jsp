@@ -4,52 +4,26 @@
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<sec:authentication var="user" property="principal" />
+<c:url var="mentorProfile" value="${pageContext.request.contextPath}/mentor/${user.userId}"></c:url>
+<c:url var="studentProfile" value="${pageContext.request.contextPath}/student/${user.userId}"></c:url>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
-     <%--  <div class="user-panel">
-                 <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div> 
-        <div class="pull-left info">
-          <p>Mentor Sherpa</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>--%>
-      <!-- search form 
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>-->
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <!--<li class="active treeview">
-          <a href="#">
-            <i class="fa fa-list-alt"></i> <span>Programs</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="index.html"><i class="fa fa-circle-o"></i> Search Programs</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Add Program</a></li>
-          </ul>
-        </li>-->
+        <%-- ORGANIZATION Navigation --%>
+        <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
         <li class="active treeview">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Mentors</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
+            <li><a href="${pageContext.request.contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -58,9 +32,64 @@
             <span>Students</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${contextPath}/organization/child/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
+            <li><a href="${pageContext.request.contextPath}/organization/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
           </ul>
         </li>
+        </sec:authorize>
+        <%-- MENTOR Navigation --%>
+        <sec:authorize access="hasRole('MENTOR')">
+        <li>
+          <a href="${mentorProfile}">
+            <i class="fa fa-user"></i>
+            <span>My Profile</span>
+          </a>
+        </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Organizations</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="${pageContext.request.contextPath}/mentor/organization/list"><i class="fa fa-circle-o"></i> Show Organization</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Students</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="${pageContext.request.contextPath}/mentor/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
+          </ul>
+        </li>
+        </sec:authorize>
+        <%-- Student Navigation --%>
+        <sec:authorize access="hasRole('STUDENT')">
+        <li>
+          <a href="${studentProfile}">
+            <i class="fa fa-user"></i>
+            <span>My Profile</span>
+          </a>
+        </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Organizations</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="${pageContext.request.contextPath}/student/organization/list"><i class="fa fa-circle-o"></i> Show Organizations</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Mentors</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="${pageContext.request.contextPath}/student/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
+          </ul>
+        </li>
+        </sec:authorize>
       </ul>
     </section>
     <!-- /.sidebar -->

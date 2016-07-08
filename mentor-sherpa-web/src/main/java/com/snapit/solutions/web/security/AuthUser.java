@@ -14,6 +14,15 @@ import org.springframework.security.core.userdetails.User;
 public class AuthUser extends User {
     
     private String fullName;
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getFullName() {
         return fullName;

@@ -3,50 +3,41 @@
  */
 package com.snapit.solutions.mentor.sherpa.controller;
 
+import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.service.ChildService;
+import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import com.snapit.solutions.mentor.sherpa.entity.Mentor;
-import com.snapit.solutions.mentor.sherpa.entity.Child;
-import com.snapit.solutions.mentor.sherpa.service.ChildService;
-import com.snapit.solutions.mentor.sherpa.service.MentorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
 @Controller
-@RequestMapping("/organization")
-public class OrganizationController {
+@RequestMapping("/mentor")
+public class MentorController {
     @Autowired
     MentorService mentorService;
     
     @Autowired
     ChildService studentService;
 
-    @RequestMapping(value = "/programs", method = RequestMethod.GET)
-    public ModelAndView programs(Model model) {
-        return new ModelAndView("");
-    }
-    
-    @RequestMapping(value = "/programs/add", method = RequestMethod.GET)
-    public ModelAndView addPrograms(Model model) {
-        return new ModelAndView("");
-    }
-    @RequestMapping(value = "/mentor/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String showMentor(@PathVariable String name, Model model) {
         Mentor mentor = mentorService.findByMentorName(name);
         model.addAttribute(mentor);
         return "mentorProfile";
     }   
         
-    @RequestMapping(value = "/mentor/list", method = RequestMethod.GET)
-    public ModelAndView showMentorList(Model model) {
+    @RequestMapping(value = "/organization/list", method = RequestMethod.GET)
+    public ModelAndView showOrganizationList(Model model) {
 //        List<Mentor> mentorList = new ArrayList<Mentor>();
         List<Mentor> mentorList = mentorService.findall();
 //        Mentor mentor = new Mentor();
@@ -99,7 +90,7 @@ public class OrganizationController {
 //        mentorList.add(mentor);
 //        
         model.addAttribute(mentorList);
-        return new ModelAndView("mentorList");
+        return new ModelAndView("organizationList");
     }
     
     @RequestMapping(value = "/student/list", method = RequestMethod.GET)
@@ -167,4 +158,5 @@ public class OrganizationController {
         return new ModelAndView("studentList");
     }
 
+    
 }
