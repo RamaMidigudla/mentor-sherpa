@@ -72,50 +72,50 @@ public class LoginController {
         return "logout";
     }    
     
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView showRegister(Model model) {
-        RegisterForm registerForm = new RegisterForm();
-        model.addAttribute(registerForm);
-        return new ModelAndView("register");
-    }
-    
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@Valid @ModelAttribute("registerForm") RegisterForm registerForm, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute(registerForm);
-            return "register";            
-        }
-        User user;
-        user = userService.findByUserId(registerForm.getEmailId());
-        
-        if (user == null) {
-            List<String> roles = new ArrayList<>();
-            roles.add("ORG_ADMIN");
-            user = new User();
-//            user = new CustomUser(registerForm.getEmailId(), PASSWORD_ENCODER.encode(registerForm.getPassword()), getGrantedAuthorities());
-//            Role role = new Role();
-//            role.setName("ORG_ADMIN");
-            user.setEmail(registerForm.getEmailId());
-            user.setPassword(PASSWORD_ENCODER.encode(registerForm.getPassword()));
-            user.setFirstName(registerForm.getFirstName());
-            user.setLastName(registerForm.getLastName());
-            user.setUserRole(roles);
-//            List<Role> roles = new ArrayList<Role>();
-//            roles.add(role);
-//            user.setAuthorities(roles);
-            userService.registerUser(user);
-            return "redirect:login";
-        } else {
-            result.reject("Oops! that email already exists. Try logging in!");
-        }
-        return "register";
-    }
+//    @RequestMapping(value = "/register", method = RequestMethod.GET)
+//    public ModelAndView showRegister(Model model) {
+//        RegisterForm registerForm = new RegisterForm();
+//        model.addAttribute(registerForm);
+//        return new ModelAndView("register");
+//    }
+//    
+//    @RequestMapping(value = "/register", method = RequestMethod.POST)
+//    public String register(@Valid @ModelAttribute("registerForm") RegisterForm registerForm, BindingResult result, Model model) {
+//        if (result.hasErrors()) {
+//            model.addAttribute(registerForm);
+//            return "register";            
+//        }
+//        User user;
+//        user = userService.findByUserId(registerForm.getEmailId());
+//        
+//        if (user == null) {
+//            List<String> roles = new ArrayList<>();
+//            roles.add("ORG_ADMIN");
+//            user = new User();
+////            user = new CustomUser(registerForm.getEmailId(), PASSWORD_ENCODER.encode(registerForm.getPassword()), getGrantedAuthorities());
+////            Role role = new Role();
+////            role.setName("ORG_ADMIN");
+//            user.setEmail(registerForm.getEmailId());
+//            user.setPassword(PASSWORD_ENCODER.encode(registerForm.getPassword()));
+//            user.setFirstName(registerForm.getFirstName());
+//            user.setLastName(registerForm.getLastName());
+//            user.setUserRole(roles);
+////            List<Role> roles = new ArrayList<Role>();
+////            roles.add(role);
+////            user.setAuthorities(roles);
+//            userService.registerUser(user);
+//            return "redirect:login";
+//        } else {
+//            result.reject("Oops! that email already exists. Try logging in!");
+//        }
+//        return "register";
+//    }
 
-        private List<GrantedAuthority> getGrantedAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-        authorities.add(new SimpleGrantedAuthority("ROLE_ORG_ADMIN"));
-        return authorities;
-    }
+//        private List<GrantedAuthority> getGrantedAuthorities() {
+//        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+//
+//        authorities.add(new SimpleGrantedAuthority("ROLE_ORG_ADMIN"));
+//        return authorities;
+//    }
 
 }

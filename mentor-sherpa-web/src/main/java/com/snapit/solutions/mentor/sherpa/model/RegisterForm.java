@@ -3,9 +3,12 @@
  */
 package com.snapit.solutions.mentor.sherpa.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -23,7 +26,11 @@ public class RegisterForm {
     private String firstName;
     @NotEmpty
     private String lastName;
-    
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    @NotNull @Past
+    private String dateOfBirth;
+    private String phoneNumber;
+
     public String getEmailId() {
         return emailId;
     }
@@ -63,5 +70,20 @@ public class RegisterForm {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }  
 }

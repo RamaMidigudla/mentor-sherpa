@@ -29,16 +29,6 @@ public class OrganizationController {
     @Autowired
     ChildService childService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView organization(Model model) {
-        return new ModelAndView("registration");
-    }
-    
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView register(Model model) {
-        return new ModelAndView("registration");
-    }
-    
     @RequestMapping(value = "/programs", method = RequestMethod.GET)
     public ModelAndView programs(Model model) {
         return new ModelAndView("");

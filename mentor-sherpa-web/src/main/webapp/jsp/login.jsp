@@ -54,7 +54,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox" name="_spring_security_remember_me"> Remember Me
             </label>
           </div>
         </div>
@@ -76,7 +76,7 @@
     <!-- /.social-auth-links -->
 --%>
     <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
+    <a href="${pageContext.request.contextPath}/register" class="text-center">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->

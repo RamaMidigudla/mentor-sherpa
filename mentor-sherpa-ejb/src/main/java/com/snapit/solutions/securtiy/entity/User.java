@@ -30,6 +30,10 @@ public class User implements Serializable {
 
     private String email;
     
+    private String dateOfBirth;
+    
+    private String phoneNumber;
+    
     private List<String> userRole;
     
     
@@ -79,6 +83,22 @@ public class User implements Serializable {
 
     public void setUserRole(List<String> userRole) {
         this.userRole = userRole;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
 
