@@ -3,11 +3,10 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao.test;
 
-import com.snapit.solutions.mentor.sherpa.dao.ChildDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.dao.ParentDAO;
-import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 
 /**
  *
@@ -38,7 +38,7 @@ public class OrganizationDaoTest {
     private MentorDAO mentorDAO;
     
     @Autowired
-    private ChildDAO childDAO;
+    private StudentDAO childDAO;
     
     
     

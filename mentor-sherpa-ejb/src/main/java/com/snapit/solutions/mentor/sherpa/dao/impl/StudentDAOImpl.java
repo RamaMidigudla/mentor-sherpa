@@ -5,24 +5,24 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao.impl;
 
-import com.snapit.solutions.mentor.sherpa.dao.ChildDAO;
-import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 
 /**
  *
  * @author Ram
  */
-@Repository("childDAO")
-public class ChildDAOImpl extends BasicDAO<Child, ObjectId> implements ChildDAO {
+@Repository("studentDAO")
+public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements StudentDAO {
     
      @Autowired
-    public ChildDAOImpl(Datastore ds) {
+    public StudentDAOImpl(Datastore ds) {
         super(ds);
         ds.ensureIndexes(); //creates all defined with @Indexed
         ds.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
@@ -30,8 +30,8 @@ public class ChildDAOImpl extends BasicDAO<Child, ObjectId> implements ChildDAO 
     }
 
     @Override
-    public List<Child> findAll() {
-        return getDatastore().find( Child.class ).asList();
+    public List<Student> findAll() {
+        return getDatastore().find(Student.class ).asList();
     }
     
 }

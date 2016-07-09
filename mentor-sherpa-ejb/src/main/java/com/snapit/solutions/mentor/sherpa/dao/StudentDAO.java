@@ -5,7 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao;
 
-import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.DAO;
@@ -14,8 +14,8 @@ import org.mongodb.morphia.dao.DAO;
  *
  * @author Ram
  */
-public interface ChildDAO extends DAO<Child, ObjectId> {
+public interface StudentDAO extends DAO<Student, ObjectId> {
     
-    public List<Child> findAll(); 
+    public List<Student> findAll(); 
     
 }

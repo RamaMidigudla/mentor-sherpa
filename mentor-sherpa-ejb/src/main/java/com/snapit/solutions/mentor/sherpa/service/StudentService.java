@@ -5,15 +5,16 @@
  */
 package com.snapit.solutions.mentor.sherpa.service;
 
-import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 
 /**
  *
  * @author Ram
  */
-public interface ChildService {
+public interface StudentService {
     
-     public List<Child> findall();
+    public void createMentor(Student student);
+    public List<Student> findall();
     
 }

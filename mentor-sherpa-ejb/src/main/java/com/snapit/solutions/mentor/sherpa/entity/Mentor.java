@@ -6,6 +6,7 @@
 package com.snapit.solutions.mentor.sherpa.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
@@ -28,21 +29,21 @@ public class Mentor implements Serializable {
     @Embedded("userObjectId")
     private ObjectId userObjectId;
     
-    private String name;
+    private String name = "";
     
-    private String title;
+    private String title = "";
 
     private int age;
     
-    private String gender;
+    private String gender = "";
     
-    private String education;
+    private String education = "";
     
-    private List<InterestedOrganizations>  interestedOrganizations;
+    private List<InterestedOrganizations>  interestedOrganizations = new ArrayList<>();
     
-    private List<String>  interests;
+    private List<String>  interests = new ArrayList<>();
     
-    private String imageName;
+    private String imageName = "";
     
     public ObjectId getId() {
         return id;

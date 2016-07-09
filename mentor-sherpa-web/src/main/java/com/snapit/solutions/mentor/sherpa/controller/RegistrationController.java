@@ -3,6 +3,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.controller;
 
+import com.snapit.solutions.mentor.sherpa.facade.MentorSherpaUserService;
 import com.snapit.solutions.mentor.sherpa.model.RegisterForm;
 import com.snapit.solutions.mentor.sherpa.model.StudentRegisterForm;
 import com.snapit.solutions.mentor.sherpa.model.MentorRegisterForm;
@@ -39,20 +40,12 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes({"mentorRegisterForm", "studentRegisterForm"})
 public class RegistrationController {
     @Autowired
-    private UserService userService;
-    static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder(11);
-    
-//    @Autowired
-//    RegisterValidator registerValidator;
+    MentorSherpaUserService mentorSherpaUserService;
     @Autowired
     StudentRegisterValidator studentRegisterValidator;
     @Autowired
     MentorRegisterValidator mentorRegisterValidator;
     
-//    @InitBinder
-//    public void initBinder(WebDataBinder webDataBinder){
-//        webDataBinder.setValidator(registerValidator);
-//    }
     @InitBinder("mentorRegisterForm")
     public void initMentorBinder(WebDataBinder webDataBinder){
         webDataBinder.setValidator(mentorRegisterValidator);
@@ -103,21 +96,11 @@ public class RegistrationController {
             return "register";            
         }
         User user;
-        user = userService.findByUserId(registerForm.getEmailId());
+        user = mentorSherpaUserService.findUser(registerForm.getEmailId());
         
         if (user == null) {
-            List<String> roles = new ArrayList<>();
-            roles.add(role);
-            user = new User();
-            user.setEmail(registerForm.getEmailId());
-            user.setPassword(PASSWORD_ENCODER.encode(registerForm.getPassword()));
-            user.setFirstName(registerForm.getFirstName());
-            user.setLastName(registerForm.getLastName());
-            user.setUserRole(roles);
-            user.setDateOfBirth(registerForm.getDateOfBirth());
-            user.setPhoneNumber(registerForm.getPhoneNumber());
-            userService.registerUser(user);
-            return "redirect:login";
+            mentorSherpaUserService.registerUser(registerForm, role);
+            return "redirect:/login";
         } else {
             result.reject("Oops! that email already exists. Try logging in!");
         }

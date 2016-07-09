@@ -5,30 +5,30 @@
  */
 package com.snapit.solutions.mentor.sherpa.service;
 
-import com.snapit.solutions.mentor.sherpa.dao.ChildDAO;
-import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 
 /**
  *
  * @author Ram
  */
-@Service("childService")
-public class ChildServiceImpl implements ChildService {
+@Service("studentService")
+public class StudentServiceImpl implements StudentService {
     
     @Autowired
-    ChildDAO childDAO;
+    StudentDAO studentDAO;
    
     
     @Override
-    public List<Child> findall() {
-        return childDAO.findAll();
+    public List<Student> findall() {
+        return studentDAO.findAll();
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public void createMentor(Student student) {
+        studentDAO.save(student);
+    }
 }

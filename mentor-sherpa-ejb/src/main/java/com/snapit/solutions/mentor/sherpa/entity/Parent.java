@@ -29,7 +29,7 @@ public class Parent implements Serializable  {
     private User parentLoginCredentials;
     
     @Embedded("child")
-    private List<Child> childList;
+    private List<Student> childList;
 
     public User getParentLoginCredentials() {
         return parentLoginCredentials;
@@ -39,11 +39,11 @@ public class Parent implements Serializable  {
         this.parentLoginCredentials = parentLoginCredentials;
     }
 
-    public List<Child> getChildList() {
+    public List<Student> getChildList() {
         return childList;
     }
 
-    public void setChildList(List<Child> childList) {
+    public void setChildList(List<Student> childList) {
         this.childList = childList;
     } 
 

@@ -3,9 +3,8 @@
  */
 package com.snapit.solutions.mentor.sherpa.controller;
 
-import com.snapit.solutions.mentor.sherpa.entity.Child;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
-import com.snapit.solutions.mentor.sherpa.service.ChildService;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import com.snapit.solutions.mentor.sherpa.service.StudentService;
 
 /**
  *
@@ -27,7 +27,7 @@ public class MentorController {
     MentorService mentorService;
     
     @Autowired
-    ChildService studentService;
+    StudentService studentService;
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String showMentor(@PathVariable String name, Model model) {
@@ -95,59 +95,59 @@ public class MentorController {
     
     @RequestMapping(value = "/student/list", method = RequestMethod.GET)
     public ModelAndView showStudentList(Model model) {
-        List<Child> studentList = studentService.findall();
+        List<Student> studentList = studentService.findall();
         
 //        interestsList.add("Baking");
-//        Child child = new Child();
+//        Student child = new Student();
 //        child.setAge(10);
 //        child.setName("John Doe");
 //        child.setGender("Male");
 //        child.setIntrests(interestsList);
 //        childList.add(child);
 //
-//        child = new Child();
+//        child = new Student();
 //        child.setAge(8);
 //        child.setName("John Doe");
 //        child.setGender("Male");
 //        childList.add(child);
 //        child.setIntrests(interestsList);
 //
-//        child = new Child();
+//        child = new Student();
 //        child.setAge(12);
 //        child.setName("John Doe");
 //        childList.add(child);
 //        child.setGender("Male");
 //        child.setIntrests(interestsList);
 //
-//        child = new Child();
+//        child = new Student();
 //        child.setAge(16);
 //        child.setName("John Doe");
 //        childList.add(child);
 //        child.setGender("Male");
 //        child.setIntrests(interestsList);
 //
-//        child = new Child();
+//        child = new Student();
 //        child.setAge(13);
 //        child.setName("John Doe");
 //        childList.add(child);
 //        child.setGender("Male");
 //        child.setIntrests(interestsList);
 //
-//        child = new Child();
+//        child = new Student();
 //        child.setAge(14);
 //        child.setName("John Doe");
 //        childList.add(child);
 //        child.setGender("Male");
 //        child.setIntrests(interestsList);
 //
-//        child = new Child();
+//        child = new Student();
 //        child.setAge(11);
 //        child.setName("John Doe");
 //        childList.add(child);
 //        child.setGender("Male");
 //        child.setIntrests(interestsList);
 //
-//        child = new Child();
+//        child = new Student();
 //        child.setAge(12);
 //        child.setName("John Doe");
 //        child.setGender("Male");
