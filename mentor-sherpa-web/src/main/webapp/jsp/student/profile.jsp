@@ -1,6 +1,6 @@
 <%-- 
     Document   : profile
-    Created on : Jul 8, 2016, 6:56:57 PM
+    Created on : Jul 8, 2016, 9:34:40 PM
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
 
@@ -14,9 +14,7 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/boxed-bg.png" alt="User profile picture">
 
-              <h3 class="profile-username text-center">${mentor.name}</h3>
-
-              <p class="text-muted text-center">${mentor.title}</p>
+              <h3 class="profile-username text-center">${student.name}</h3>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
@@ -46,7 +44,7 @@
               <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
 
               <p class="text-muted">
-                ${mentor.education}
+                ${student.education}
               </p>
 
               <hr>
@@ -57,7 +55,7 @@
 
               <hr>
 
-              <c:forEach items="${mentor.interests}" var="skill">
+              <c:forEach items="${student.interests}" var="skill">
               <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
               <p>
                 <span class="label label-danger">${skill}</span>

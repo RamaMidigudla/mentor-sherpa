@@ -17,5 +17,6 @@ import org.mongodb.morphia.dao.DAO;
 public interface StudentDAO extends DAO<Student, ObjectId> {
     
     public List<Student> findAll(); 
-    
+    public Student findById(String studentId);
+
 }

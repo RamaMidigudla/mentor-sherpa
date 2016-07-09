@@ -35,5 +35,9 @@ public class MentorServiceImpl implements MentorService {
     public Mentor findByMentorName(String mentorName) {
         return mentorDAO.findByMentorName(mentorName);
     }
-    
+
+    @Override
+    public Mentor findById(String id) {
+        return mentorDAO.findById(id);
+    }
 }

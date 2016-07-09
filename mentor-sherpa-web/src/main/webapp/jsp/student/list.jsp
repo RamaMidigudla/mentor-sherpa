@@ -27,7 +27,7 @@
                                     <td>${student.name}</td>
                                     <td>${student.age}</td>
                                     <td>${student.gender}</td>
-                                    <td><c:forEach items="${student.intrests}" var="interest">${interest}</br></c:forEach></td>
+                                    <td><c:forEach items="${student.interests}" var="interest">${interest}</br></c:forEach></td>
                                 </tr>
                             </c:forEach>
                                

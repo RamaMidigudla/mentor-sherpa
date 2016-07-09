@@ -19,4 +19,6 @@ public interface MentorService {
     public List<Mentor> findall();
     
     public Mentor findByMentorName(String mentorName);
+    
+    public Mentor findById(String id);
 }

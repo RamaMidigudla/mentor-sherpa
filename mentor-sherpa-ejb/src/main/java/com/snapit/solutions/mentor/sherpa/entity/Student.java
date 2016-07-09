@@ -32,7 +32,13 @@ public class Student implements Serializable {
     
     private String gender = "";
     
-    private List<String> interests = new ArrayList<>();
+    private String education = "";
+    
+    private List<InterestedOrganizations>  interestedOrganizations = new ArrayList<>();
+    
+    private List<String>  interests = new ArrayList<>();
+    
+    private String imageName = "";
 
     public String getGender() {
         return gender;
@@ -81,6 +87,30 @@ public class Student implements Serializable {
 
     public void setUserObjectId(ObjectId userObjectId) {
         this.userObjectId = userObjectId;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public List<InterestedOrganizations> getInterestedOrganizations() {
+        return interestedOrganizations;
+    }
+
+    public void setInterestedOrganizations(List<InterestedOrganizations> interestedOrganizations) {
+        this.interestedOrganizations = interestedOrganizations;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
     
 }

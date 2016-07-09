@@ -21,6 +21,7 @@
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Mentors</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="${pageContext.request.contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
@@ -30,6 +31,7 @@
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Students</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="${pageContext.request.contextPath}/organization/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
@@ -39,7 +41,7 @@
         <%-- MENTOR Navigation --%>
         <sec:authorize access="hasRole('MENTOR')">
         <li>
-          <a href="${mentorProfile}">
+          <a href="${pageContext.request.contextPath}/mentor/${user.userId}">
             <i class="fa fa-user"></i>
             <span>My Profile</span>
           </a>
@@ -48,6 +50,7 @@
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Organizations</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="${pageContext.request.contextPath}/mentor/organization/list"><i class="fa fa-circle-o"></i> Show Organization</a></li>
@@ -57,6 +60,7 @@
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Students</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="${pageContext.request.contextPath}/mentor/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
@@ -66,7 +70,7 @@
         <%-- Student Navigation --%>
         <sec:authorize access="hasRole('STUDENT')">
         <li>
-          <a href="${studentProfile}">
+          <a href="${pageContext.request.contextPath}/student/${user.userId}">
             <i class="fa fa-user"></i>
             <span>My Profile</span>
           </a>

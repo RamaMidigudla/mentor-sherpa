@@ -20,18 +20,27 @@ import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
  */
 @Repository("studentDAO")
 public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements StudentDAO {
-    
-     @Autowired
+
+    @Autowired
     public StudentDAOImpl(Datastore ds) {
         super(ds);
         ds.ensureIndexes(); //creates all defined with @Indexed
         ds.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
-  
+
+    }
+
+    @Override
+    public Student findById(String studentId) {
+        if (!ObjectId.isValid(studentId)) {
+            return null;
+        }
+
+        ObjectId oid = new ObjectId(studentId);
+        return getDatastore().find(Student.class).field("_id").equal(oid).get();
     }
 
     @Override
     public List<Student> findAll() {
-        return getDatastore().find(Student.class ).asList();
+        return getDatastore().find(Student.class).asList();
     }
-    
 }

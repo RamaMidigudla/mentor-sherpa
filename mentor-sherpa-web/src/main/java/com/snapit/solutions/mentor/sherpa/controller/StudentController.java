@@ -29,10 +29,14 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
-    public String showMentor(@PathVariable String name, Model model) {
-        Mentor mentor = mentorService.findByMentorName(name);
-        model.addAttribute(mentor);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String showMentor(@PathVariable String id, Model model) {
+        Student student = studentService.findById(id);
+        if (student != null) {
+            model.addAttribute(student);
+        } else {
+            model.addAttribute(new Student());  // We should be throwing Exception
+        }
         return "studentProfile";
     }   
         

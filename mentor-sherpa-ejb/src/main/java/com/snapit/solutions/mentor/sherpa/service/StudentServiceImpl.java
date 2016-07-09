@@ -31,4 +31,10 @@ public class StudentServiceImpl implements StudentService {
     public void createMentor(Student student) {
         studentDAO.save(student);
     }
+
+    @Override
+    public Student findById(String id) {
+        return studentDAO.findById(id);
+    }
+    
 }

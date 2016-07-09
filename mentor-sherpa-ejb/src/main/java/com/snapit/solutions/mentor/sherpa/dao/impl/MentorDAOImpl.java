@@ -20,29 +20,39 @@ import org.springframework.stereotype.Repository;
  * @author Ram
  */
 @Repository("mentorDAO")
-public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorDAO  { 
-    
-     @Autowired
+public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorDAO {
+
+    @Autowired
     public MentorDAOImpl(Datastore ds) {
         super(ds);
         ds.ensureIndexes(); //creates all defined with @Indexed
         ds.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
-  
+
     }
 
     @Override
     public List<Mentor> findAll() {
-        return getDatastore().find( Mentor.class ).asList();
+        return getDatastore().find(Mentor.class).asList();
+    }
+
+    @Override
+    public Mentor findById(String mentorId) {
+        if (!ObjectId.isValid(mentorId)) {
+            return null;
+        }
+
+        ObjectId oid = new ObjectId(mentorId);
+        return getDatastore().find(Mentor.class).field("_id").equal(oid).get();
     }
 
     @Override
     public Mentor findByMentorName(String mentorName) {
-        return getDatastore().find( Mentor.class ).field("name").equal(mentorName).get();
+        return getDatastore().find(Mentor.class).field("name").equal(mentorName).get();
     }
 
     @Override
     public Mentor findMentorByUserName(ObjectId userObjectId) {
-         return getDatastore().find(Mentor.class).field("user_id").equal(userObjectId).get();
+        return getDatastore().find(Mentor.class).field("user_id").equal(userObjectId).get();
     }
 
     @Override
@@ -57,9 +67,9 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
 
     @Override
     public void deleteMentorById(Mentor mentor) {
-         Datastore dataStore = getDatastore(); 
-        Query<Mentor> deleteQuery = 
-                dataStore.createQuery(Mentor.class).field("_id").equal(mentor.getId());
-            dataStore.delete(deleteQuery);
-    }   
+        Datastore dataStore = getDatastore();
+        Query<Mentor> deleteQuery
+                = dataStore.createQuery(Mentor.class).field("_id").equal(mentor.getId());
+        dataStore.delete(deleteQuery);
+    }
 }

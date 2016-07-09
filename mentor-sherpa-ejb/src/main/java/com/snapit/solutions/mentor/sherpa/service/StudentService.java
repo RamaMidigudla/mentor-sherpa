@@ -16,5 +16,5 @@ public interface StudentService {
     
     public void createMentor(Student student);
     public List<Student> findall();
-    
+    public Student findById(String id);
 }

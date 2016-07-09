@@ -17,6 +17,7 @@ import org.mongodb.morphia.dao.DAO;
 public interface MentorDAO extends DAO<Mentor, ObjectId> {
     
     public List<Mentor> findAll();
+    public Mentor findById(String mentorId);
     
      /**
      * Retrieves  mentor doc in mentor collection by username.
