@@ -15,35 +15,40 @@ import org.mongodb.morphia.dao.DAO;
  * @author Ram
  */
 public interface MentorDAO extends DAO<Mentor, ObjectId> {
-    
+
     public List<Mentor> findAll();
+
     public Mentor findById(String mentorId);
-    
-     /**
-     * Retrieves  mentor doc in mentor collection by username.
-     * @param userObjectId 
-     * @return Mentor doc 
+
+    /**
+     * Retrieves mentor doc in mentor collection by username.
+     *
+     * @param userObjectId
+     * @return Mentor doc
      */
     public Mentor findMentorByUserName(ObjectId userObjectId);
-    
+
     /**
      * Updates existing mentor doc in mentor collection.
-     * @param mentor 
+     *
+     * @param mentor
      */
     public void updateMentorById(Mentor mentor);
-    
+
     /**
      * persists new mentor object into mentor collection
-     * @param mentor 
+     *
+     * @param mentor
      */
     public void saveMentor(Mentor mentor);
-    
+
     /**
      * deletes mentor doc in mentor collection.
-     * @param mentor 
+     *
+     * @param mentor
      */
     public void deleteMentorById(Mentor mentor);
-    
-        public Mentor findByMentorName(String mentorName);
-      
+
+    public Mentor findByMentorName(String mentorName);
+
 }

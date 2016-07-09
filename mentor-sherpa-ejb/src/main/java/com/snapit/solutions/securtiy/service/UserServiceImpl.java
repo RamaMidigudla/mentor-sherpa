@@ -3,7 +3,7 @@
  */
 package com.snapit.solutions.securtiy.service;
 
-import com.snapit.solutions.mentor.sherpa.service.OrganizationSessionBean;
+import com.snapit.solutions.mentor.sherpa.service.OrganizationServiceImpl;
 import com.snapit.solutions.security.dao.UserDAO;
 import com.snapit.solutions.securtiy.entity.User;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    private static final Logger LOG = LogManager.getLogger(OrganizationSessionBean.class);
+    private static final Logger LOG = LogManager.getLogger(OrganizationServiceImpl.class);
     @Autowired
     private UserDAO userDAO;
 

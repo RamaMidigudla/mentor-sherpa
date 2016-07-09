@@ -6,6 +6,8 @@
 package com.snapit.solutions.mentor.sherpa.service;
 
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
+import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
 import java.util.List;
 
 /**
@@ -21,4 +23,6 @@ public interface MentorService {
     public Mentor findByMentorName(String mentorName);
     
     public Mentor findById(String id);
+    
+    public List<QuestionOptions> getQuestionsForMentorToAnswer(InterestedOrganizations InterestedOrganizations);
 }

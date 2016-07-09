@@ -45,6 +45,9 @@ public class Mentor implements Serializable {
     
     private String imageName = "";
     
+    @Embedded("questionAndResponses")
+    private QuestionResponse mentorQuestionAndResponses;
+    
     public ObjectId getId() {
         return id;
     }
@@ -123,6 +126,13 @@ public class Mentor implements Serializable {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
-    }    
-   
+    }
+
+    public QuestionResponse getMentorQuestionAndResponses() {
+        return mentorQuestionAndResponses;
+    }
+
+    public void setMentorQuestionAndResponses(QuestionResponse mentorQuestionAndResponses) {
+        this.mentorQuestionAndResponses = mentorQuestionAndResponses;
+    }
 }

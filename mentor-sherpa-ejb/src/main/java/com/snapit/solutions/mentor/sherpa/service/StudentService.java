@@ -5,6 +5,8 @@
  */
 package com.snapit.solutions.mentor.sherpa.service;
 
+import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
+import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 
@@ -13,8 +15,12 @@ import java.util.List;
  * @author Ram
  */
 public interface StudentService {
-    
+
     public void createMentor(Student student);
+
     public List<Student> findall();
+
     public Student findById(String id);
+
+    public List<QuestionOptions> getQuestionsForStudentToAnswer(InterestedOrganizations InterestedOrganizations);
 }

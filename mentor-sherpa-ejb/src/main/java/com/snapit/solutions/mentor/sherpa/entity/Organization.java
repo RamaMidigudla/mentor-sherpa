@@ -28,14 +28,9 @@ public class Organization implements Serializable {
     @Embedded("superUser")
     private User superUser;
     
-    @Embedded("subUser")
-    private List<User> subUsers;
-    
     @Embedded("program")
     private List<Program> programs;
     
-    
-
     public ObjectId getId() {
         return id;
     }
@@ -66,27 +61,6 @@ public class Organization implements Serializable {
 
     public void setSuperUser(User superUser) {
         this.superUser = superUser;
-    }
-
-    public List<User> getSubUsers() {
-        return subUsers;
-    }
-
-    public void setSubUsers(List<User> subUsers) {
-        this.subUsers = subUsers;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Organization)) {
-            return false;
-        }
-        Organization other = (Organization) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

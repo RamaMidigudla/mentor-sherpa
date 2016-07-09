@@ -10,6 +10,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
+import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
+import com.snapit.solutions.mentor.sherpa.entity.Organization;
+import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
+import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 
 /**
  *
@@ -20,6 +24,12 @@ public class StudentServiceImpl implements StudentService {
     
     @Autowired
     StudentDAO studentDAO;
+    
+   @Autowired
+   OrganizationService organizationService;
+
+   @Autowired
+   QuestionOptionsService questionOptionsService;
    
     
     @Override
@@ -35,6 +45,14 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student findById(String id) {
         return studentDAO.findById(id);
+    }
+    
+    @Override
+    public List<QuestionOptions> getQuestionsForStudentToAnswer(InterestedOrganizations interestedOrganizations) {
+        Organization organization = organizationService.findOrganziationById(interestedOrganizations.getOrgId());
+        return questionOptionsService.findQuestionOptionsByQuestionFor(
+                CommonServiceUtils.findrequiredQuestionIdList(
+                        organization, interestedOrganizations), "student");
     }
     
 }

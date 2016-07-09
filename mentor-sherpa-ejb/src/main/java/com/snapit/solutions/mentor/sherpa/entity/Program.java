@@ -9,6 +9,8 @@ package com.snapit.solutions.mentor.sherpa.entity;
  */
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -23,6 +25,8 @@ public class Program implements Serializable {
     private Date programStartDate;
 
     private Date programEndDate;
+    
+    private List<ObjectId> questionIdList;
 
     public String getProgramName() {
         return programName;
@@ -55,5 +59,14 @@ public class Program implements Serializable {
     public void setProgramEndDate(Date programEndDate) {
         this.programEndDate = programEndDate;
     }
+
+    public List<ObjectId> getQuestionIdList() {
+        return questionIdList;
+    }
+
+    public void setQuestionIdList(List<ObjectId> questionIdList) {
+        this.questionIdList = questionIdList;
+    }
+    
 
 }

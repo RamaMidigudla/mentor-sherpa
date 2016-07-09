@@ -5,6 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
@@ -14,7 +15,7 @@ import org.mongodb.morphia.annotations.Embedded;
  * @author Ram
  */
 @Embedded
-class InterestedOrganizations {
+public class InterestedOrganizations implements Serializable {
     
     private ObjectId orgId;
     

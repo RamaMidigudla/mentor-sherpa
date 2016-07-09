@@ -5,13 +5,16 @@ package com.snapit.solutions.mentor.sherpa.service;
 
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import java.util.List;
-import javax.ejb.Remote;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Sudheer.Parasker@SnapIT.Solutions
  */
-@Remote
 public interface OrganizationService {
+
     public List<Organization> listAllOrganizations();
+
+    public Organization findOrganziationById(ObjectId orgId);
+
 }

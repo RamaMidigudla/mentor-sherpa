@@ -62,7 +62,6 @@ public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implem
            UpdateOperations<Organization> ops = dataStore.createUpdateOperations(Organization.class).
             set("organizationName", organization.getOrganizationName()).
             set("superUser", organization.getSuperUser()).
-            set("subUser", organization.getSubUsers()).
             set("programs", organization.getPrograms());
     
             dataStore.update(updateQuery, ops);
@@ -75,5 +74,17 @@ public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implem
                 dataStore.createQuery(Organization.class).field("_id").equal(organization.getId());
             dataStore.delete(deleteQuery);
     } 
+
+    @Override
+    public Organization retrieveOrganizationById(ObjectId orgID) {
+        return getDatastore().find(
+                    Organization.class, 
+                    "_id", 
+                    orgID).get(); 
+    }
+
+    
+    
+    
         
 }
