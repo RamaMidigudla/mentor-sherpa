@@ -9,6 +9,8 @@ import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
 import java.util.List;
+import java.util.Map;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -25,4 +27,6 @@ public interface MentorService {
     public Mentor findById(String id);
     
     public List<QuestionOptions> getQuestionsForMentorToAnswer(InterestedOrganizations InterestedOrganizations);
+    
+    public Map<Mentor, Integer> getMatchedMentors(ObjectId studentId, ObjectId orgId, String programName);
 }

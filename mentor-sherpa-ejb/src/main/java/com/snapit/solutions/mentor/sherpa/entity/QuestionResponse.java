@@ -6,7 +6,6 @@
 package com.snapit.solutions.mentor.sherpa.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  *
@@ -14,9 +13,10 @@ import java.util.Set;
  */
 public class QuestionResponse  implements Serializable {
     
+    
     private String question;
     
-    private Set<String> responses;
+    private String response;
 
     public String getQuestion() {
         return question;
@@ -26,12 +26,14 @@ public class QuestionResponse  implements Serializable {
         this.question = question;
     }
 
-    public Set<String> getResponses() {
-        return responses;
+    public String getResponse() {
+        return response;
     }
 
-    public void setResponses(Set<String> responses) {
-        this.responses = responses;
+    public void setResponse(String response) {
+        this.response = response;
     }
+
+   
     
 }

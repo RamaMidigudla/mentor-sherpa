@@ -8,6 +8,7 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import java.util.List;
+import java.util.Set;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
@@ -72,4 +73,12 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
                 = dataStore.createQuery(Mentor.class).field("_id").equal(mentor.getId());
         dataStore.delete(deleteQuery);
     }
+
+    @Override
+    public List<Mentor> findMentorsByIds(Set<ObjectId> mentorIds) {
+        Query<Mentor> query = getDatastore().createQuery(Mentor.class);
+        query.field("id").hasAnyOf(mentorIds);
+        return query.asList();
+    }
+      
 }

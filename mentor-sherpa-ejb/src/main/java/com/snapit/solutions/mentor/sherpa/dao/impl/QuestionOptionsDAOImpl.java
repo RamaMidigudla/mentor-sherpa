@@ -7,7 +7,6 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.QuestionOptionsDAO;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.bson.types.ObjectId;

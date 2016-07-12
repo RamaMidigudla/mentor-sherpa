@@ -5,13 +5,19 @@
  */
 package com.snapit.solutions.mentor.sherpa.service;
 
+import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +36,9 @@ public class MentorServiceImpl implements MentorService {
 
     @Autowired
     QuestionOptionsService questionOptionsService;
+    
+    @Autowired
+    MentorAndStudentResponseDAO  mentorAndStudentResponseDAO;
 
     @Override
     public void createMentor(Mentor mentor) {
@@ -58,5 +67,30 @@ public class MentorServiceImpl implements MentorService {
                 CommonServiceUtils.findrequiredQuestionIdList(
                         organization, interestedOrganizations), "mentor");
     }
+
+    @Override
+    public Map<Mentor, Integer> getMatchedMentors(ObjectId studentId, ObjectId orgId, String programName) {
+       
+         MentorAndStudentResponse studentResponse = mentorAndStudentResponseDAO.retrieveByMentorStudentId(studentId);
+         
+         List<MentorAndStudentResponse> mentorResponseList = mentorAndStudentResponseDAO.
+                                                                retrieveMentorsResponsebyOrgAndProgram(orgId, programName, orgId);
+         
+         Map<ObjectId, Integer> mentorToMatchPercentageMap = MatchingServiceImpl.match(studentResponse, mentorResponseList);
+         
+         Set<ObjectId> mentorIds = mentorToMatchPercentageMap.keySet();
+         
+         List<Mentor> mentorList = mentorDAO.findMentorsByIds(mentorIds);
+         
+         Map<Mentor, Integer> mentorMatchPercentageForStudent = new HashMap<>();
+         
+         for(Mentor mentor : mentorList){
+            mentorMatchPercentageForStudent.put(mentor, mentorToMatchPercentageMap.get(mentor.getId()));
+         }
+        
+      return mentorMatchPercentageForStudent;  
+    }
+    
+    
 
 }

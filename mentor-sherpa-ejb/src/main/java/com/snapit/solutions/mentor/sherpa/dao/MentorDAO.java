@@ -7,6 +7,7 @@ package com.snapit.solutions.mentor.sherpa.dao;
 
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import java.util.List;
+import java.util.Set;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.DAO;
 
@@ -50,5 +51,7 @@ public interface MentorDAO extends DAO<Mentor, ObjectId> {
     public void deleteMentorById(Mentor mentor);
 
     public Mentor findByMentorName(String mentorName);
+    
+    public List<Mentor> findMentorsByIds(Set<ObjectId> mentorIds);
 
 }
