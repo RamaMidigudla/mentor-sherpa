@@ -47,6 +47,12 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
     public List<MentorAndStudentResponse> findAll() {
         return getDatastore().find(MentorAndStudentResponse.class).asList();
     }
+
+    @Override
+    public void saveMentor(MentorAndStudentResponse mentorAndStudentResponse) {
+        getDatastore().save(mentorAndStudentResponse);
+    }
+    
     
     
 

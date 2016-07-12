@@ -5,6 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao;
 
+import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -23,4 +24,6 @@ public interface MentorAndStudentResponseDAO extends DAO<MentorAndStudentRespons
                                                                 String programName,
                                                                 ObjectId childId);
     public List<MentorAndStudentResponse> findAll();
+    
+    public void saveMentor(MentorAndStudentResponse mentorAndStudentResponse);
 }
