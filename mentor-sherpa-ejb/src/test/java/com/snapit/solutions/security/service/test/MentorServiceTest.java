@@ -5,8 +5,12 @@
  */
 package com.snapit.solutions.security.service.test;
 
+import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
-import com.snapit.solutions.securtiy.service.UserService;
+import com.snapit.solutions.mentor.sherpa.service.QuestionOptionsService;
+import java.util.ArrayList;
+import java.util.List;
+import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -28,6 +32,9 @@ public class MentorServiceTest {
     
     @Autowired
     private MentorService mentorService;
+    
+    @Autowired
+    private QuestionOptionsService questionOptionsService;
     
     public MentorServiceTest() {
     }
@@ -58,9 +65,15 @@ public class MentorServiceTest {
     @Test
     public void find() {  
         
+       List<ObjectId> questionIdList = new ArrayList<>();
         
-     
-   //Assert.assertNotNull(mentorService.findMentorById(userId));
+        questionIdList.add(new ObjectId("577da4703008228a61fdc33a"));
+        
+                                                 
+                                  
+     List<QuestionOptions> bb = questionOptionsService.findQuestionOptionsByQuestionFor(questionIdList,"mentor" );
+     Assert.assertNotNull(mentorService);
+     Assert.assertNotNull(bb);
    
     }
 }

@@ -45,4 +45,11 @@ public class QuestionOptionsDAOImpl extends BasicDAO<QuestionOptions, ObjectId> 
         return query.asList();
     }
     
+   @Override
+    public List<QuestionOptions> retrieveCommonQuestions() {        
+        Query<QuestionOptions> query = getDatastore().createQuery(QuestionOptions.class);
+        query.field("questionFor").equal("common");
+        return query.asList();
+    } 
+    
 }

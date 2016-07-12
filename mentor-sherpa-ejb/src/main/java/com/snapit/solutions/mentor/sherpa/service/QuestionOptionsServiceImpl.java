@@ -35,7 +35,12 @@ public class QuestionOptionsServiceImpl implements QuestionOptionsService {
         Set<String> questionForSet = new HashSet<>();
         questionForSet.add(questionFor);
         questionForSet.add("common");
-        return questionOptionsDAO.retrievebyQuestionFor(questionIdList,questionForSet);
+         
+        List<QuestionOptions> questionOptions = questionOptionsDAO.retrievebyQuestionFor(questionIdList,questionForSet);
+        List<QuestionOptions> commonQuestionOptions = questionOptionsDAO.retrieveCommonQuestions();
+        questionOptions.addAll(commonQuestionOptions);
+        return questionOptions;
+        
     }
     
     
