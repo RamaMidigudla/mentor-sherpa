@@ -21,7 +21,7 @@
         <intercept-url pattern="/organization/user/**" access="hasRole('ORG_USER')" />
         <intercept-url pattern="/student/**" access="hasRole('STUDENT')" />
         <intercept-url pattern="/" access="hasRole('ORG_ADMIN') OR hasRole('MENTOR') OR hasRole('STUDENT')" />
-        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/accessDenied" />
+        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login" />
         <logout invalidate-session="true" logout-success-url="/login"
             logout-url="/logout" />
         <session-management session-fixation-protection="migrateSession">

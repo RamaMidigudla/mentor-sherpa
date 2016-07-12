@@ -4,8 +4,9 @@
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false"%>
+
 <header class="main-header">
 
     <!-- Logo -->
@@ -253,7 +254,12 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    <sec:authorize access="hasRole('MENTOR')">
+                        <a href="${pageContext.request.contextPath}/mentor/${user.userId}" class="btn btn-default btn-flat">Profile</a>                        
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('STUDENT')">
+                        <a href="${pageContext.request.contextPath}/student/${user.userId}" class="btn btn-default btn-flat">Profile</a>
+                    </sec:authorize>
                 </div>
                   <c:url var="logoutAction" value="/logout"></c:url>
                 <div class="pull-right">

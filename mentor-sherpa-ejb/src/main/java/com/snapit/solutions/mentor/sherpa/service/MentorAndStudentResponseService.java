@@ -5,11 +5,13 @@
  */
 package com.snapit.solutions.mentor.sherpa.service;
 
+import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
+
 /**
  *
  * @author Ram
  */
 public interface MentorAndStudentResponseService {
-    
+    public void saveResponses(MentorAndStudentResponse mentorAndStudentResponse);
     
 }

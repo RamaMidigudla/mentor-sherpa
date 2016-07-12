@@ -40,13 +40,13 @@
         </sec:authorize>
         <%-- MENTOR Navigation --%>
         <sec:authorize access="hasRole('MENTOR')">
-        <li>
+        <li class="active">
           <a href="${pageContext.request.contextPath}/mentor/${user.userId}">
             <i class="fa fa-user"></i>
             <span>My Profile</span>
           </a>
         </li>
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Organizations</span>
@@ -69,13 +69,13 @@
         </sec:authorize>
         <%-- Student Navigation --%>
         <sec:authorize access="hasRole('STUDENT')">
-        <li>
+        <li class="active">
           <a href="${pageContext.request.contextPath}/student/${user.userId}">
             <i class="fa fa-user"></i>
             <span>My Profile</span>
           </a>
         </li>
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Organizations</span>

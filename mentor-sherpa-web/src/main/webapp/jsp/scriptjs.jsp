@@ -10,6 +10,8 @@
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/dist/js/app.min.js"></script>
 <!-- Sparkline -->
@@ -17,8 +19,6 @@
 <!-- jvectormap -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/chartjs/Chart.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

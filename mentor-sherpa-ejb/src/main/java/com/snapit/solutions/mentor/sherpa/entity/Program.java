@@ -26,7 +26,7 @@ public class Program implements Serializable {
 
     private Date programEndDate;
     
-    private List<ObjectId> questionIdList;
+    private List<ObjectId> questionsIdList;
 
     public String getProgramName() {
         return programName;
@@ -60,12 +60,12 @@ public class Program implements Serializable {
         this.programEndDate = programEndDate;
     }
 
-    public List<ObjectId> getQuestionIdList() {
-        return questionIdList;
+    public List<ObjectId> getQuestionsIdList() {
+        return questionsIdList;
     }
 
-    public void setQuestionIdList(List<ObjectId> questionIdList) {
-        this.questionIdList = questionIdList;
+    public void setQuestionsIdList(List<ObjectId> questionsIdList) {
+        this.questionsIdList = questionsIdList;
     }
     
 

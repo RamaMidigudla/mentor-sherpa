@@ -29,5 +29,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization findOrganziationById(ObjectId orgId) {
         return organizationDao.retrieveOrganizationById(orgId);
     }
+    @Override
+    public Organization findOrganziationById(String orgId) {
+        return organizationDao.findById(orgId);
+    }
 
 }

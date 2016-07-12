@@ -26,13 +26,13 @@ public class MatchingServiceImpl {
 
         Set<String> studentResponseSet = new HashSet<>();
         for (QuestionResponse questionResponse : studentResponse.getQuestionAndResponses()) {
-            studentResponseSet.add(questionResponse.getResponse());
+            studentResponseSet.addAll(questionResponse.getResponse());
         }
 
         for (MentorAndStudentResponse mentorResponse : mentorResponseList) {
             Set<String> mentorResponseSet = new HashSet<>();
             for (QuestionResponse questionResponse : mentorResponse.getQuestionAndResponses()) {
-                mentorResponseSet.add(questionResponse.getResponse());     
+                mentorResponseSet.addAll(questionResponse.getResponse());     
             }
             Integer percentage = getPercentage(mentorResponseSet, studentResponseSet);
             mentorToMatchPercentageMap.put(mentorResponse.getMentorOrStudentId(),percentage);

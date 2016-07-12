@@ -82,9 +82,14 @@ public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implem
                     "_id", 
                     orgID).get(); 
     }
+    
+    @Override
+    public Organization findById(String id) {
+        if (!ObjectId.isValid(id)) {
+            return null;
+        }
 
-    
-    
-    
-        
+        ObjectId oid = new ObjectId(id);
+        return getDatastore().find(Organization.class).field("_id").equal(oid).get();
+    }        
 }

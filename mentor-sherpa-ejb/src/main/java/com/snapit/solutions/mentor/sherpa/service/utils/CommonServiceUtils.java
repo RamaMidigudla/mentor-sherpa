@@ -26,7 +26,7 @@ public class CommonServiceUtils {
             {
                 if (interestedProgramName.equals(program.getProgramName())) 
                 {
-                    questionIdList.addAll(program.getQuestionIdList());
+                    questionIdList.addAll(program.getQuestionsIdList());
                 }
             }
         }

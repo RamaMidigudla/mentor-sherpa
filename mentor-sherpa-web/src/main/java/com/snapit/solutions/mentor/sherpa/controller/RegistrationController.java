@@ -48,7 +48,7 @@ public class RegistrationController {
     }
 
     private void dateValidator(WebDataBinder webDataBinder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         dateFormat.setLenient(false);
         webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }

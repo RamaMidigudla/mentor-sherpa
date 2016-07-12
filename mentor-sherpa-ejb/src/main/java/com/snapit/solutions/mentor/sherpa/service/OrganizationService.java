@@ -16,5 +16,6 @@ public interface OrganizationService {
     public List<Organization> listAllOrganizations();
 
     public Organization findOrganziationById(ObjectId orgId);
+    public Organization findOrganziationById(String orgId);
 
 }

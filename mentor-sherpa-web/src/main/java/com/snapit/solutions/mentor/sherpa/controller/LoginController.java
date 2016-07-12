@@ -26,7 +26,7 @@ public class LoginController {
         return new ModelAndView("accessDenied");
     }
 
-    @RequestMapping(value="/logout")
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logout(){
         return "logout";
     }    

@@ -5,10 +5,22 @@
  */
 package com.snapit.solutions.mentor.sherpa.service;
 
+import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
+import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author Ram
  */
-public class MentorAndStudentResponseServiceImpl {
-    
+@Service("mentorAndStudentResponseService")
+public class MentorAndStudentResponseServiceImpl implements MentorAndStudentResponseService {
+
+    @Autowired 
+    public MentorAndStudentResponseDAO responseDao;
+    @Override
+    public void saveResponses(MentorAndStudentResponse mentorAndStudentResponse) {
+        responseDao.saveMentor(mentorAndStudentResponse);
+    }    
 }
