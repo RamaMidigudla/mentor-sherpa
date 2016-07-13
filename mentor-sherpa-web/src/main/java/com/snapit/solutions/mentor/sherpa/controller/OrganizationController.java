@@ -47,57 +47,7 @@ public class OrganizationController {
         
     @RequestMapping(value = "/mentor/list", method = RequestMethod.GET)
     public ModelAndView showMentorList(Model model) {
-//        List<Mentor> mentorList = new ArrayList<Mentor>();
         List<Mentor> mentorList = mentorService.findall();
-//        Mentor mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        mentor = new Mentor();
-//        mentor.setAge(32);
-//        mentor.setName("John Doe");
-//        mentor.setGender("Male");
-//        mentor.setEducation("Masters");
-//        mentorList.add(mentor);
-//        
         model.addAttribute(mentorList);
         return new ModelAndView("mentorList");
     }
@@ -105,66 +55,13 @@ public class OrganizationController {
     @RequestMapping(value = "/student/list", method = RequestMethod.GET)
     public ModelAndView showStudentList(Model model) {
         List<Student> studentList = studentService.findall();
-        
-//        interestsList.add("Baking");
-//        Student child = new Student();
-//        child.setAge(10);
-//        child.setName("John Doe");
-//        child.setGender("Male");
-//        child.setIntrests(interestsList);
-//        childList.add(child);
-//
-//        child = new Student();
-//        child.setAge(8);
-//        child.setName("John Doe");
-//        child.setGender("Male");
-//        childList.add(child);
-//        child.setIntrests(interestsList);
-//
-//        child = new Student();
-//        child.setAge(12);
-//        child.setName("John Doe");
-//        childList.add(child);
-//        child.setGender("Male");
-//        child.setIntrests(interestsList);
-//
-//        child = new Student();
-//        child.setAge(16);
-//        child.setName("John Doe");
-//        childList.add(child);
-//        child.setGender("Male");
-//        child.setIntrests(interestsList);
-//
-//        child = new Student();
-//        child.setAge(13);
-//        child.setName("John Doe");
-//        childList.add(child);
-//        child.setGender("Male");
-//        child.setIntrests(interestsList);
-//
-//        child = new Student();
-//        child.setAge(14);
-//        child.setName("John Doe");
-//        childList.add(child);
-//        child.setGender("Male");
-//        child.setIntrests(interestsList);
-//
-//        child = new Student();
-//        child.setAge(11);
-//        child.setName("John Doe");
-//        childList.add(child);
-//        child.setGender("Male");
-//        child.setIntrests(interestsList);
-//
-//        child = new Student();
-//        child.setAge(12);
-//        child.setName("John Doe");
-//        child.setGender("Male");
-//        child.setIntrests(interestsList);
-//        childList.add(child);
-        
         model.addAttribute(studentList);
         return new ModelAndView("studentList");
     }
-
+    
+    @RequestMapping(value = "/{id}/assign", method = RequestMethod.GET)
+    public String assignMentor(@PathVariable String id, Model model) {
+        
+        return "assignMentor";
+    }   
 }

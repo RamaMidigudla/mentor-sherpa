@@ -85,11 +85,7 @@ public class MentorController {
             }
         programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(questionIdList, "mentor"));
         model.addAttribute(organization);
-//        model.addAttribute(questionsList);
         model.addAttribute(programSignupForm);
-//        redirectAttr.addFlashAttribute(organization);
-//        redirectAttr.addFlashAttribute(questionsList);
-//        redirectAttr.addFlashAttribute(programSignupForm);
         }
         return new ModelAndView("answerQuestions");
     }
