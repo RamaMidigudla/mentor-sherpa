@@ -6,14 +6,15 @@
 
 <!-- jQuery 2.2.0 -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/jQueryUI/jquery-ui.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="${pageContext.request.contextPath}/themes/AdminLTE/dist/js/app.js"></script>
 <!-- SlimScroll 1.3.0 -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- AdminLTE App -->
-<script src="${pageContext.request.contextPath}/themes/AdminLTE/dist/js/app.min.js"></script>
 <!-- Sparkline -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -40,16 +41,8 @@
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 <!-- bootstrap time picker -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- iCheck 1.0.1 -->
 <script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/iCheck/icheck.min.js"></script>
-<!-- FastClick -->
-<script src="${pageContext.request.contextPath}/themes/AdminLTE/plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="${pageContext.request.contextPath}/themes/AdminLTE/dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${pageContext.request.contextPath}/themes/AdminLTE/dist/js/demo.js"></script>
 <script> //<!-- Holding onto the tab after Submit if there are errors -->
     $(function() { 
     // for bootstrap 3 use 'shown.bs.tab', for bootstrap 2 use 'shown' in the next line
@@ -62,6 +55,68 @@
     var lastTab = localStorage.getItem('lastTab');
     if (lastTab) {
         $('[href="' + lastTab + '"]').tab('show');
+    }
+});
+</script>
+<!-- left-nav -->
+<script> //<!-- Holding onto the tab after Submit if there are errors -->
+     $(function(){
+         alert("1");
+      function stripTrailingSlash(str) {
+        if(str.substr(-1) === '/') {
+          return str.substr(0, str.length - 1);
+        }
+        return str;
+      }
+
+         alert("2");
+      var url = window.location.pathname;  
+         alert("3");
+      var activePage = stripTrailingSlash(url);
+         alert("4");
+      console.log("##################################");
+      console.log(url);
+      console.log(activePage);
+      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+      $('.nav li a').each(function(){  
+        var currentPage = stripTrailingSlash($(this).attr('href'));
+
+        if (activePage === currentPage) {
+          $(this).parent().addClass('active'); 
+          $(this).parent().parent().addClass('active'); 
+        } 
+      });
+    });
+</script>
+<!-- left-nav -->
+<script> //<!-- Holding onto the tab after Submit if there are errors -->
+    $(function() { 
+     // go to the latest tab, if it exists:
+    var leftNav = localStorage.getItem('leftNav');
+    if (leftNav) {
+    var $this = leftNav;
+         //Get the parent menu
+        var parent = $this.parents('ul').first();
+        //Close all open menus within the parent
+        var ul = parent.find('ul:visible').slideUp(animationSpeed);
+        //Remove the menu-open class from the parent
+        ul.removeClass('menu-open');
+        //Get the parent li
+        var parent_li = $this.parent("li");
+
+        //Open the target menu and add the menu-open class
+        checkElement.slideDown(animationSpeed, function () {
+          //Add the class active to the parent li
+          checkElement.addClass('menu-open');
+          parent.find('li.active').removeClass('active');
+          parent_li.addClass('active');
+          // save the latest tab; use cookies if you like 'em better:
+           localStorage.setItem('leftNav', $(this).attr('href'));
+
+          //Fix the layout in case the sidebar stretches over the height of the window
+          _this.layout.fix();
+      });
     }
 });
 </script>

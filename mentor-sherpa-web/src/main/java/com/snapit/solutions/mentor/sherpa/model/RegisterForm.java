@@ -30,6 +30,15 @@ public class RegisterForm {
     @NotNull @Past
     private String dateOfBirth;
     private String phoneNumber;
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public String getEmailId() {
         return emailId;

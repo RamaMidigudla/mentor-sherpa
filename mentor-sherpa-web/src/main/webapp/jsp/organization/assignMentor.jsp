@@ -63,7 +63,7 @@
             <!-- /.box-header -->
             <div class="box-body text-center">
                 <span class="fa-stack fa-4x">
-                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
                   <strong class="fa-stack-1x text-primary">91</strong>
                 </span>
             </div>
@@ -76,12 +76,12 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/flay.jpeg" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/ramsay.jpeg" alt="User profile picture">
 
-              <h3 class="profile-username text-center">Bobby Flay</h3>
+              <h3 class="profile-username text-center">Gordon Ramsay</h3>
             <div class="box-body text-center">
                 <span class="fa-stack fa-4x">
-                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
                   <strong class="fa-stack-1x text-primary">72</strong>
                 </span>
             </div>
@@ -102,7 +102,7 @@
               <h3 class="profile-username text-center">Giada De Laurentiis</h3>
             <div class="box-body text-center">
                 <span class="fa-stack fa-4x">
-                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
                   <strong class="fa-stack-1x text-primary">53</strong>
                 </span>
             </div>

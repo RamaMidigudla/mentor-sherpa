@@ -91,5 +91,13 @@ public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implem
 
         ObjectId oid = new ObjectId(id);
         return getDatastore().find(Organization.class).field("_id").equal(oid).get();
-    }        
+    }   
+    
+    @Override
+    public Organization findByUserId(String userId) {
+        return getDatastore().find(
+                    Organization.class, 
+                    "userId", 
+                    userId).get(); 
+    }
 }

@@ -16,6 +16,9 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+                            <c:if test="${not empty selectedProgramName}">
+                                <div class="callout callout-info"><h4>Program - <c:out value="${selectedProgramName}" /></h4></div>
+                            </c:if>
                         <table id="Mentor List" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -23,9 +26,11 @@
                                     <th>Age</th>
                                     <th>Gender</th>
                                     <th>Interests</th>
+                            <c:if test="${not empty selectedProgramName}">
                                     <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
                                     <th>Assignment</th>
                                     </sec:authorize>
+                            </c:if>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,21 +40,15 @@
                                     <td>${student.age}</td>
                                     <td>${student.gender}</td>
                                     <td><c:forEach items="${student.interests}" var="interest">${interest}</br></c:forEach></td>
+                            <c:if test="${not empty selectedProgramName}">
                                     <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
                                         <td><a href="${pageContext.request.contextPath}/organization/${student.id}/assign"><span class="label label-success">Assign Mentor</span></a></td>
                                     </sec:authorize>
+                            </c:if>
                                 </tr>
                             </c:forEach>
                                
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Student Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Interests</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <!-- /.box-body -->

@@ -17,5 +17,6 @@ public interface OrganizationService {
 
     public Organization findOrganziationById(ObjectId orgId);
     public Organization findOrganziationById(String orgId);
+    public Organization findOrganziationByUserId(String orgId);
 
 }

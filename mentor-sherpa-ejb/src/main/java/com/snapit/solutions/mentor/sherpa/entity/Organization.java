@@ -24,6 +24,16 @@ public class Organization implements Serializable {
     private ObjectId id;
     
     private String organizationName;
+    
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
    
     @Embedded("superUser")
     private User superUser;

@@ -3,6 +3,9 @@
     Created on : Jul 8, 2016, 9:34:40 PM
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="false"%>
 
 <section class="content">
 
@@ -12,7 +15,15 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/boxed-bg.png" alt="User profile picture">
+            <sec:authentication var="user" property="principal" />
+            <c:url var="userProfileImage" value="boxed-bg.png"></c:url>
+             <c:if test="${user.male}">
+                 <c:url var="userProfileImage" value="avatar5.png"></c:url>
+             </c:if>
+             <c:if test="${user.female}">
+                 <c:url var="userProfileImage" value="avatar2.png"></c:url>
+             </c:if>
+              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/${userProfileImage}" alt="User profile picture">
 
               <h3 class="profile-username text-center">${student.name}</h3>
 

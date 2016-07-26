@@ -81,7 +81,7 @@ public class StudentController {
         ProgramSignupForm programSignupForm = new ProgramSignupForm();
         programSignupForm.setOrganizationId(id);
         model.addAttribute(programSignupForm);
-        return new ModelAndView("programSignup");
+        return new ModelAndView("selectProgram");
     }
     
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)

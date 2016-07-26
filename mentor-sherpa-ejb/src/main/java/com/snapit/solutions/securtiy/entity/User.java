@@ -30,6 +30,8 @@ public class User implements Serializable {
 
     private String email;
     
+    private String gender;
+
     private String dateOfBirth;
     
     private String phoneNumber;
@@ -77,6 +79,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    
     public List<String> getUserRole() {
         return userRole;
     }

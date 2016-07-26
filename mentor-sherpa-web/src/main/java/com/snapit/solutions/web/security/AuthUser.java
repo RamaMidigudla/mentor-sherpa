@@ -15,6 +15,9 @@ public class AuthUser extends User {
     
     private String fullName;
     private String userId;
+    private String gender;
+    private boolean male;
+    private boolean female;
 
     public String getUserId() {
         return userId;
@@ -32,6 +35,20 @@ public class AuthUser extends User {
         this.fullName = fullName;
     }
     
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public boolean getMale() {
+        return getGender() != null ? getGender().equalsIgnoreCase("male"): false; // TODO - BAD
+    }
+    public boolean getFemale() {
+        return getGender() != null ? getGender().equalsIgnoreCase("female"): false; // TODO - BAD
+    }
     public AuthUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
