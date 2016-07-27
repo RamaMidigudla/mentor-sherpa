@@ -5,7 +5,6 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao;
 
-import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -17,12 +16,12 @@ import org.mongodb.morphia.dao.DAO;
  */
 public interface MentorAndStudentResponseDAO extends DAO<MentorAndStudentResponse, ObjectId> {
 
-    public MentorAndStudentResponse retrieveByMentorStudentId(ObjectId mentorOrStudentId);
+    public MentorAndStudentResponse retrieveByMentorStudentId(String mentorOrStudentId);
 
     public List<MentorAndStudentResponse> retrieveMentorsResponsebyOrgAndProgram(
-                                                                ObjectId orgId,
+                                                                String orgId,
                                                                 String programName,
-                                                                ObjectId childId);
+                                                                String childId);
     public List<MentorAndStudentResponse> findAll();
     
     public void saveMentor(MentorAndStudentResponse mentorAndStudentResponse);

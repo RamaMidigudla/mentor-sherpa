@@ -6,6 +6,7 @@
 package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.QuestionOptionsDAO;
+import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import java.util.List;
 import java.util.Set;
@@ -31,16 +32,16 @@ public class QuestionOptionsDAOImpl extends BasicDAO<QuestionOptions, ObjectId> 
     }
 
     @Override
-    public List<QuestionOptions> retrievebyObjectIds(List<ObjectId> questionIdList) {
+    public List<QuestionOptions> retrievebyObjectIds(Set<String> questionIdList) {
         Query<QuestionOptions> query = getDatastore().createQuery(QuestionOptions.class);
-        query.field("id").hasAnyOf(questionIdList);
+        query.field("id").hasAnyOf(DaoUtils.createSetOfObjectIds(questionIdList));
         return query.asList();
     }
     
     @Override
-    public List<QuestionOptions> retrievebyQuestionFor(List<ObjectId> questionIdList, Set<String> questionFor) {        
+    public List<QuestionOptions> retrievebyQuestionFor(Set<String> questionIdList, Set<String> questionFor) {        
         Query<QuestionOptions> query = getDatastore().createQuery(QuestionOptions.class);
-        query.field("id").hasAnyOf(questionIdList).
+        query.field("id").hasAnyOf(DaoUtils.createSetOfObjectIds(questionIdList)).
                 and(query.criteria("questionFor").hasAnyOf(questionFor));
         return query.asList();
     }

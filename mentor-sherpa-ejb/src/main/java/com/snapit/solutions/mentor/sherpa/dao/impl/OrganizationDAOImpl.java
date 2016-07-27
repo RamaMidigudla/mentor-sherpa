@@ -4,6 +4,7 @@
 package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
+import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.securtiy.entity.User;
 
@@ -76,20 +77,15 @@ public class OrganizationDAOImpl extends BasicDAO<Organization, ObjectId> implem
     } 
 
     @Override
-    public Organization retrieveOrganizationById(ObjectId orgID) {
+    public Organization retrieveOrganizationById(String orgID) {
         return getDatastore().find(
                     Organization.class, 
                     "_id", 
-                    orgID).get(); 
+                    DaoUtils.createObjectId(orgID)).get(); 
     }
     
     @Override
     public Organization findById(String id) {
-        if (!ObjectId.isValid(id)) {
-            return null;
-        }
-
-        ObjectId oid = new ObjectId(id);
-        return getDatastore().find(Organization.class).field("_id").equal(oid).get();
+        return getDatastore().find(Organization.class).field("_id").equal(DaoUtils.createObjectId(id)).get();
     }        
 }

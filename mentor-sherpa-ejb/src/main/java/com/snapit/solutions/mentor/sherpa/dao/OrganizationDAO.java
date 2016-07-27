@@ -43,7 +43,7 @@ public interface OrganizationDAO extends DAO<Organization, ObjectId> {
     
     public List<Organization> findAll();
     
-    public Organization retrieveOrganizationById(ObjectId orgID);
+    public Organization retrieveOrganizationById(String orgID);
     public Organization findById(String id);
     
 }

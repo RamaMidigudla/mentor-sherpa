@@ -13,6 +13,7 @@ import org.mongodb.morphia.dao.BasicDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
+import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 
 /**
  *
@@ -31,12 +32,7 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
 
     @Override
     public Student findById(String studentId) {
-        if (!ObjectId.isValid(studentId)) {
-            return null;
-        }
-
-        ObjectId oid = new ObjectId(studentId);
-        return getDatastore().find(Student.class).field("_id").equal(oid).get();
+        return getDatastore().find(Student.class).field("_id").equal(DaoUtils.createObjectId(studentId)).get();
     }
 
     @Override

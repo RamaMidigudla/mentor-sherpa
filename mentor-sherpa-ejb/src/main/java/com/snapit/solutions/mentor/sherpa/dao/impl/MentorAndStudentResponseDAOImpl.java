@@ -10,6 +10,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.BasicDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
+import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +31,16 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
     }
 
     @Override
-    public MentorAndStudentResponse retrieveByMentorStudentId(ObjectId mentorOrStudentId) {
-        return getDatastore().find(MentorAndStudentResponse.class).field("mentorOrStudentId").equal(mentorOrStudentId).get();
+    public MentorAndStudentResponse retrieveByMentorStudentId(String mentorOrStudentId) {
+        return getDatastore().find(MentorAndStudentResponse.class).field("mentorOrStudentId").equal(DaoUtils.createObjectId(mentorOrStudentId)).get();
     }
 
     @Override
-    public List<MentorAndStudentResponse> retrieveMentorsResponsebyOrgAndProgram(ObjectId orgId, String programName, ObjectId childId) {
+    public List<MentorAndStudentResponse> retrieveMentorsResponsebyOrgAndProgram(String orgId, String programName, String childId) {
          Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
-         query.field("orgId").equal(orgId).
+         query.field("orgId").equal(DaoUtils.createObjectId(orgId)).
                 and(query.criteria("programName").hasThisOne(programName).
-                and(query.criteria("mentorOrStudentId").notEqual(childId)));
+                and(query.criteria("mentorOrStudentId").notEqual(DaoUtils.createObjectId(childId))));
         return query.asList();
     }
 

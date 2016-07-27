@@ -9,15 +9,10 @@ import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
-import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +31,9 @@ public class MentorServiceImpl implements MentorService {
 
     @Autowired
     QuestionOptionsService questionOptionsService;
-    
+
     @Autowired
-    MentorAndStudentResponseDAO  mentorAndStudentResponseDAO;
+    MentorAndStudentResponseDAO mentorAndStudentResponseDAO;
 
     @Override
     public void createMentor(Mentor mentor) {
@@ -62,13 +57,10 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public List<QuestionOptions> getQuestionsForMentorToAnswer(InterestedOrganizations interestedOrganizations) {
-        Organization organization = organizationService.findOrganziationById(interestedOrganizations.getOrgId());
+        Organization organization = organizationService.findOrganziationById(CommonServiceUtils.createStringId(interestedOrganizations.getOrgId()));
         return questionOptionsService.findQuestionOptionsByQuestionFor(
                 CommonServiceUtils.findrequiredQuestionIdList(
                         organization, interestedOrganizations), "mentor");
     }
-
-    
-    
 
 }

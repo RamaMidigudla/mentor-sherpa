@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
+import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
@@ -83,7 +84,7 @@ public class MentorController {
                     questionIdList.addAll(program.getQuestionsIdList());
                 }
             }
-        programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(questionIdList, "mentor"));
+        programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "mentor"));
         model.addAttribute(organization);
         model.addAttribute(programSignupForm);
         }

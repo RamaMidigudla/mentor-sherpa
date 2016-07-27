@@ -6,6 +6,7 @@
 package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
+import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import java.util.List;
 import java.util.Set;
@@ -38,12 +39,8 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
 
     @Override
     public Mentor findById(String mentorId) {
-        if (!ObjectId.isValid(mentorId)) {
-            return null;
-        }
-
-        ObjectId oid = new ObjectId(mentorId);
-        return getDatastore().find(Mentor.class).field("_id").equal(oid).get();
+        return getDatastore().find(Mentor.class).field("_id").
+                equal(DaoUtils.createObjectId(mentorId)).get();
     }
 
     @Override
@@ -52,8 +49,9 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
     }
 
     @Override
-    public Mentor findMentorByUserName(ObjectId userObjectId) {
-        return getDatastore().find(Mentor.class).field("user_id").equal(userObjectId).get();
+    public Mentor findMentorByUserName(String userObjectId) {
+        return getDatastore().find(Mentor.class).field("user_id").
+                equal(DaoUtils.createObjectId(userObjectId)).get();
     }
 
     @Override
@@ -75,9 +73,9 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
     }
 
     @Override
-    public List<Mentor> findMentorsByIds(Set<ObjectId> mentorIds) {
+    public List<Mentor> findMentorsByIds(Set<String> mentorIds) {
         Query<Mentor> query = getDatastore().createQuery(Mentor.class);
-        query.field("id").hasAnyOf(mentorIds);
+        query.field("id").hasAnyOf(DaoUtils.createSetOfObjectIds(mentorIds));
         return query.asList();
     }
       

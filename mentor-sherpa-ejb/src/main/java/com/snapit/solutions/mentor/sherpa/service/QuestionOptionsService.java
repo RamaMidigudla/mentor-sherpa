@@ -7,7 +7,7 @@ package com.snapit.solutions.mentor.sherpa.service;
 
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import java.util.List;
-import org.bson.types.ObjectId;
+import java.util.Set;
 
 /**
  *
@@ -15,8 +15,8 @@ import org.bson.types.ObjectId;
  */
 public interface QuestionOptionsService {
 
-    public List<QuestionOptions> findQuestionOptionsForOrganization(List<ObjectId> questionIdList);
+    public List<QuestionOptions> findQuestionOptionsForOrganization(Set<String> questionIdList);
     
-    public List<QuestionOptions> findQuestionOptionsByQuestionFor(List<ObjectId> questionIdList,String questionFor);
+    public List<QuestionOptions> findQuestionOptionsByQuestionFor(Set<String> questionIdList,String questionFor);
 
 }

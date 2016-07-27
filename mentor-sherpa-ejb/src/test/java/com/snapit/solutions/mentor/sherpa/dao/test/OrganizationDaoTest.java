@@ -75,11 +75,15 @@ public class OrganizationDaoTest {
 
     @Test
     public void hello() {      
-        Set<ObjectId> mentorIds = new HashSet<>();
+       Set<ObjectId> mentorIds = new HashSet<>();
         mentorIds.add(new ObjectId("574a265d0243e21a831d66e5"));
         mentorIds.add(new ObjectId("5781d0253008228a61fdc345"));
+        
+//        Set<String> mentorIds = new HashSet<>();
+//        mentorIds.add("574a265d0243e21a831d66e5");
+//        mentorIds.add("5781d0253008228a61fdc345");
      
-        List<Mentor> mentors = mentorDAO.findMentorsByIds(mentorIds);
+        Mentor mentors = mentorDAO.findById(new ObjectId("574a265d0243e21a831d66e5").toHexString());
         Assert.assertNotNull(mentors);
 
     }
