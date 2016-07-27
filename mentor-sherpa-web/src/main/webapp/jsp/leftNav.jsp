@@ -9,7 +9,8 @@
 <sec:authentication var="user" property="principal" />
 <c:url var="mentorProfile" value="${pageContext.request.contextPath}/mentor/${user.userId}"></c:url>
 <c:url var="studentProfile" value="${pageContext.request.contextPath}/student/${user.userId}"></c:url>
-  <!-- Left side column. contains the logo and sidebar -->
+<nav role="navigation">  
+<!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -17,37 +18,41 @@
         <li class="header">MAIN NAVIGATION</li>
         <%-- ORGANIZATION Navigation --%>
         <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
-        <li class="active treeview">
-          <a href="#">
+        <li class="treeview">
+          <a href="#mentornav">
             <i class="fa fa-users"></i>
             <span>Mentors</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
+              <li><a href="${pageContext.request.contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#studentnav">
             <i class="fa fa-users"></i>
             <span>Students</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/organization/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
+              <li><a href="${pageContext.request.contextPath}/organization/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#programnav">
+            <i class="fa fa-users"></i>
+            <span>Programs</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+              <li><a href="${pageContext.request.contextPath}/organization/programs/list"><i class="fa fa-circle-o"></i> Match Mentors</a></li>
           </ul>
         </li>
         </sec:authorize>
         <%-- MENTOR Navigation --%>
         <sec:authorize access="hasRole('MENTOR')">
-        <li class="active">
-          <a href="${pageContext.request.contextPath}/mentor/${user.userId}">
-            <i class="fa fa-user"></i>
-            <span>My Profile</span>
-          </a>
-        </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#orgnav">
             <i class="fa fa-users"></i>
             <span>Organizations</span>
             <i class="fa fa-angle-left pull-right"></i>
@@ -57,7 +62,7 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#studentnav">
             <i class="fa fa-users"></i>
             <span>Students</span>
             <i class="fa fa-angle-left pull-right"></i>
@@ -69,14 +74,8 @@
         </sec:authorize>
         <%-- Student Navigation --%>
         <sec:authorize access="hasRole('STUDENT')">
-        <li class="active">
-          <a href="${pageContext.request.contextPath}/student/${user.userId}">
-            <i class="fa fa-user"></i>
-            <span>My Profile</span>
-          </a>
-        </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#orgnav">
             <i class="fa fa-users"></i>
             <span>Organizations</span>
           </a>
@@ -85,7 +84,7 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#mentornav">
             <i class="fa fa-users"></i>
             <span>Mentors</span>
           </a>
@@ -98,3 +97,4 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+</nav>

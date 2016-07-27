@@ -5,6 +5,15 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<sec:authentication var="user" property="principal" />
+<sec:authorize access="hasRole('MENTOR')">
+<c:url var="mentorStudent" value="mentor"></c:url>    
+</sec:authorize>
+<sec:authorize access="hasRole('STUDENT')">
+<c:url var="mentorStudent" value="student"></c:url>
+</sec:authorize>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
         <div class="row">
             <div class="col-xs-12">          
@@ -31,7 +40,7 @@
                                         ${program.programName}</br>
                                     </c:forEach>
                                     </td>
-                                    <td><a href="${contextPath}/mentor/signup/${organization.id}"><span class="label label-success">Signup</span></a></td>
+                                    <td><a href="${contextPath}/${mentorStudent}/signup/${organization.id}"><span class="label label-success">Signup</span></a></td>
                                 </tr>
                             </c:forEach>
                                

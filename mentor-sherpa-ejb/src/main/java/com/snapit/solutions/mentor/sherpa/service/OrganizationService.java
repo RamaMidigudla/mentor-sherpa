@@ -19,5 +19,7 @@ public interface OrganizationService {
     public Organization findOrganziationById(String orgId);
     
     public Map<Mentor, Integer> getMatchedMentors(String studentId, String orgId, String programName);
+    
+    public Organization findOrganziationByUserId(String orgId);
 
 }

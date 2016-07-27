@@ -43,6 +43,7 @@ public class RegisterValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "registerForm.confPassword.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfBirth", "registerForm.dateOfBirth.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "registerForm.phoneNumber.empty");
+        ValidationUtils.rejectIfEmpty(errors, "gender", "registerForm.gender.empty");
         
         if (errors.hasErrors()) {
          return;   

@@ -42,6 +42,7 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
         user.setFirstName(registerForm.getFirstName());
         user.setLastName(registerForm.getLastName());
         user.setUserRole(roles);
+        user.setGender(registerForm.getGender());
         user.setDateOfBirth(registerForm.getDateOfBirth());
         user.setPhoneNumber(registerForm.getPhoneNumber());
         userService.registerUser(user);

@@ -222,15 +222,22 @@
           <!-- User Account: style can be found in dropdown.less -->
          <sec:authentication var="user" property="principal" />
          <sec:authorize access="isAuthenticated()">
+            <c:url var="userProfileImage" value="boxed-bg.png"></c:url>
+             <c:if test="${user.male}">
+                 <c:url var="userProfileImage" value="avatar5.png"></c:url>
+             </c:if>
+             <c:if test="${user.female}">
+                 <c:url var="userProfileImage" value="avatar2.png"></c:url>
+             </c:if>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/boxed-bg.png" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/${userProfileImage}" class="user-image" alt="User Image">
               <span class="hidden-xs">${user.fullName}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/boxed-bg.png" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/${userProfileImage}" class="img-circle" alt="User Image">
                 <p>
                     ${user.fullName}
                     </sec:authorize>

@@ -220,7 +220,47 @@ $(function () {
 
   });
 });
+$( function () {
+      function stripTrailingSlash(str) {
+        if(str.substr(-1) === '/') {
+          return str.substr(0, str.length - 1);
+        }
+        return str;
+      }
 
+      var url = window.location.pathname;  
+      var activePage = stripTrailingSlash(url);
+      var animationSpeed = $.AdminLTE.options.animationSpeed;
+        $('li a').each(function(){  
+        var currentPage = stripTrailingSlash($(this).attr('href'));
+        if (activePage === currentPage) {
+            var $this = $(this);
+            var par1 = $(this).parent();
+            var par2 = $(this).parent().parent();
+          $(this).addClass('active');
+          par1.addClass('active'); 
+          par2.addClass('active'); 
+          if(par2.is('.treeview-menu')) {
+        //Get the parent menu
+        var parent = $this.parents('ul').first();
+        //Close all open menus within the parent
+        var ul = parent.find('ul:visible').slideUp(animationSpeed);
+        //Remove the menu-open class from the parent
+        ul.removeClass('menu-open');
+        //Get the parent li
+        var parent_li = par2.parent("li");
+            //Open the target menu and add the menu-open class
+            par2.slideDown(animationSpeed, function () {
+              //Add the class active to the parent li
+              par2.addClass('menu-open');
+              //parent.find('li.active').removeClass('active');
+              parent_li.addClass('active');
+              //Fix the layout in case the sidebar stretches over the height of the window
+              });
+          }
+        } 
+      });
+});
 /* ----------------------------------
  * - Initialize the AdminLTE Object -
  * ----------------------------------
