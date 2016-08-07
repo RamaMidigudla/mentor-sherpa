@@ -52,8 +52,4 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
     public void saveMentor(MentorAndStudentResponse mentorAndStudentResponse) {
         getDatastore().save(mentorAndStudentResponse);
     }
-    
-    
-    
-
 }
