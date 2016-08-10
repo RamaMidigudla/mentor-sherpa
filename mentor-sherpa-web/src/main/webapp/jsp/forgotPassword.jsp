@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : Jun 18, 2016, 10:57:40 AM
+    Document   : forgotPassword
+    Created on : Aug 7, 2016, 10:59:41 AM
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
 
@@ -13,7 +13,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Mentor Sherpa | Log in</title>
+        <title>Mentor Sherpa | Reset Password</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -41,53 +41,28 @@
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Forgot Password</p>
 
-                <form:form always-use-default-target="true" action="login" method="post">
+                <form:form always-use-default-target="true" action="forgot" method="post">
                         <c:if test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                                <p>Please provide a valid username/password ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
-                            </div>
-                        </c:if>
-                        <c:if test="${not empty successMessage}">
-
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Success!</h4>
-                                <p>${successMessage}</p>
-                            </div>
-                        </c:if>
-                        <c:if test="${not empty alertMessage}">
-
-                            <div class="alert alert-danger alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                                <p>${alertMessage}</p>
+                                <p>${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
                             </div>
                         </c:if>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="form-group has-feedback">
-                        <input type="text" name="username" class="form-control" placeholder="Username">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Email">
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">
-                            <div class="checkbox icheck">
-                                <label>
-                                    <input type="checkbox" name="_spring_security_remember_me"> Remember Me
-                                </label>
-                            </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                            <button type="submit" onclick="resetPass()" class="btn btn-primary btn-block btn-flat">Reset</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -102,7 +77,7 @@
                     </div>
                     <!-- /.social-auth-links -->
                 --%>
-                <a href="${pageContext.request.contextPath}/forgot">I forgot my password</a><br>
+                <a href="${pageContext.request.contextPath}/login">Login</a><br>
                 <a href="${pageContext.request.contextPath}/register" class="text-center">Register a new membership</a>
 
             </div>
@@ -125,5 +100,25 @@
                 });
             });
         </script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+function resetPass(){
+    var email = $("#email").val();
+    $.post("<c:url value="/resetPassword"></c:url>",{email: email}, function(data){
+            window.location.href = 
+              "<c:url value="/login"></c:url>" + "?message=" + data.message;
+    })
+    .fail(function(data) {
+        if(data.responseJSON.error.indexOf("MailError") > -1) {
+            window.location.href = 
+              "<c:url value="/emailError"></c:url>";
+        }
+        else {
+            window.location.href = 
+              "<c:url value="/login"></c:url>" + "?message=" + data.responseJSON.message;
+        }
+    });
+}
+</script>
     </body>
 </html>

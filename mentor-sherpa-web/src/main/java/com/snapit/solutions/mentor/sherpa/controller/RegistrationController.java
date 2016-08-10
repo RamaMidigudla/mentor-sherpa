@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -72,16 +73,16 @@ public class RegistrationController {
     }
     
     @RequestMapping(value = "/mentor", method = RequestMethod.POST)
-    public String mentorRegistration(@Validated @ModelAttribute("mentorRegisterForm") MentorRegisterForm mentorRegisterForm, BindingResult result, Model model) {
-        return register(mentorRegisterForm, result, model, "MENTOR");
+    public String mentorRegistration(@Validated @ModelAttribute("mentorRegisterForm") MentorRegisterForm mentorRegisterForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+        return register(mentorRegisterForm, result, model, "MENTOR", redirectAttributes);
     }
     
     @RequestMapping(value = "/student", method = RequestMethod.POST)
-    public String studentRegistration(@Validated @ModelAttribute("studentRegisterForm") StudentRegisterForm studentRegisterForm, BindingResult result, Model model) {
-        return register(studentRegisterForm, result, model, "STUDENT");
+    public String studentRegistration(@Validated @ModelAttribute("studentRegisterForm") StudentRegisterForm studentRegisterForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+        return register(studentRegisterForm, result, model, "STUDENT", redirectAttributes);
     }
     
-    private String register(RegisterForm registerForm, BindingResult result, Model model, String role) {
+    private String register(RegisterForm registerForm, BindingResult result, Model model, String role, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
 //            if (registerForm instanceof MentorRegisterForm) {
 //                model.addAttribute("mentorRegisterForm", registerForm);
@@ -95,6 +96,7 @@ public class RegistrationController {
         
         if (user == null) {
             mentorSherpaUserService.registerUser(registerForm, role);
+            redirectAttributes.addFlashAttribute("successMessage", "You have successfully registered. Please Login! ");
             return "redirect:/login";
         } else {
             result.reject("Oops! that email already exists. Try logging in!");
