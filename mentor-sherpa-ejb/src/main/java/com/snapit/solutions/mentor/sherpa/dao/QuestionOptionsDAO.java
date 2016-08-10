@@ -17,9 +17,9 @@ import org.mongodb.morphia.dao.DAO;
  */
 public interface QuestionOptionsDAO extends DAO<QuestionOptions, ObjectId> {
 
-    public List<QuestionOptions> retrievebyObjectIds(List<ObjectId> questionIdList);
+    public List<QuestionOptions> retrievebyObjectIds(Set<String> questionIdList);
 
-    public List<QuestionOptions> retrievebyQuestionFor(List<ObjectId> questionIdList, Set<String> questionFor);
+    public List<QuestionOptions> retrievebyQuestionFor(Set<String> questionIdList, Set<String> questionFor);
     
     public List<QuestionOptions> retrieveCommonQuestions();
 }

@@ -27,7 +27,7 @@ public interface MentorDAO extends DAO<Mentor, ObjectId> {
      * @param userObjectId
      * @return Mentor doc
      */
-    public Mentor findMentorByUserName(ObjectId userObjectId);
+    public Mentor findMentorByUserName(String userObjectId);
 
     /**
      * Updates existing mentor doc in mentor collection.
@@ -52,6 +52,6 @@ public interface MentorDAO extends DAO<Mentor, ObjectId> {
 
     public Mentor findByMentorName(String mentorName);
     
-    public List<Mentor> findMentorsByIds(Set<ObjectId> mentorIds);
+    public List<Mentor> findMentorsByIds(Set<String> mentorIds);
 
 }

@@ -48,4 +48,3 @@ public interface OrganizationDAO extends DAO<Organization, ObjectId> {
     public Organization findByUserId(String userId);
     
 }
-

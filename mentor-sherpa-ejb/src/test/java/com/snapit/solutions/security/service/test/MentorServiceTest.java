@@ -8,9 +8,9 @@ package com.snapit.solutions.security.service.test;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.QuestionOptionsService;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import org.bson.types.ObjectId;
+import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -63,14 +63,9 @@ public class MentorServiceTest {
     }
     
     @Test
-    public void find() {  
-        
-       List<ObjectId> questionIdList = new ArrayList<>();
-        
-        questionIdList.add(new ObjectId("577da4703008228a61fdc33a"));
-        
-                                                 
-                                  
+    public void find() {      
+     Set<String> questionIdList = new HashSet();  
+     questionIdList.add("577da4703008228a61fdc33a");                            
      List<QuestionOptions> bb = questionOptionsService.findQuestionOptionsByQuestionFor(questionIdList,"mentor" );
      Assert.assertNotNull(mentorService);
      Assert.assertNotNull(bb);

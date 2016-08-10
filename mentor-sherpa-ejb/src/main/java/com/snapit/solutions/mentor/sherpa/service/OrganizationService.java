@@ -7,7 +7,6 @@ import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import java.util.List;
 import java.util.Map;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -16,12 +15,11 @@ import org.bson.types.ObjectId;
 public interface OrganizationService {
 
     public List<Organization> listAllOrganizations();
-
-    public Organization findOrganziationById(ObjectId orgId);
     
     public Organization findOrganziationById(String orgId);
     
-    public Map<Mentor, Integer> getMatchedMentors(ObjectId studentId, ObjectId orgId, String programName);
+    public Map<Mentor, Integer> getMatchedMentors(String studentId, String orgId, String programName);
+    
     public Organization findOrganziationByUserId(String orgId);
 
 }

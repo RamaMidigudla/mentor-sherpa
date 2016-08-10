@@ -49,7 +49,7 @@ public class StudentServiceImpl implements StudentService {
     
     @Override
     public List<QuestionOptions> getQuestionsForStudentToAnswer(InterestedOrganizations interestedOrganizations) {
-        Organization organization = organizationService.findOrganziationById(interestedOrganizations.getOrgId());
+        Organization organization = organizationService.findOrganziationById(CommonServiceUtils.createStringId(interestedOrganizations.getOrgId()));
         return questionOptionsService.findQuestionOptionsByQuestionFor(
                 CommonServiceUtils.findrequiredQuestionIdList(
                         organization, interestedOrganizations), "student");

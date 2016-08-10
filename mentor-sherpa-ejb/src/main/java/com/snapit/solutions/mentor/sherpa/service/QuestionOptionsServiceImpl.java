@@ -7,11 +7,9 @@ package com.snapit.solutions.mentor.sherpa.service;
 
 import com.snapit.solutions.mentor.sherpa.dao.QuestionOptionsDAO;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +24,13 @@ public class QuestionOptionsServiceImpl implements QuestionOptionsService {
     private QuestionOptionsDAO questionOptionsDAO;
 
     @Override
-    public List<QuestionOptions> findQuestionOptionsForOrganization(List<ObjectId> questionIdList) {
+    public List<QuestionOptions> findQuestionOptionsForOrganization(Set<String> questionIdList) {
         return questionOptionsDAO.retrievebyObjectIds(questionIdList);
     }
 
     @Override
-    public List<QuestionOptions> findQuestionOptionsByQuestionFor(List<ObjectId> questionIdList, String questionFor) {
-        Set<String> questionForSet = new HashSet<>();
+    public List<QuestionOptions> findQuestionOptionsByQuestionFor(Set<String> questionIdList, String questionFor) {
+        Set<String> questionForSet = new HashSet();
         questionForSet.add(questionFor);
         questionForSet.add("common");
          
