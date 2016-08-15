@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,12 +65,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
-    @ResponseBody
-    public GenericResponse resetPassword(
-            HttpServletRequest request, @RequestParam("email") String userEmail) {
+    public String resetPassword(
+            HttpServletRequest request, @RequestParam("email") String userEmail, RedirectAttributes redirectAttributes) {
 
         User user = userService.findByUserId(userEmail);
         if (user == null) {
+            redirectAttributes.addFlashAttribute("alertMessage", "Have you registered with this email id? " + userEmail + "Please try to again.");
             throw new UserNotFoundException();
         }
 
@@ -82,8 +83,8 @@ public class LoginController {
         SimpleMailMessage email
                 = constructResetTokenEmail(appUrl, request.getLocale(), token, user);
         mailSender.send(email);
-//http://localhost:8080/mentor-sherpa-web/changePassword?id=577f110769e71e78d842bf26&token=46246042-7c80-46fc-ad2f-4ed4d483d166
-        return new GenericResponse("Click on the link to reset Password.");
+        redirectAttributes.addFlashAttribute("successMessage", "Click on the link in the email to reset your password.");
+        return "redirect:/login";
     }
 
     private SimpleMailMessage constructResetTokenEmail(String contextPath, Locale locale, String token, User user) {
@@ -92,7 +93,7 @@ public class LoginController {
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(user.getEmail());
         email.setSubject("Reset Password");
-        email.setText(message + " rn" + url);
+        email.setText(message + " <br/>" + url);
         email.setFrom("info@snapit.solutions");
         return email;
     }

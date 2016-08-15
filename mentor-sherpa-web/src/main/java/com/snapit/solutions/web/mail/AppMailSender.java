@@ -6,6 +6,7 @@ package com.snapit.solutions.web.mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,12 +16,8 @@ import org.springframework.stereotype.Service;
 @Service("mailService")
 public class AppMailSender {
 
-//    @Autowired
-    private MailSender mailSender;
-
-    public void setMailSender(MailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    @Autowired
+    private JavaMailSender javaMailSender;
 
 //    @Autowired
 //    private SimpleMailMessage preConfiguredMessage;
@@ -34,11 +31,11 @@ public class AppMailSender {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
-        mailSender.send(message);
+//        mailSender.send(message);
     }
 
     public void send(SimpleMailMessage message) {
-        mailSender.send(message);
+        javaMailSender.send(message);
     }
 
     /**
