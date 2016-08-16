@@ -19,5 +19,7 @@ public interface StudentDAO extends DAO<Student, ObjectId> {
     public List<Student> findAll();
 
     public Student findById(String studentId);
+    
+    public void assignNewMentorToStudent(String studentiD, String orgId, String mentorId, String programName);
 
 }

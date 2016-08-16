@@ -21,5 +21,7 @@ public interface OrganizationService {
     public Map<Mentor, Integer> getMatchedMentors(String studentId, String orgId, String programName);
     
     public Organization findOrganziationByUserId(String orgId);
+    
+    public void assignNewMentorToStudent(String studentID, String orgId, String mentorId, String programName);
 
 }

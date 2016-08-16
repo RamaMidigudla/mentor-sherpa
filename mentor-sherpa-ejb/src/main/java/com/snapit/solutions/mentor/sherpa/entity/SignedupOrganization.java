@@ -15,7 +15,7 @@ import org.mongodb.morphia.annotations.Embedded;
  * @author Ram
  */
 @Embedded
-public class InterestedOrganizations implements Serializable {
+public class SignedupOrganization implements Serializable {
     
     private ObjectId orgId;
     

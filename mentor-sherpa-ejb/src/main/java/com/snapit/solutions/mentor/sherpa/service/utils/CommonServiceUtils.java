@@ -5,7 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.service.utils;
 
-import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
+import com.snapit.solutions.mentor.sherpa.entity.SignedupOrganization;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Program;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import org.bson.types.ObjectId;
  */
 public class CommonServiceUtils {
     
-    public static Set<String> findrequiredQuestionIdList(Organization organization,InterestedOrganizations interestedOrganizations){
+    public static Set<String> findrequiredQuestionIdList(Organization organization,SignedupOrganization interestedOrganizations){
         Set<ObjectId> questionIdList = new HashSet();
         for (Program program : organization.getPrograms()) 
         {

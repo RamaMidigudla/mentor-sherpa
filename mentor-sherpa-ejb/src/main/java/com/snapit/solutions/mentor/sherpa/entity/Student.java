@@ -26,6 +26,8 @@ public class Student implements Serializable {
     @Embedded("userObjectId")
     private ObjectId userObjectId;
     
+    private List<AssignedMentor> assignedMentors;
+    
     private String name = "";
     
     private int age;
@@ -34,7 +36,7 @@ public class Student implements Serializable {
     
     private String education = "";
     
-    private List<InterestedOrganizations>  interestedOrganizations = new ArrayList<>();
+    private List<SignedupOrganization>  interestedOrganizations = new ArrayList<>();
     
     private List<String>  interests = new ArrayList<>();
     
@@ -97,11 +99,11 @@ public class Student implements Serializable {
         this.education = education;
     }
 
-    public List<InterestedOrganizations> getInterestedOrganizations() {
+    public List<SignedupOrganization> getInterestedOrganizations() {
         return interestedOrganizations;
     }
 
-    public void setInterestedOrganizations(List<InterestedOrganizations> interestedOrganizations) {
+    public void setInterestedOrganizations(List<SignedupOrganization> interestedOrganizations) {
         this.interestedOrganizations = interestedOrganizations;
     }
 
@@ -112,5 +114,14 @@ public class Student implements Serializable {
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
+    
+    public List<AssignedMentor> getAssignedMentors() {
+        return assignedMentors;
+    }
+
+    public void setAssignedMentors(List<AssignedMentor> assignedMentors) {
+        this.assignedMentors = assignedMentors;
+    }
+
     
 }

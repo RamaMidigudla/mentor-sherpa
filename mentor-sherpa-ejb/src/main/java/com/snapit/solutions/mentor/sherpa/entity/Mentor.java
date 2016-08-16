@@ -39,7 +39,7 @@ public class Mentor implements Serializable {
     
     private String education = "";
     
-    private List<InterestedOrganizations>  interestedOrganizations = new ArrayList<>();
+    private List<SignedupOrganization>  signedupOrganizations = new ArrayList<>();
     
     private List<String>  interests = new ArrayList<>();
     
@@ -104,12 +104,12 @@ public class Mentor implements Serializable {
         this.education = education;
     }
 
-    public List<InterestedOrganizations> getInterestedOrganizations() {
-        return interestedOrganizations;
+    public List<SignedupOrganization> getSignedupOrganizations() {
+        return signedupOrganizations;
     }
 
-    public void setInterestedOrganizations(List<InterestedOrganizations> interestedOrganizations) {
-        this.interestedOrganizations = interestedOrganizations;
+    public void setSignedupOrganizations(List<SignedupOrganization> signedupOrganizations) {
+        this.signedupOrganizations = signedupOrganizations;
     }
 
     public List<String> getInterests() {

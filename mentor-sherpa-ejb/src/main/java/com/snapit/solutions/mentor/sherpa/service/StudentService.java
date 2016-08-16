@@ -5,7 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.service;
 
-import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
+import com.snapit.solutions.mentor.sherpa.entity.SignedupOrganization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
@@ -22,5 +22,5 @@ public interface StudentService {
 
     public Student findById(String id);
 
-    public List<QuestionOptions> getQuestionsForStudentToAnswer(InterestedOrganizations InterestedOrganizations);
+    public List<QuestionOptions> getQuestionsForStudentToAnswer(SignedupOrganization InterestedOrganizations);
 }

@@ -6,6 +6,7 @@ package com.snapit.solutions.mentor.sherpa.service;
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
+import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
@@ -33,6 +34,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     
     @Autowired
     MentorDAO mentorDAO;
+    
+    @Autowired
+    StudentDAO studentDAO;
     
 
     @Override
@@ -84,4 +88,11 @@ public class OrganizationServiceImpl implements OrganizationService {
         
       return mentorMatchPercentageForStudent;  
     }
+
+    @Override
+    public void assignNewMentorToStudent(String studentID, String orgId, String mentorId, String programName) {
+        studentDAO.assignNewMentorToStudent(studentID, orgId, mentorId, programName);
+    }
+    
+    
 }

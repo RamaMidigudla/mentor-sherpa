@@ -7,7 +7,7 @@ package com.snapit.solutions.mentor.sherpa.service;
 
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
-import com.snapit.solutions.mentor.sherpa.entity.InterestedOrganizations;
+import com.snapit.solutions.mentor.sherpa.entity.SignedupOrganization;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
@@ -56,7 +56,7 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public List<QuestionOptions> getQuestionsForMentorToAnswer(InterestedOrganizations interestedOrganizations) {
+    public List<QuestionOptions> getQuestionsForMentorToAnswer(SignedupOrganization interestedOrganizations) {
         Organization organization = organizationService.findOrganziationById(CommonServiceUtils.createStringId(interestedOrganizations.getOrgId()));
         return questionOptionsService.findQuestionOptionsByQuestionFor(
                 CommonServiceUtils.findrequiredQuestionIdList(
