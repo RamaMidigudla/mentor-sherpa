@@ -15,8 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
-import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
-import org.mongodb.morphia.query.Query;
+import java.util.ArrayList;
 import org.mongodb.morphia.query.UpdateOperations;
 
 /**
@@ -47,13 +46,15 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
     @Override
     public void assignNewMentorToStudent(String studentId, String orgId, String mentorId, String programName) {
         
+        List<AssignedMentor> assignedMentors = new ArrayList();
         AssignedMentor assignedMentor = new AssignedMentor();
         assignedMentor.setProgramName(programName);
         assignedMentor.setOrgId(DaoUtils.createObjectId(orgId));
         assignedMentor.setMentorId(DaoUtils.createObjectId(mentorId));
-       
+        assignedMentors.add(assignedMentor);
+        
         UpdateOperations<Student> ops = 
-                getDatastore().createUpdateOperations(Student.class).set("assignedMentors", assignedMentor);
+                getDatastore().createUpdateOperations(Student.class).addAll("assignedMentors", assignedMentors, false);
 	getDatastore().update(getDatastore().createQuery(Student.class).field("id").
                 equal(DaoUtils.createObjectId(studentId)), ops);
            

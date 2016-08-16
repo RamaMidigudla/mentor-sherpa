@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Embedded;
  *
  * @author Ram
  */
-@Embedded("assignedMentors")
+@Embedded
 public class AssignedMentor implements Serializable {
     
     private ObjectId orgId;
