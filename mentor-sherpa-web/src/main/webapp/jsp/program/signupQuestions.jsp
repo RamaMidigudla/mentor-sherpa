@@ -15,7 +15,7 @@
             <c:out value="${infoMessage}" />
         </div>
     </c:if>
-    <div class="col-md-8">
+    <div class="col-md-12">
         <!-- Horizontal Form -->
         <div class="box box-info">
             <div class="box-header with-border">
@@ -36,11 +36,25 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">
-                                            <c:forEach items="${question.options}" var="option"  varStatus="index2">
-                                                <form:checkbox class="minimal" path="questionResponses" name="optionsRadios" id="optionsRadios" value="${option}" />   <c:out value="${option}"/> </br>
+                                        <div>
+                                             <c:forEach items="${question.options}" var="option"  varStatus="index2">
+                                            <c:if test="${question.questionType eq 'radioButton'}">
+                                        <label class="col-sm-2">
+                                               <form:radiobutton path="questionResponses[${index1.index}]" name="optionsRadios" id="optionsRadios" value="${option}" />   <c:out value="${option}"/>
+                                        </label>
+                                            </c:if>
+                                            <c:if test="${question.questionType eq 'checkBox'}">
+                                        <label class="col-sm-3">
+                                               <form:checkbox path="questionResponses[${index1.index}]" name="optionsRadios" id="optionsRadios" value="${option}" />   <c:out value="${option}"/>
+                                        </label>
+                                            </c:if>
                                             </c:forEach>
-                                        </label></br>
+                                            <c:if test="${question.questionType eq 'textBox'}">
+                                        <label class="col-sm-8">
+                                               <form:textarea path="questionResponses[${index1.index}]" name="optionsRadios" id="optionsRadios" rows="5" cols="100"/>
+                                        </label>
+                                            </c:if>
+                                        </div>
                                     </div>
                                 </c:forEach>
                             </c:otherwise>

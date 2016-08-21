@@ -40,7 +40,14 @@ public class QuestionOptionsServiceImpl implements QuestionOptionsService {
         return questionOptions;
         
     }
-    
-    
 
+    @Override
+    public List<QuestionOptions> getMentorQuestions(String id, String programName) {
+        return questionOptionsDAO.retrieveMentorQuestions(id, programName);
+    }
+
+    @Override
+    public List<QuestionOptions> getStudentQuestions(String id, String programName) {
+        return questionOptionsDAO.retrieveStudentQuestions(id, programName);
+    }
 }

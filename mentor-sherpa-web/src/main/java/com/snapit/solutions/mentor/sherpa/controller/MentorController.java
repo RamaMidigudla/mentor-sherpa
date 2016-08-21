@@ -7,7 +7,7 @@ import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
-import com.snapit.solutions.mentor.sherpa.entity.Program;
+import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionResponse;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
 import com.snapit.solutions.mentor.sherpa.service.MentorAndStudentResponseService;
@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
-import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.ArrayList;
+import java.util.Map;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
@@ -96,24 +96,35 @@ public class MentorController {
      * @param model
      * @return 
      */
+//    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
+//    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
+//        Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
+//        if (organization != null && organization.getPrograms() != null) { //this should never happen. throw exception
+//            List<ObjectId> questionIdList = new ArrayList<>();
+//            List<Program> programList = organization.getPrograms();
+//            for (Program program : programList) {
+//                if (program.getProgramName().trim().equalsIgnoreCase(programSignupForm.getSelectedProgramName()) && program.getQuestionsIdList() != null) {
+//                    questionIdList.addAll(program.getQuestionsIdList());
+//                }
+//            }
+//            programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "mentor"));
+//            model.addAttribute(organization);
+//            model.addAttribute(programSignupForm);
+//        programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "mentor"));
+//        model.addAttribute(organization);
+//        model.addAttribute(programSignupForm);
+//        }
+//        return new ModelAndView("answerQuestions");
+//    }
+
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
     public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
-        if (organization != null && organization.getPrograms() != null) { //this should never happen. throw exception
-            List<ObjectId> questionIdList = new ArrayList<>();
-            List<Program> programList = organization.getPrograms();
-            for (Program program : programList) {
-                if (program.getProgramName().trim().equalsIgnoreCase(programSignupForm.getSelectedProgramName()) && program.getQuestionsIdList() != null) {
-                    questionIdList.addAll(program.getQuestionsIdList());
-                }
-            }
-            programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "mentor"));
-            model.addAttribute(organization);
-            model.addAttribute(programSignupForm);
-        programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "mentor"));
+        List<QuestionOptions> questionsList = new ArrayList<>();
+        questionsList.addAll(questionOptionsService.getMentorQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
+        programSignupForm.setQuestionsList(questionsList);
         model.addAttribute(organization);
         model.addAttribute(programSignupForm);
-        }
         return new ModelAndView("answerQuestions");
     }
 
@@ -127,11 +138,15 @@ public class MentorController {
      */
     @RequestMapping(value = "/signup/save", method = RequestMethod.POST)
     public ModelAndView saveQuestionResponses(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttr) {
+    
+        for (int i = 0; i <  programSignupForm.getQuestionResponses().size(); i++) {
         List<QuestionResponse> questionResponseList = new ArrayList<>();
 
         QuestionResponse questionResponse = new QuestionResponse();
-        questionResponse.setQuestion(programSignupForm.getQuestions().get(0));
-        questionResponse.setResponse(programSignupForm.getQuestionResponses());
+        questionResponse.setQuestion(programSignupForm.getQuestions().get(i));
+        if (null != programSignupForm.getQuestionResponses().get(i)) {
+            questionResponse.setResponse(programSignupForm.getQuestionResponses().get(i));
+        }
         questionResponseList.add(questionResponse);
 
         MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
@@ -143,6 +158,7 @@ public class MentorController {
         mentorResponse.setQuestionAndResponses(questionResponseList);
 
         mentorAndStudentResponseService.saveResponses(mentorResponse);
+        }
         redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
         return new ModelAndView("redirect:/");
     }
@@ -162,11 +178,28 @@ public class MentorController {
      * @param model
      * @return 
      */
-    @RequestMapping(value = "/organization/list", method = RequestMethod.GET)
-    public ModelAndView showOrganizationList(Model model) {
+    @RequestMapping(value = "/programs/list", method = RequestMethod.GET)
+    public ModelAndView showCurrentPrograms(Model model) {
         List<Organization> mentorList = organizationService.listAllOrganizations();
         model.addAttribute(mentorList);
         return new ModelAndView("organizationList");
+    }
+
+//    @RequestMapping(value = "/programs/{org}", method = RequestMethod.GET)
+//    public ModelAndView showCurrentPrograms(@PathVariable String orgName, Model model) {
+//        Organization org = organizationService.findByOrganizationName(orgName);
+//        if (null != org) {
+//            List<Organization> mentorList = questionOptionsService.getMentorQuestions(org.getId(), "Mentor Makers"); // TODO
+//            model.addAttribute(mentorList);
+//            return new ModelAndView("organizationList");
+//        }
+//    }
+
+    @RequestMapping(value = "/programs/new", method = RequestMethod.GET)
+    public ModelAndView showNewPrograms(Model model) {
+        List<Organization> mentorList = organizationService.listAllOrganizations();
+        model.addAttribute(mentorList);
+        return new ModelAndView("newPrograms");
     }
 
     /**

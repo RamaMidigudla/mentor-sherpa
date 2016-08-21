@@ -38,7 +38,16 @@ public class User implements Serializable {
     
     private List<String> userRole;
     
-    
+    private String imageName;
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
     public ObjectId getId() {
         return id;
     }

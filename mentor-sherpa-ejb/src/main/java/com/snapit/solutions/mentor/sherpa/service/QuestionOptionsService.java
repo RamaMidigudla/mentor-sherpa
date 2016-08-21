@@ -18,5 +18,6 @@ public interface QuestionOptionsService {
     public List<QuestionOptions> findQuestionOptionsForOrganization(Set<String> questionIdList);
     
     public List<QuestionOptions> findQuestionOptionsByQuestionFor(Set<String> questionIdList,String questionFor);
-
+    public List<QuestionOptions> getMentorQuestions(String id, String programName);
+    public List<QuestionOptions> getStudentQuestions(String id, String programName);
 }

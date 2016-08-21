@@ -46,5 +46,6 @@ public interface OrganizationDAO extends DAO<Organization, ObjectId> {
     public Organization retrieveOrganizationById(ObjectId orgID);
     public Organization findById(String id);
     public Organization findByUserId(String userId);
+    public Organization findByOrgName(String name);
     
 }

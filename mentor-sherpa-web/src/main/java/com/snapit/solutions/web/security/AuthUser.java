@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.User;
  */
 public class AuthUser extends User {
     
+    private com.snapit.solutions.securtiy.entity.User authorizedUser;
+
     private String fullName;
     private String userId;
     private String gender;
@@ -20,27 +22,19 @@ public class AuthUser extends User {
     private boolean female;
 
     public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+        return authorizedUser.getId().toString();
     }
 
     public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+        return authorizedUser.getFirstName() + " " + authorizedUser.getLastName();
     }
     
     public String getGender() {
-        return gender;
+        return authorizedUser.getGender();
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String getImageName() {
+        return authorizedUser.getImageName();
     }
 
     public boolean getMale() {
@@ -55,5 +49,12 @@ public class AuthUser extends User {
 
     public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
+    }
+    public com.snapit.solutions.securtiy.entity.User getAuthorizedUser() {
+        return authorizedUser;
+    }
+
+    public void setAuthorizedUser(com.snapit.solutions.securtiy.entity.User authorizedUser) {
+        this.authorizedUser = authorizedUser;
     }
 }

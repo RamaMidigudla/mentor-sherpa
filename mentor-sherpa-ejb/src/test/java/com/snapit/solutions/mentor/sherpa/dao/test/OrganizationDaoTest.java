@@ -6,7 +6,6 @@ package com.snapit.solutions.mentor.sherpa.dao.test;
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
-import com.snapit.solutions.mentor.sherpa.dao.ParentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.QuestionOptionsDAO;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -36,10 +35,7 @@ public class OrganizationDaoTest {
  
     @Autowired
     private OrganizationDAO organizationDAO;
-    
-    @Autowired
-    private ParentDAO parentDAO;
-    
+        
     @Autowired
     private MentorDAO mentorDAO;
     

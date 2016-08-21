@@ -22,4 +22,6 @@ public interface QuestionOptionsDAO extends DAO<QuestionOptions, ObjectId> {
     public List<QuestionOptions> retrievebyQuestionFor(Set<String> questionIdList, Set<String> questionFor);
     
     public List<QuestionOptions> retrieveCommonQuestions();
+    public List<QuestionOptions> retrieveMentorQuestions(String id, String programName);
+    public List<QuestionOptions> retrieveStudentQuestions(String id, String programName);
 }

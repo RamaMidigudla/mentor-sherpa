@@ -231,13 +231,13 @@
              </c:if>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/${userProfileImage}" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/${user.imageName}" class="user-image" alt="User Image">
               <span class="hidden-xs">${user.fullName}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/${userProfileImage}" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/${user.imageName}" class="img-circle" alt="User Image">
                 <p>
                     ${user.fullName}
                     </sec:authorize>

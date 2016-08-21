@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -30,6 +31,15 @@ public class QuestionOptions implements Serializable {
     private String question;
     
     private Set<String> options;
+    
+    @Embedded("orgId")
+    private ObjectId orgId;
+
+    private String QuestionCategory;
+    
+    private int categoryOrder;
+    
+    private String programName;
 
     public ObjectId getId() {
         return id;
@@ -70,5 +80,37 @@ public class QuestionOptions implements Serializable {
     public void setOptions(Set<String> options) {
         this.options = options;
     }
+    public ObjectId getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(ObjectId orgId) {
+        this.orgId = orgId;
+    }
+
+    public String getQuestionCategory() {
+        return QuestionCategory;
+    }
+
+    public void setQuestionCategory(String QuestionCategory) {
+        this.QuestionCategory = QuestionCategory;
+    }
+
+    public int getCategoryOrder() {
+        return categoryOrder;
+    }
+
+    public void setCategoryOrder(int categoryOrder) {
+        this.categoryOrder = categoryOrder;
+    }
+
+    public String getProgramName() {
+        return programName;
+    }
+
+    public void setProgramName(String programName) {
+        this.programName = programName;
+    }
+    
     
 }

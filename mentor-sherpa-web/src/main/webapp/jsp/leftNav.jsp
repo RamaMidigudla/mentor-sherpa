@@ -52,46 +52,52 @@
         <%-- MENTOR Navigation --%>
         <sec:authorize access="hasRole('MENTOR')">
         <li class="treeview">
-          <a href="#orgnav">
+          <a href="#programnav">
             <i class="fa fa-users"></i>
-            <span>Organizations</span>
+            <span>Programs</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/mentor/organization/list"><i class="fa fa-circle-o"></i> Show Organization</a></li>
+            <li><a href="${pageContext.request.contextPath}/mentor/programs/list"><i class="fa fa-circle-o"></i> Sign up</a></li>
           </ul>
+<!--          <ul class="treeview-menu">
+            <li><a href="${pageContext.request.contextPath}/mentor/programs/bbbs"><i class="fa fa-circle-o"></i> BBBS - Aces</a></li>
+          </ul>-->
         </li>
-        <li class="treeview">
+<!--        <li class="treeview">
           <a href="#studentnav">
             <i class="fa fa-users"></i>
             <span>Students</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/mentor/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
+            <li><a href="${pageContext.request.contextPath}/mentor/student/list"><i class="fa fa-circle-o"></i> My Students</a></li>
           </ul>
-        </li>
+        </li>-->
         </sec:authorize>
         <%-- Student Navigation --%>
         <sec:authorize access="hasRole('STUDENT')">
         <li class="treeview">
-          <a href="#orgnav">
+          <a href="#programnav">
             <i class="fa fa-users"></i>
-            <span>Organizations</span>
+            <span>Programs</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/student/organization/list"><i class="fa fa-circle-o"></i> Show Organizations</a></li>
+            <li><a href="${pageContext.request.contextPath}/student/programs/list"><i class="fa fa-circle-o"></i> Sign up</a></li>
           </ul>
         </li>
-        <li class="treeview">
+<!--          <ul class="treeview-menu">
+            <li><a href="${pageContext.request.contextPath}/student/programs/bbbs"><i class="fa fa-circle-o"></i> BBBS - Aces</a></li>
+          </ul>-->
+<!--        <li class="treeview">
           <a href="#mentornav">
             <i class="fa fa-users"></i>
             <span>Mentors</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/student/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
+            <li><a href="${pageContext.request.contextPath}/student/mentor/list"><i class="fa fa-circle-o"></i> My Mentors</a></li>
           </ul>
-        </li>
+        </li>-->
         </sec:authorize>
       </ul>
     </section>

@@ -93,6 +93,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     public void assignNewMentorToStudent(String studentID, String orgId, String mentorId, String programName) {
         studentDAO.assignNewMentorToStudent(studentID, orgId, mentorId, programName);
     }
-    
-    
+
+    @Override
+    public Organization findByOrganizationName(String name) {
+        return organizationDao.findByOrgName(name);
+    }
 }

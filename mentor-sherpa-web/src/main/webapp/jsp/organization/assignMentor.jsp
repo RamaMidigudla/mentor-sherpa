@@ -62,11 +62,16 @@
               <h3 class="profile-username text-center">Elliot Graham</h3>
             <!-- /.box-header -->
             <div class="box-body text-center">
+                <span><b>Match Score</b></span>
+            </div>    
+            <div class="box-body text-center">
                 <span class="fa-stack fa-4x">
-                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                  <i class="fa fa-circle fa-stack-2x icon-background4"></i>
+                  <i class="fa fa-circle-thin fa-stack-2x icon-background6"></i>
                   <strong class="fa-stack-1x text-primary">91</strong>
                 </span>
             </div>
+            <a href="#" class="btn btn-primary btn-block"><b>Assign</b></a>
           </div>
           </div>
         </div>
@@ -80,11 +85,16 @@
 
               <h3 class="profile-username text-center">Gordon Ramsay</h3>
             <div class="box-body text-center">
+                <span><b>Match Score</b></span>
+            </div>    
+            <div class="box-body text-center">
                 <span class="fa-stack fa-4x">
-                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                  <i class="fa fa-circle fa-stack-2x icon-background4"></i>
+                  <i class="fa fa-circle-thin fa-stack-2x icon-background6"></i>
                   <strong class="fa-stack-1x text-primary">72</strong>
                 </span>
             </div>
+            <a href="#" class="btn btn-primary btn-block"><b>Assign</b></a>
             </div>
             <!-- /.box-body -->
 
@@ -101,11 +111,16 @@
 
               <h3 class="profile-username text-center">Giada De Laurentiis</h3>
             <div class="box-body text-center">
+                <span><b>Match Score</b></span>
+            </div>    
+            <div class="box-body text-center">
                 <span class="fa-stack fa-4x">
-                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                  <i class="fa fa-circle fa-stack-2x icon-background4"></i>
+                  <i class="fa fa-circle-thin fa-stack-2x icon-background6"></i>
                   <strong class="fa-stack-1x text-primary">53</strong>
                 </span>
             </div>
+            <a href="#" class="btn btn-primary btn-block"><b>Assign</b></a>
             </div>
             <!-- /.box-body -->
 

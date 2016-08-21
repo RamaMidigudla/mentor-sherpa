@@ -68,13 +68,27 @@ public class StudentController {
         return new ModelAndView("mentorList");
     }
     
-    @RequestMapping(value = "/organization/list", method = RequestMethod.GET)
-    public ModelAndView showOrganizationList(Model model) {
+//    @RequestMapping(value = "/programs/{org}", method = RequestMethod.GET)
+//    public ModelAndView showCurrentPrograms(@PathVariable String org, Model model) {
+//        List<Organization> mentorList = organizationService.listAllOrganizations();
+//        model.addAttribute(mentorList);
+//        return new ModelAndView("organizationList");
+//    }    
+    
+    @RequestMapping(value = "/programs/list", method = RequestMethod.GET)
+    public ModelAndView showCurrentPrograms( Model model) {
         List<Organization> mentorList = organizationService.listAllOrganizations();
         model.addAttribute(mentorList);
         return new ModelAndView("organizationList");
     }    
-    
+
+    @RequestMapping(value = "/programs/new", method = RequestMethod.GET)
+    public ModelAndView showNewPrograms(Model model) {
+        List<Organization> mentorList = organizationService.listAllOrganizations();
+        model.addAttribute(mentorList);
+        return new ModelAndView("newPrograms");
+    }    
+
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.GET)
     public ModelAndView showPrograms(@PathVariable String id, Model model) {
         Organization organization = organizationService.findOrganziationById(id);
@@ -113,7 +127,7 @@ public class StudentController {
 
         QuestionResponse questionResponse = new QuestionResponse();
         questionResponse.setQuestion(programSignupForm.getQuestions().get(0));
-        questionResponse.setResponse(programSignupForm.getQuestionResponses());
+        questionResponse.setResponse(programSignupForm.getQuestionResponses().get(0));
         questionResponseList.add(questionResponse);
         
          MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();

@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/themes/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/themes/AdminLTE/plugins/select2/select2.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/snapit.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
