@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Set;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
@@ -119,15 +119,25 @@ public class MentorController {
 
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
     public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
-        Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
+         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
         List<QuestionOptions> questionsList = new ArrayList<>();
         questionsList.addAll(questionOptionsService.getMentorQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
         programSignupForm.setQuestionsList(questionsList);
+        for (QuestionOptions question : programSignupForm.getQuestionsList()) {
+            if (null == programSignupForm.getUserSelection().get(question.getQuestionCategory())) {
+                List<QuestionOptions> tempQuestionsList = new ArrayList<>();
+                tempQuestionsList.add(question);
+                programSignupForm.getUserSelection().put(question.getQuestionCategory(), tempQuestionsList);
+            } else {
+                List<QuestionOptions> tempQuestionsList = programSignupForm.getUserSelection().get(question.getQuestionCategory());
+                tempQuestionsList.add(question);
+            }
+        }
         model.addAttribute(organization);
         model.addAttribute(programSignupForm);
         return new ModelAndView("answerQuestions");
     }
-
+    
     /**
      * Save User responses for Program's questions.
      * 
@@ -144,9 +154,8 @@ public class MentorController {
 
         QuestionResponse questionResponse = new QuestionResponse();
         questionResponse.setQuestion(programSignupForm.getQuestions().get(i));
-        if (null != programSignupForm.getQuestionResponses().get(i)) {
+        if (i < programSignupForm.getQuestionResponses().size() && null != programSignupForm.getQuestionResponses().get(i) && 0 != programSignupForm.getQuestionResponses().get(i).size()) {
             questionResponse.setResponse(programSignupForm.getQuestionResponses().get(i));
-        }
         questionResponseList.add(questionResponse);
 
         MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
@@ -158,6 +167,8 @@ public class MentorController {
         mentorResponse.setQuestionAndResponses(questionResponseList);
 
         mentorAndStudentResponseService.saveResponses(mentorResponse);
+                }
+
         }
         redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
         return new ModelAndView("redirect:/");

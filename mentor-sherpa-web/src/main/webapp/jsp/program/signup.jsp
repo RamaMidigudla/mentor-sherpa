@@ -7,6 +7,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script lang="javascript">
+    function checkProgram() {
+  // All <input> tags...
+  var chx = document.getElementsByTagName('input');
+  for (var i=0; i<chx.length; i++) {
+    // If you have more than one radio group, also check the name attribute
+    // for the one you want as in && chx[i].name == 'choose'
+    // Return true from the function on first match of a checked item
+    if (chx[i].type === 'radio' && chx[i].checked) {
+      return true;
+    } 
+  }
+  // End of the loop, return false
+  alert("Please select a Program.");
+  return false;
+}
+</script>
         <div class="container">
 
             <div class="col-md-8">
@@ -17,7 +34,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                        <form:form class="form-horizontal" commandName="programSignupForm">
+                        <form:form class="form-horizontal" commandName="programSignupForm" onsubmit="return checkProgram();">
                         <form:hidden path="organizationId" />
                         <div class="box-body">
                             <div class="form-group">

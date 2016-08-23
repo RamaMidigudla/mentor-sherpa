@@ -18,7 +18,7 @@ public class ProgramSignupForm {
     private String selectedProgramName;
     private List<String> questions;
 //    private Set<String> questionResponses;
-    private Map<String, List<String>> userSelection = new HashMap<>();
+    private Map<String, List<QuestionOptions>> userSelection = new HashMap<>();
     private List<Set<String>> questionResponses;
     private List<QuestionOptions> questionsList;
 
@@ -60,11 +60,11 @@ public class ProgramSignupForm {
         this.questionsList = questionsList;
     }
 
-    public Map<String, List<String>> getUserSelection() {
+    public Map<String, List<QuestionOptions>> getUserSelection() {
         return userSelection;
     }
 
-    public void setUserSelection(Map<String, List<String>> userSelection) {
+    public void setUserSelection(Map<String, List<QuestionOptions>> userSelection) {
         this.userSelection = userSelection;
     }
 }

@@ -35,7 +35,7 @@ public class QuestionOptions implements Serializable {
     @Embedded("orgId")
     private ObjectId orgId;
 
-    private String QuestionCategory;
+    private String questionCategory;
     
     private int categoryOrder;
     
@@ -89,11 +89,11 @@ public class QuestionOptions implements Serializable {
     }
 
     public String getQuestionCategory() {
-        return QuestionCategory;
+        return questionCategory;
     }
 
     public void setQuestionCategory(String QuestionCategory) {
-        this.QuestionCategory = QuestionCategory;
+        this.questionCategory = QuestionCategory;
     }
 
     public int getCategoryOrder() {
