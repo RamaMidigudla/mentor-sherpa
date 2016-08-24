@@ -35,6 +35,7 @@
                             <c:forEach items="${programSignupForm.userSelection}" var="entry" varStatus="index2">
                                         <div class="panel box box-primary">
                                             <div class="box-header with-border">
+                                                <i class="glyphicon glyphicon-plus-sign pull-right"></i>
                                                 <h4 class="box-title">
                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne${index2.index}" aria-expanded="false" class="collapsed">
                                                         <c:out value="${entry.key}"></c:out>

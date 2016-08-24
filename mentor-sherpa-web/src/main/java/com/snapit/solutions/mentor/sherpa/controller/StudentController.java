@@ -150,7 +150,7 @@ public class StudentController {
     public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
          Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
         List<QuestionOptions> questionsList = new ArrayList<>();
-        questionsList.addAll(questionOptionsService.getMentorQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
+        questionsList.addAll(questionOptionsService.getStudentQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
         programSignupForm.setQuestionsList(questionsList);
         for (QuestionOptions question : programSignupForm.getQuestionsList()) {
             if (null == programSignupForm.getUserSelection().get(question.getQuestionCategory())) {
