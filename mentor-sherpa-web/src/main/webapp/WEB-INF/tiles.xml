@@ -59,8 +59,8 @@
         <put-attribute name="title" value="Mentor Sherpa -- Student Profile"></put-attribute>
         <put-attribute name="body" value="/jsp/student/profile.jsp"></put-attribute>
     </definition>
-    <definition name="assignMentor" extends="base.definition">
+    <definition name="matchedMentors" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa -- Assign Mentor"></put-attribute>
-        <put-attribute name="body" value="/jsp/organization/assignMentor.jsp"></put-attribute>
+        <put-attribute name="body" value="/jsp/organization/matchedMentors.jsp"></put-attribute>
     </definition>
 </tiles-definitions>

@@ -72,7 +72,7 @@ public class OrganizationServiceImpl implements OrganizationService {
          MentorAndStudentResponse studentResponse = mentorAndStudentResponseDAO.retrieveByMentorStudentId(studentId);
          
          List<MentorAndStudentResponse> mentorResponseList = mentorAndStudentResponseDAO.
-                                                                retrieveMentorsResponsebyOrgAndProgram(orgId, programName, orgId);
+                                                                retrieveMentorsResponsebyOrgAndProgram(orgId, programName, studentId);
          
          Map<ObjectId, Integer> mentorToMatchPercentageMap = MatchingServiceImpl.match(studentResponse, mentorResponseList);
          

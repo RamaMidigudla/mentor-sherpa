@@ -13,12 +13,15 @@ import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
+import com.snapit.solutions.mentor.sherpa.model.TestModel;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
 import com.snapit.solutions.web.security.AuthUser;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -91,12 +94,29 @@ public class OrganizationController {
     }
     
     @RequestMapping(value = "/{id}/assign", method = RequestMethod.GET)
-    public String assignMentor(@PathVariable String id, Model model) {
-        // Get org id from user id
-        // Get Program id from previous page?
-        // Student is available
-        return "assignMentor";
-    }   
+    public ModelAndView findMentors(@PathVariable String id,@ModelAttribute String selectedProgramName,Model model) {
+        Organization organization = organizationService.findOrganziationById(getOrganizationId());
+        Student student = studentService.findById(id);
+       Map<Mentor,Integer> matchResults = new HashMap<>();
+               matchResults.putAll(organizationService.getMatchedMentors(id, 
+                organization.getId().toString(),
+                organization.getPrograms().get(0).getProgramName()));
+               
+        TestModel testModel = new TestModel();
+        testModel.setMatch(matchResults);
+        model.addAttribute(testModel);
+        model.addAttribute(student);
+        return new ModelAndView("matchedMentors");
+    }
+    
+    @RequestMapping(value = "/{id}/save/{mid}", method = RequestMethod.GET)
+    public ModelAndView assignMentor(@PathVariable String id,@PathVariable String mid, Model model, RedirectAttributes redirectAttr) {
+        Organization organization = organizationService.findOrganziationById(getOrganizationId());
+        organizationService.assignNewMentorToStudent(id, organization.getId().toString(), mid, 
+                organization.getPrograms().get(0).getProgramName());
+        redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
+        return new ModelAndView("redirect:/");
+    }
     
     private String getOrganizationId() {
         AuthUser authUser = (AuthUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

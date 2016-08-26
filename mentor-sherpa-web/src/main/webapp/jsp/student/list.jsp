@@ -42,7 +42,7 @@
                                     <td><c:forEach items="${student.interests}" var="interest">${interest}</br></c:forEach></td>
                             <c:if test="${not empty selectedProgramName}">
                                     <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
-                                        <td><a href="${pageContext.request.contextPath}/organization/${student.id}/assign"><span class="label label-success">Assign Mentor</span></a></td>
+                                        <td><a href="${pageContext.request.contextPath}/organization/${student.id}/assign"><span class="label label-success">Find Mentors</span></a></td>
                                     </sec:authorize>
                             </c:if>
                                 </tr>
