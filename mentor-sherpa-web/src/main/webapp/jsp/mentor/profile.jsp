@@ -31,17 +31,17 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Followers</b> <a class="pull-right">1,322</a>
+                  <b>Programs</b> <a class="pull-right"></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Following</b> <a class="pull-right">543</a>
+                  <b>Mentees</b> <a class="pull-right"></a>
                 </li>
-                <li class="list-group-item">
+<!--                <li class="list-group-item">
                   <b>Friends</b> <a class="pull-right">13,287</a>
-                </li>
+                </li>-->
               </ul>
 
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              <!--<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
             </div>
             <!-- /.box-body -->
           </div>
@@ -64,7 +64,7 @@
 
               <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-              <p class="text-muted">Malibu, California</p>
+              <!--<p class="text-muted">Malibu, California</p>-->
 
               <hr>
 
@@ -82,7 +82,7 @@
 
               <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>-->
             </div>
             <!-- /.box-body -->
           </div>

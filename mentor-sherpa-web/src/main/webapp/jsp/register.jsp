@@ -164,6 +164,10 @@
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="male" />  Male 
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="female" />  Female 
+                                    </div>
+                                    <div class="form-group has-feedback">
                                         <div class="input-group date">
                                             <input type="text" class="form-control pull-right" name="dateOfBirth" placeholder="Date Of Birth" id="datepicker1">
                                             <div class="input-group-addon">

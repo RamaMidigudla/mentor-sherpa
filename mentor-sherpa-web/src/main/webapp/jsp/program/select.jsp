@@ -21,7 +21,7 @@
                                     <th>Age</th>
                                     <th>Gender</th>
                                     <th>Education</th>
-                                    <th>Availability</th>
+                                    <!--<th>Availability</th>-->
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,20 +31,11 @@
                                     <td>${mentor.age}</td>
                                     <td>${mentor.gender}</td>
                                     <td>${mentor.education}</td>
-                                    <td><span class="label label-success">Available</span></td>
+                                    <!--<td><span class="label label-success">Available</span></td>-->
                                 </tr>
                             </c:forEach>
                                
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Mentor Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Education</th>
-                                    <th>Availability</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <!-- /.box-body -->

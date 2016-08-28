@@ -1,9 +1,8 @@
 <%-- 
-    Document   : accessDenied
-    Created on : Jun 25, 2016, 11:45:48 PM
+    Document   : error
+    Created on : Aug 27, 2016, 6:04:54 PM
     Author     : Sudheer.Parasker@SnapIT.Solutions
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -40,13 +39,13 @@
     <section class="content">
 
       <div class="error-page">
-        <h2 class="headline text-red">403</h2>
+        <h2 class="headline text-red">500</h2>
 
         <div class="error-content">
-          <h3><i class="fa fa-warning text-red"></i> Forbidden</h3>
+          <h3><i class="fa fa-warning text-red"></i> Error</h3>
 
           <p>
-            You do not have enough privileges. Please contact system admin.
+            Application encountered an error. Please contact admin.
           </p>
 
         </div>

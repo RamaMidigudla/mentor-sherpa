@@ -19,7 +19,7 @@
 	       
     <context-param>
         <param-name>parentContextKey</param-name>
-        <param-value>ejb.context</param-value>
+        <param-value>parentServiceContext</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

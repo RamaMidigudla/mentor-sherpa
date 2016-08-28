@@ -12,7 +12,7 @@
     <!-- This will automatically declare several post-processors
     including the AutowiredAnnotationBeanPostProcessor -->    
     <!-- This context is loaded by type and not by name -->
-    <bean class="org.springframework.context.support.ClassPathXmlApplicationContext" id="ejb.context">
+    <bean class="org.springframework.context.support.ClassPathXmlApplicationContext" id="parentServiceContext">
         <constructor-arg value="classpath*:service-applicationContext.xml" /> 
     </bean>
     

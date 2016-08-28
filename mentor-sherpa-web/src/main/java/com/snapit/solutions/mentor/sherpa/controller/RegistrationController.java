@@ -10,10 +10,14 @@ import com.snapit.solutions.mentor.sherpa.model.MentorRegisterForm;
 import com.snapit.solutions.mentor.sherpa.validator.MentorRegisterValidator;
 import com.snapit.solutions.mentor.sherpa.validator.StudentRegisterValidator;
 import com.snapit.solutions.securtiy.entity.User;
+import com.snapit.solutions.securtiy.service.UserService;
+import com.snapit.solutions.web.mail.AppMailSender;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +45,10 @@ public class RegistrationController {
     StudentRegisterValidator studentRegisterValidator;
     @Autowired
     MentorRegisterValidator mentorRegisterValidator;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AppMailSender mailSender;
     
     @InitBinder("mentorRegisterForm")
     public void initMentorBinder(WebDataBinder webDataBinder){
@@ -73,16 +81,16 @@ public class RegistrationController {
     }
     
     @RequestMapping(value = "/mentor", method = RequestMethod.POST)
-    public String mentorRegistration(@Validated @ModelAttribute("mentorRegisterForm") MentorRegisterForm mentorRegisterForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        return register(mentorRegisterForm, result, model, "MENTOR", redirectAttributes);
+    public String mentorRegistration(@Validated @ModelAttribute("mentorRegisterForm") MentorRegisterForm mentorRegisterForm, BindingResult result, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        return register(mentorRegisterForm, result, model, "MENTOR", redirectAttributes, request);
     }
     
     @RequestMapping(value = "/student", method = RequestMethod.POST)
-    public String studentRegistration(@Validated @ModelAttribute("studentRegisterForm") StudentRegisterForm studentRegisterForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        return register(studentRegisterForm, result, model, "STUDENT", redirectAttributes);
+    public String studentRegistration(@Validated @ModelAttribute("studentRegisterForm") StudentRegisterForm studentRegisterForm, BindingResult result, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        return register(studentRegisterForm, result, model, "STUDENT", redirectAttributes, request);
     }
     
-    private String register(RegisterForm registerForm, BindingResult result, Model model, String role, RedirectAttributes redirectAttributes) {
+    private String register(RegisterForm registerForm, BindingResult result, Model model, String role, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         if (result.hasErrors()) {
 //            if (registerForm instanceof MentorRegisterForm) {
 //                model.addAttribute("mentorRegisterForm", registerForm);
@@ -97,10 +105,23 @@ public class RegistrationController {
         if (user == null) {
             mentorSherpaUserService.registerUser(registerForm, role);
             redirectAttributes.addFlashAttribute("successMessage", "You have successfully registered. Please Login! ");
+        SimpleMailMessage email
+                = constructRegistrationEmail(registerForm.getEmailId());
+        mailSender.send(email);
             return "redirect:/login";
         } else {
             result.reject("Oops! that email already exists. Try logging in!");
         }
         return "register";
     }
+    private SimpleMailMessage constructRegistrationEmail(String emailId) {
+        String message = "Welcome to Mentor Sherpa and Thank you for Registering with your email-id : " + emailId + ". Please notify us immedidately if you did not request this registration.";
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(emailId);
+        email.setSubject("Welcome!!");
+        email.setText(message);
+        email.setFrom("info@snapit.solutions");
+        return email;
+    }
+
 }

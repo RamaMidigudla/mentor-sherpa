@@ -63,4 +63,7 @@
         <put-attribute name="title" value="Mentor Sherpa -- Assign Mentor"></put-attribute>
         <put-attribute name="body" value="/jsp/organization/matchedMentors.jsp"></put-attribute>
     </definition>
+    <definition name="error" template="/jsp/error.jsp">
+        <put-attribute name="title" value="Mentor Sherpa | Error"></put-attribute>
+    </definition>
 </tiles-definitions>

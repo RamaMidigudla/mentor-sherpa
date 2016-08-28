@@ -5,7 +5,6 @@ package com.snapit.solutions.mentor.sherpa.controller;
 
 import com.snapit.solutions.mentor.sherpa.entity.PasswordResetToken;
 import com.snapit.solutions.mentor.sherpa.exception.UserNotFoundException;
-import com.snapit.solutions.mentor.sherpa.model.GenericResponse;
 import com.snapit.solutions.securtiy.entity.User;
 import com.snapit.solutions.securtiy.service.UserService;
 import com.snapit.solutions.web.mail.AppMailSender;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +25,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -143,7 +140,6 @@ public class LoginController {
             userService.changePassword(user, PASSWORD_ENCODER.encode(password));
             redirectAttributes.addFlashAttribute("successMessage", "Password was saved Successfully.");
         } catch (Exception e) {
-            System.out.println("Baddddddddddddddddd");
             redirectAttributes.addFlashAttribute("alertMessage", "There was an error processing your password update. Please try again.");
         }
         return "redirect:/login";

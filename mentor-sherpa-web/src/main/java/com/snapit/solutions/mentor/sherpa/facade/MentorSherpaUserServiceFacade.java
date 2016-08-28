@@ -45,7 +45,7 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
         user.setGender(registerForm.getGender());
         user.setDateOfBirth(registerForm.getDateOfBirth());
         user.setPhoneNumber(registerForm.getPhoneNumber());
-        if(null != registerForm.getGender()) {
+        if (null != registerForm.getGender()) {
             user.setImageName(registerForm.getGender().equals("male") ? "avatar5.png" : "avatar2.png");
         }
         userService.registerUser(user);
@@ -60,15 +60,24 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
     private void createUserProfile(String emailId, String role) {
         User user = findUser(emailId);
 
-        if (role.equals("MENTOR")) {
-            Mentor mentor = new Mentor();
-            mentor.setUserObjectId(user.getId());
-            mentorService.createMentor(mentor);
-        } else if (role.equals("STUDENT")) {
-            Student student = new Student();
-            student.setUserObjectId(user.getId());
-            studentService.createMentor(student);
+        if (null != user) {
+            if (role.equals("MENTOR")) {
+                Mentor mentor = new Mentor();
+                mentor.setUserObjectId(user.getId());
+                mentor.setGender(user.getGender());
+                mentor.setImageName(user.getImageName());
+                mentor.setName(user.getFirstName() + " " + user.getLastName());
+                mentorService.createMentor(mentor);
+            } else if (role.equals("STUDENT")) {
+                Student student = new Student();
+                student.setUserObjectId(user.getId());
+                student.setGender(user.getGender());
+                student.setImageName(user.getImageName());
+                student.setName(user.getFirstName() + " " + user.getLastName());
+                studentService.createMentor(student);
+            }
         }
+
     }
 
 }
