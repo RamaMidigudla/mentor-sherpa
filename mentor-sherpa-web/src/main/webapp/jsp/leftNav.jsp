@@ -15,7 +15,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">Main Menu</li>
         <%-- ORGANIZATION Navigation --%>
         <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
         <li class="treeview">

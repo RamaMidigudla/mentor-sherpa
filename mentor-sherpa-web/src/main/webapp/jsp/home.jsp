@@ -19,7 +19,5 @@
             <c:out value="${infoMessage}" />
         </div>
     </c:if>
-
-        <h1>Welcome! Select an activity from menu!</h1>
     </body>
 </html>
