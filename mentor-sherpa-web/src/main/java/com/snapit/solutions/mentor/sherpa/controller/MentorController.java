@@ -149,27 +149,23 @@ public class MentorController {
     @RequestMapping(value = "/signup/save", method = RequestMethod.POST)
     public ModelAndView saveQuestionResponses(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttr) {
     
-        for (int i = 0; i <  programSignupForm.getQuestionResponses().size(); i++) {
+        MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
+        mentorResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
+        mentorResponse.setProgramName(programSignupForm.getSelectedProgramName());
+        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mentorResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
         List<QuestionResponse> questionResponseList = new ArrayList<>();
-
+        for (int i = 0; i <  programSignupForm.getQuestionResponses().size(); i++) {
         QuestionResponse questionResponse = new QuestionResponse();
         questionResponse.setQuestion(programSignupForm.getQuestions().get(i));
         if (i < programSignupForm.getQuestionResponses().size() && null != programSignupForm.getQuestionResponses().get(i) && 0 != programSignupForm.getQuestionResponses().get(i).size()) {
             questionResponse.setResponse(programSignupForm.getQuestionResponses().get(i));
         questionResponseList.add(questionResponse);
-
-        MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
-        mentorResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
-        mentorResponse.setProgramName(programSignupForm.getSelectedProgramName());
-        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        mentorResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
-        mentorResponse.setQuestionAndResponses(questionResponseList);
-
-        mentorAndStudentResponseService.saveResponses(mentorResponse);
-                }
-
+        
+            }
         }
+        mentorResponse.setQuestionAndResponses(questionResponseList);
+        mentorAndStudentResponseService.saveResponses(mentorResponse);
         redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
         return new ModelAndView("redirect:/");
     }
