@@ -7,7 +7,6 @@ import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
-import com.snapit.solutions.mentor.sherpa.entity.Program;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionResponse;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
-import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
@@ -177,28 +175,24 @@ public class StudentController {
      */
     @RequestMapping(value = "/signup/save", method = RequestMethod.POST)
     public ModelAndView saveQuestionResponses(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttr) {
-    
-        for (int i = 0; i <  programSignupForm.getQuestionResponses().size(); i++) {
+      
+        MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
+        mentorResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
+        mentorResponse.setProgramName(programSignupForm.getSelectedProgramName()); 
+        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mentorResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
         List<QuestionResponse> questionResponseList = new ArrayList<>();
-
+        
+        for (int i = 0; i <  programSignupForm.getQuestionResponses().size(); i++) {    
         QuestionResponse questionResponse = new QuestionResponse();
         questionResponse.setQuestion(programSignupForm.getQuestions().get(i));
         if (i < programSignupForm.getQuestionResponses().size() && null != programSignupForm.getQuestionResponses().get(i) && 0 != programSignupForm.getQuestionResponses().get(i).size()) {
             questionResponse.setResponse(programSignupForm.getQuestionResponses().get(i));
         questionResponseList.add(questionResponse);
-
-        MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
-        mentorResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
-        mentorResponse.setProgramName(programSignupForm.getSelectedProgramName());
-        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        mentorResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
-        mentorResponse.setQuestionAndResponses(questionResponseList);
-
-        mentorAndStudentResponseService.saveResponses(mentorResponse);
                 }
-
         }
+        mentorResponse.setQuestionAndResponses(questionResponseList);
+        mentorAndStudentResponseService.saveResponses(mentorResponse);
         redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
         return new ModelAndView("redirect:/");
     }
