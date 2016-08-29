@@ -10,6 +10,7 @@ import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionResponse;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
+import com.snapit.solutions.mentor.sherpa.model.QuestionOptionsAndResponses;
 import com.snapit.solutions.mentor.sherpa.service.MentorAndStudentResponseService;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
@@ -25,9 +26,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.ArrayList;
+import java.util.HashSet;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -100,69 +104,37 @@ public class StudentController {
         return new ModelAndView("selectProgram");
     }
     
-//    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
-//    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
-//        Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
-//        if (organization != null && organization.getPrograms() != null) { //this should never happen. throw exception
-//            List<ObjectId> questionIdList = new ArrayList<>();
-//            List<Program> programList = organization.getPrograms();
-//            for(Program program: programList) {
-//                if (program.getProgramName().trim().equalsIgnoreCase(programSignupForm.getSelectedProgramName()) && program.getQuestionsIdList() != null) {
-//                    questionIdList.addAll(program.getQuestionsIdList());
-//                }
-//            }
-//        programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "student"));
-//        model.addAttribute(organization);
-////        model.addAttribute(questionsList);
-//        model.addAttribute(programSignupForm);
-////        redirectAttr.addFlashAttribute(organization);
-////        redirectAttr.addFlashAttribute(questionsList);
-////        redirectAttr.addFlashAttribute(programSignupForm);
-//        }
-//        return new ModelAndView("answerQuestions");
-//    }
-//    
-//     @RequestMapping(value = "/signup/save", method = RequestMethod.POST)
-//    public ModelAndView saveQuestionResponses(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttr) {
-//        List<QuestionResponse> questionResponseList = new ArrayList<>();
-//
-//        QuestionResponse questionResponse = new QuestionResponse();
-//        questionResponse.setQuestion(programSignupForm.getQuestions().get(0));
-//        questionResponse.setResponse(programSignupForm.getQuestionResponses().get(0));
-//        questionResponseList.add(questionResponse);
-//        
-//         MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
-//         mentorResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
-//         mentorResponse.setProgramName(programSignupForm.getSelectedProgramName());
-//         AuthUser activeUser = (AuthUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//         mentorResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
-//         mentorResponse.setQuestionAndResponses(questionResponseList);
-//         
-//         mentorAndStudentResponseService.saveResponses(mentorResponse);
-//        redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
-//       return new ModelAndView("redirect:/");
-//    }
-    
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
     public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
-         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
+        Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
         List<QuestionOptions> questionsList = new ArrayList<>();
         questionsList.addAll(questionOptionsService.getStudentQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
         programSignupForm.setQuestionsList(questionsList);
+
         for (QuestionOptions question : programSignupForm.getQuestionsList()) {
-            if (null == programSignupForm.getUserSelection().get(question.getQuestionCategory())) {
-                List<QuestionOptions> tempQuestionsList = new ArrayList<>();
-                tempQuestionsList.add(question);
-                programSignupForm.getUserSelection().put(question.getQuestionCategory(), tempQuestionsList);
+            if (null == programSignupForm.getQuestionResponseMap().get(question.getQuestionCategory())) {
+                List<QuestionOptionsAndResponses> questionOptionsAndResponses = new ArrayList<>();
+                getQuestionOptionResponse(question, questionOptionsAndResponses);
+                programSignupForm.getQuestionResponseMap().put(question.getQuestionCategory(), questionOptionsAndResponses);
             } else {
-                List<QuestionOptions> tempQuestionsList = programSignupForm.getUserSelection().get(question.getQuestionCategory());
-                tempQuestionsList.add(question);
+                List<QuestionOptionsAndResponses> questionOptionsAndResponses = programSignupForm.getQuestionResponseMap().get(question.getQuestionCategory());
+                getQuestionOptionResponse(question, questionOptionsAndResponses);
             }
         }
         model.addAttribute(organization);
-        model.addAttribute(programSignupForm);
+        model.addAttribute("programSignupForm", programSignupForm);
         return new ModelAndView("answerQuestions");
+    }
+
+    private void getQuestionOptionResponse(QuestionOptions question, List<QuestionOptionsAndResponses> questionOptionsAndResponses) {
+        QuestionOptionsAndResponses questionOptionsAndResponse = new QuestionOptionsAndResponses();
+        questionOptionsAndResponse.setQuestionOption(question);
+        QuestionResponse questionResponse = new QuestionResponse();
+        questionResponse.setQuestion(question.getQuestion());
+        questionResponse.setResponse(new HashSet<String>());
+        questionOptionsAndResponse.setQuestionResponse(questionResponse);
+
+        questionOptionsAndResponses.add(questionOptionsAndResponse);
     }
     
     /**
@@ -174,27 +146,34 @@ public class StudentController {
      * @return 
      */
     @RequestMapping(value = "/signup/save", method = RequestMethod.POST)
-    public ModelAndView saveQuestionResponses(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttr) {
-      
-        MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
-        mentorResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
-        mentorResponse.setProgramName(programSignupForm.getSelectedProgramName()); 
-        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        mentorResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
-        List<QuestionResponse> questionResponseList = new ArrayList<>();
-        
-        for (int i = 0; i <  programSignupForm.getQuestionResponses().size(); i++) {    
-        QuestionResponse questionResponse = new QuestionResponse();
-        questionResponse.setQuestion(programSignupForm.getQuestions().get(i));
-        if (i < programSignupForm.getQuestionResponses().size() && null != programSignupForm.getQuestionResponses().get(i) && 0 != programSignupForm.getQuestionResponses().get(i).size()) {
-            questionResponse.setResponse(programSignupForm.getQuestionResponses().get(i));
-        questionResponseList.add(questionResponse);
-                }
+    public String saveQuestionResponses(@Validated @ModelAttribute ProgramSignupForm programSignupForm, BindingResult result, Model model, RedirectAttributes redirectAttr) {
+
+        if (result.hasErrors()) {
+            redirectAttr.addFlashAttribute("errorMessage", "Please answer all questions.");     
+            model.addAttribute("errorMessage", "Please answer all questions.");
+            model.addAttribute(programSignupForm);
+            return "answerQuestions";
         }
-        mentorResponse.setQuestionAndResponses(questionResponseList);
-        mentorAndStudentResponseService.saveResponses(mentorResponse);
+        MentorAndStudentResponse studentResponse = new MentorAndStudentResponse();
+        studentResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
+        studentResponse.setProgramName(programSignupForm.getSelectedProgramName());
+        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        studentResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
+
+        List<QuestionResponse> questionResponseList = new ArrayList<>();
+        for (String questionCategory : programSignupForm.getQuestionResponseMap().keySet()) {
+            List<QuestionOptionsAndResponses> questionOptionsAndResponses = programSignupForm.getQuestionResponseMap().get(questionCategory);
+            if (null != questionOptionsAndResponses && !questionOptionsAndResponses.isEmpty()) {
+                for (QuestionOptionsAndResponses questionOptionsAndResponse : questionOptionsAndResponses) {
+                    questionResponseList.add(questionOptionsAndResponse.getQuestionResponse());
+                }
+            }
+        }
+
+        studentResponse.setQuestionAndResponses(questionResponseList);
+        mentorAndStudentResponseService.saveResponses(studentResponse);
         redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
-        return new ModelAndView("redirect:/");
+        return "redirect:/";
     }
     @RequestMapping(value = "/signup/save", method = RequestMethod.GET)
     public ModelMap list(@RequestParam(required = false) boolean success) {

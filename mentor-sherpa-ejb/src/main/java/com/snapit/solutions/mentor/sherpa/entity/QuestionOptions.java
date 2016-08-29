@@ -6,6 +6,7 @@
 package com.snapit.solutions.mentor.sherpa.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
@@ -30,7 +31,7 @@ public class QuestionOptions implements Serializable {
 
     private String question;
     
-    private Set<String> options;
+    private List<String> options;
     
     @Embedded("orgId")
     private ObjectId orgId;
@@ -73,11 +74,11 @@ public class QuestionOptions implements Serializable {
         this.question = question;
     }
 
-    public Set<String> getOptions() {
+    public List<String> getOptions() {
         return options;
     }
 
-    public void setOptions(Set<String> options) {
+    public void setOptions(List<String> options) {
         this.options = options;
     }
     public ObjectId getOrgId() {

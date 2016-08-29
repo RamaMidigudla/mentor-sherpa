@@ -10,6 +10,7 @@ import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionResponse;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
+import com.snapit.solutions.mentor.sherpa.model.QuestionOptionsAndResponses;
 import com.snapit.solutions.mentor.sherpa.service.MentorAndStudentResponseService;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
@@ -23,12 +24,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
+import com.snapit.solutions.mentor.sherpa.validator.QuestionResponseValidator;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.HashSet;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -52,13 +58,20 @@ public class MentorController {
     QuestionOptionsService questionOptionsService;
     @Autowired
     MentorAndStudentResponseService mentorAndStudentResponseService;
+    @Autowired
+    QuestionResponseValidator questionResponseValidator;
+
+    @InitBinder("programSignupForm")
+    public void initMentorBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setValidator(questionResponseValidator);
+    }
 
     /**
      * Show Mentor by mentor id.
-     * 
+     *
      * @param id
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showMentor(@PathVariable String id, Model model) {
@@ -73,10 +86,10 @@ public class MentorController {
 
     /**
      * Show Programs for an Organization.
-     * 
+     *
      * @param id
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.GET)
     public ModelAndView showPrograms(@PathVariable String id, Model model) {
@@ -90,11 +103,11 @@ public class MentorController {
 
     /**
      * Show Questions for a Program.
-     * 
+     *
      * @param id
      * @param programSignupForm
      * @param model
-     * @return 
+     * @return
      */
 //    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
 //    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
@@ -116,58 +129,105 @@ public class MentorController {
 //        }
 //        return new ModelAndView("answerQuestions");
 //    }
-
+//    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
+//    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
+//        ProgramSignupForm newProgramSignupForm = new ProgramSignupForm();
+//        newProgramSignupForm.setOrganizationId(programSignupForm.getOrganizationId());
+//        newProgramSignupForm.setSelectedProgramName(programSignupForm.getSelectedProgramName());
+//         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
+//        List<QuestionOptions> questionsList = new ArrayList<>();
+//        questionsList.addAll(questionOptionsService.getMentorQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
+//        newProgramSignupForm.setQuestionsList(questionsList);
+//        for (QuestionOptions question : newProgramSignupForm.getQuestionsList()) {
+//            if (null == newProgramSignupForm.getUserSelection().get(question.getQuestionCategory())) {
+//                List<QuestionOptions> tempQuestionsList = new ArrayList<>();
+//                tempQuestionsList.add(question);
+//                newProgramSignupForm.getUserSelection().put(question.getQuestionCategory(), tempQuestionsList);
+//                // for JSTL
+//                List<QuestionResponse> qr = new ArrayList<>();
+//                newProgramSignupForm.getQuestionResponseMap().put(question.getQuestionCategory(), qr);
+//            } else {
+//                List<QuestionOptions> tempQuestionsList = newProgramSignupForm.getUserSelection().get(question.getQuestionCategory());
+//                tempQuestionsList.add(question);
+//                //for JSTL
+//                List<QuestionResponse> qr = newProgramSignupForm.getQuestionResponseMap().get(question.getQuestionCategory());
+//                qr.add(new QuestionResponse());
+//            }
+//        }
+//        model.addAttribute(organization);
+//        model.addAttribute("programSignupForm", newProgramSignupForm);
+//        return new ModelAndView("answerQuestions");
+//    }
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
     public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
-         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
+        Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
         List<QuestionOptions> questionsList = new ArrayList<>();
         questionsList.addAll(questionOptionsService.getMentorQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
         programSignupForm.setQuestionsList(questionsList);
+
         for (QuestionOptions question : programSignupForm.getQuestionsList()) {
-            if (null == programSignupForm.getUserSelection().get(question.getQuestionCategory())) {
-                List<QuestionOptions> tempQuestionsList = new ArrayList<>();
-                tempQuestionsList.add(question);
-                programSignupForm.getUserSelection().put(question.getQuestionCategory(), tempQuestionsList);
+            if (null == programSignupForm.getQuestionResponseMap().get(question.getQuestionCategory())) {
+                List<QuestionOptionsAndResponses> questionOptionsAndResponses = new ArrayList<>();
+                getQuestionOptionResponse(question, questionOptionsAndResponses);
+                programSignupForm.getQuestionResponseMap().put(question.getQuestionCategory(), questionOptionsAndResponses);
             } else {
-                List<QuestionOptions> tempQuestionsList = programSignupForm.getUserSelection().get(question.getQuestionCategory());
-                tempQuestionsList.add(question);
+                List<QuestionOptionsAndResponses> questionOptionsAndResponses = programSignupForm.getQuestionResponseMap().get(question.getQuestionCategory());
+                getQuestionOptionResponse(question, questionOptionsAndResponses);
             }
         }
         model.addAttribute(organization);
-        model.addAttribute(programSignupForm);
+        model.addAttribute("programSignupForm", programSignupForm);
         return new ModelAndView("answerQuestions");
     }
-    
+
+    private void getQuestionOptionResponse(QuestionOptions question, List<QuestionOptionsAndResponses> questionOptionsAndResponses) {
+        QuestionOptionsAndResponses questionOptionsAndResponse = new QuestionOptionsAndResponses();
+        questionOptionsAndResponse.setQuestionOption(question);
+        QuestionResponse questionResponse = new QuestionResponse();
+        questionResponse.setQuestion(question.getQuestion());
+        questionResponse.setResponse(new HashSet<String>());
+        questionOptionsAndResponse.setQuestionResponse(questionResponse);
+
+        questionOptionsAndResponses.add(questionOptionsAndResponse);
+    }
+
     /**
      * Save User responses for Program's questions.
-     * 
+     *
      * @param programSignupForm
      * @param model
      * @param redirectAttr
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/signup/save", method = RequestMethod.POST)
-    public ModelAndView saveQuestionResponses(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttr) {
-    
+    public String saveQuestionResponses(@Validated @ModelAttribute ProgramSignupForm programSignupForm, BindingResult result, Model model, RedirectAttributes redirectAttr) {
+
+        if (result.hasErrors()) {
+            redirectAttr.addFlashAttribute("errorMessage", "Please answer all questions.");     
+            model.addAttribute("errorMessage", "Please answer all questions.");
+            model.addAttribute(programSignupForm);
+            return "answerQuestions";
+        }
         MentorAndStudentResponse mentorResponse = new MentorAndStudentResponse();
         mentorResponse.setOrgId(new ObjectId(programSignupForm.getOrganizationId()));
         mentorResponse.setProgramName(programSignupForm.getSelectedProgramName());
         AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         mentorResponse.setMentorOrStudentId(new ObjectId(activeUser.getUserId()));
+
         List<QuestionResponse> questionResponseList = new ArrayList<>();
-        for (int i = 0; i <  programSignupForm.getQuestionResponses().size(); i++) {
-        QuestionResponse questionResponse = new QuestionResponse();
-        questionResponse.setQuestion(programSignupForm.getQuestions().get(i));
-        if (i < programSignupForm.getQuestionResponses().size() && null != programSignupForm.getQuestionResponses().get(i) && 0 != programSignupForm.getQuestionResponses().get(i).size()) {
-            questionResponse.setResponse(programSignupForm.getQuestionResponses().get(i));
-        questionResponseList.add(questionResponse);
-        
+        for (String questionCategory : programSignupForm.getQuestionResponseMap().keySet()) {
+            List<QuestionOptionsAndResponses> questionOptionsAndResponses = programSignupForm.getQuestionResponseMap().get(questionCategory);
+            if (null != questionOptionsAndResponses && !questionOptionsAndResponses.isEmpty()) {
+                for (QuestionOptionsAndResponses questionOptionsAndResponse : questionOptionsAndResponses) {
+                    questionResponseList.add(questionOptionsAndResponse.getQuestionResponse());
+                }
             }
         }
+
         mentorResponse.setQuestionAndResponses(questionResponseList);
         mentorAndStudentResponseService.saveResponses(mentorResponse);
         redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
-        return new ModelAndView("redirect:/");
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/signup/save", method = RequestMethod.GET)
@@ -181,9 +241,9 @@ public class MentorController {
 
     /**
      * Show list of Organizations.
-     * 
+     *
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/programs/list", method = RequestMethod.GET)
     public ModelAndView showCurrentPrograms(Model model) {
@@ -201,7 +261,6 @@ public class MentorController {
 //            return new ModelAndView("organizationList");
 //        }
 //    }
-
     @RequestMapping(value = "/programs/new", method = RequestMethod.GET)
     public ModelAndView showNewPrograms(Model model) {
         List<Organization> mentorList = organizationService.listAllOrganizations();
@@ -211,9 +270,9 @@ public class MentorController {
 
     /**
      * Show list of Mentors.
-     * 
+     *
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/student/list", method = RequestMethod.GET)
     public ModelAndView showStudentList(Model model) {

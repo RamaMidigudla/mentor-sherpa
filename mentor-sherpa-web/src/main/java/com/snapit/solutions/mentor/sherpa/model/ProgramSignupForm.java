@@ -4,10 +4,15 @@
 package com.snapit.solutions.mentor.sherpa.model;
 
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.collections.Factory;
+import org.apache.commons.collections.FactoryUtils;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections.list.LazyList;
 
 /**
  *
@@ -19,9 +24,21 @@ public class ProgramSignupForm {
     private List<String> questions;
 //    private Set<String> questionResponses;
     private Map<String, List<QuestionOptions>> userSelection = new HashMap<>();
+    private Map<String, List<QuestionOptionsAndResponses>> questionResponseMap = new HashMap<>();
     private List<Set<String>> questionResponses;
     private List<QuestionOptions> questionsList;
+//    private Map<String, List<QuestionResponse>> questionResponseMap;
 
+    public ProgramSignupForm() {
+      this.questionResponseMap = MapUtils.lazyMap(new HashMap<String,List<Object>>(), new Factory() {
+
+          @Override
+          public Object create() {
+              return LazyList.decorate(new ArrayList<QuestionOptionsAndResponses>(), 
+                             FactoryUtils.instantiateFactory(QuestionOptionsAndResponses.class));
+          }
+      });
+    }
     public String getOrganizationId() {
         return organizationId;
     }
@@ -66,5 +83,12 @@ public class ProgramSignupForm {
 
     public void setUserSelection(Map<String, List<QuestionOptions>> userSelection) {
         this.userSelection = userSelection;
+    }
+    public Map<String, List<QuestionOptionsAndResponses>> getQuestionResponseMap() {
+        return questionResponseMap;
+    }
+
+    public void setQuestionResponseMap(Map<String, List<QuestionOptionsAndResponses>> questionResponseMap) {
+        this.questionResponseMap = questionResponseMap;
     }
 }
