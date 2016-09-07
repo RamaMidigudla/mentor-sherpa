@@ -58,7 +58,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs" id="navTabs">
                     <li class="active"><a href="#mentor" data-toggle="tab">Mentor</a></li>
-                    <li><a href="#student" data-toggle="tab">Student</a></li>
+                    <li><a href="#student" data-toggle="tab">Student/Mentee</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="mentor">
@@ -151,7 +151,7 @@
                                         </div>
                                     </c:if>
                                 </spring:bind>
-                                <h2><b>Student</b> Registration</h2>
+                                <h2><b>Student/Mentee</b> Registration</h2>
 
                                 <div class="register-box-body">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

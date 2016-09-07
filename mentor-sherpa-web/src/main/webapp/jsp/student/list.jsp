@@ -12,7 +12,7 @@
             <div class="col-xs-12">          
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Student</h3>
+                        <h3 class="box-title">Student/Mentee</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -22,7 +22,7 @@
                         <table id="Mentor List" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Student Name</th>
+                                    <th>Student/Mentee Name</th>
                                     <th>Age</th>
                                     <th>Gender</th>
                                     <th>Interests</th>

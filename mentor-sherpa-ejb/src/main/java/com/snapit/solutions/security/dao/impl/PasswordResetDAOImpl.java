@@ -3,7 +3,6 @@
  */
 package com.snapit.solutions.security.dao.impl;
 
-import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.PasswordResetToken;
 import com.snapit.solutions.security.dao.PasswordResetDAO;
 import org.bson.types.ObjectId;

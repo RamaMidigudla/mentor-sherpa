@@ -8,6 +8,7 @@ import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.model.RegisterForm;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
+import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import com.snapit.solutions.securtiy.entity.User;
 import com.snapit.solutions.securtiy.service.UserService;
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
                 mentor.setGender(user.getGender());
                 mentor.setImageName(user.getImageName());
                 mentor.setName(user.getFirstName() + " " + user.getLastName());
+                mentor.setAge(CommonServiceUtils.calculateAge(user.getDateOfBirth()));
                 mentorService.createMentor(mentor);
             } else if (role.equals("STUDENT")) {
                 Student student = new Student();
@@ -74,6 +76,7 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
                 student.setGender(user.getGender());
                 student.setImageName(user.getImageName());
                 student.setName(user.getFirstName() + " " + user.getLastName());
+                student.setAge(CommonServiceUtils.calculateAge(user.getDateOfBirth()));
                 studentService.createMentor(student);
             }
         }

@@ -9,6 +9,7 @@ import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionResponse;
+import com.snapit.solutions.mentor.sherpa.messages.UIMessages;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
 import com.snapit.solutions.mentor.sherpa.model.QuestionOptionsAndResponses;
 import com.snapit.solutions.mentor.sherpa.service.MentorAndStudentResponseService;
@@ -226,7 +227,7 @@ public class MentorController {
 
         mentorResponse.setQuestionAndResponses(questionResponseList);
         mentorAndStudentResponseService.saveResponses(mentorResponse);
-        redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
+        redirectAttr.addFlashAttribute("infoMessage", UIMessages.SIGNUP_SUCCESS_INFO);
         return "redirect:/";
     }
 

@@ -8,10 +8,11 @@ package com.snapit.solutions.mentor.sherpa.service.utils;
 import com.snapit.solutions.mentor.sherpa.entity.SignedupOrganization;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Program;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.bson.types.ObjectId;
 
@@ -54,4 +55,11 @@ public class CommonServiceUtils {
         return objectId.toString();
     }
     
+    public static int calculateAge(String dateOfBirth){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate doB = LocalDate.parse(dateOfBirth, dateTimeFormatter);
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(doB, today);
+        return period.getYears();
+    }
 }

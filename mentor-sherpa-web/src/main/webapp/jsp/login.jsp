@@ -49,7 +49,7 @@
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                                <p>Please provide a valid username/password ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
+                                <p>Please provide a valid Email/password ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
                             </div>
                         </c:if>
                         <c:if test="${not empty successMessage}">
@@ -70,7 +70,7 @@
                         </c:if>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="form-group has-feedback">
-                        <input type="text" name="username" class="form-control" placeholder="Username">
+                        <input type="text" name="username" class="form-control" placeholder="Email">
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
