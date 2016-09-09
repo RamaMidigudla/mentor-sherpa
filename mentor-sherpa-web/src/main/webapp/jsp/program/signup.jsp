@@ -53,7 +53,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <button type="reset" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-info pull-right">Next</button>
+                            <a href="${pageContext.request.contextPath}/organization/orgStudentList" class="btn btn-info pull-right"><b>Next</b></a>
                         </div>
                         <!-- /.box-footer -->
                     </form:form>

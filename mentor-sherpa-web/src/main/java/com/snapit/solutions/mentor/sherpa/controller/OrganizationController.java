@@ -83,6 +83,14 @@ public class OrganizationController {
         return new ModelAndView("studentList");
     }
     
+    @RequestMapping(value = "/orgStudentList", method = RequestMethod.GET)
+    public ModelAndView showOrgStudentList(@ModelAttribute String selectedProgramName, Model model) {
+        List<Student> studentList = studentService.findall();
+        model.addAttribute(selectedProgramName);
+        model.addAttribute(studentList);
+        return new ModelAndView("orgStudentList");
+    }
+    
     @RequestMapping(value = "/{id}/select", method = RequestMethod.GET)
     public ModelAndView showPrograms(@PathVariable String id, Model model) {
         Organization organization = organizationService.findOrganziationById(getOrganizationId());
