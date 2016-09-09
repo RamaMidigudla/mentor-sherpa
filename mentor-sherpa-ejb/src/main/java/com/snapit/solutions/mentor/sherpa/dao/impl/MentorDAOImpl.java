@@ -78,5 +78,14 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
         query.field("id").hasAnyOf(DaoUtils.createSetOfObjectIds(mentorIds));
         return query.asList();
     }
+
+    @Override
+    public List<Mentor> findMentorsByUserObjectIds(Set<String> mentorUserObjectIds) {
+        Query<Mentor> query = getDatastore().createQuery(Mentor.class);
+        query.field("userObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(mentorUserObjectIds));
+        return query.asList();
+    }
+    
+    
       
 }

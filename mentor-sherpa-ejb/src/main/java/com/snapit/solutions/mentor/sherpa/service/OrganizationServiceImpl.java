@@ -7,9 +7,11 @@ import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
+import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import java.util.HashMap;
 import java.util.List;
@@ -78,12 +80,12 @@ public class OrganizationServiceImpl implements OrganizationService {
          
          Set<ObjectId> mentorIds = mentorToMatchPercentageMap.keySet();
          
-         List<Mentor> mentorList = mentorDAO.findMentorsByIds(CommonServiceUtils.createSetOfStringIds(mentorIds));
+         List<Mentor> mentorList = mentorDAO.findMentorsByUserObjectIds(CommonServiceUtils.createSetOfStringIds(mentorIds));
          
          Map<Mentor, Integer> mentorMatchPercentageForStudent = new HashMap();
          
          for(Mentor mentor : mentorList){
-            mentorMatchPercentageForStudent.put(mentor, mentorToMatchPercentageMap.get(mentor.getId()));
+            mentorMatchPercentageForStudent.put(mentor, mentorToMatchPercentageMap.get(mentor.getUserObjectId()));
          }
         
       return mentorMatchPercentageForStudent;  
@@ -98,4 +100,24 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization findByOrganizationName(String name) {
         return organizationDao.findByOrgName(name);
     }
+    
+    @Override
+    public Map<ObjectId, Mentor> findAssignedMentorForStudents(List<Student> studentList)
+    {
+        Map<ObjectId ,List<AssignedMentor>> studentToAssignedMentorMap = new HashMap();
+        for(Student student : studentList){
+           if(!student.getAssignedMentors().isEmpty()){
+           studentToAssignedMentorMap.put(student.getId(), student.getAssignedMentors());
+           }
+        }
+        Map<ObjectId, Mentor> studentToMentorMap = new HashMap();
+        for (Map.Entry<ObjectId ,List<AssignedMentor>> entry : studentToAssignedMentorMap.entrySet()) {
+          for(AssignedMentor assignedMentor : entry.getValue()){
+             studentToMentorMap.put(entry.getKey(), mentorDAO.findById(assignedMentor.getMentorId().toString()));
+          }
+        }
+        return studentToMentorMap;
+    }
+    
+    
 }

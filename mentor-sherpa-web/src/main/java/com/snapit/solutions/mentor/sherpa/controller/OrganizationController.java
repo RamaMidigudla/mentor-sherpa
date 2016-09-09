@@ -98,7 +98,7 @@ public class OrganizationController {
         Organization organization = organizationService.findOrganziationById(getOrganizationId());
         Student student = studentService.findById(id);
        Map<Mentor,Integer> matchResults = new HashMap<>();
-               matchResults.putAll(organizationService.getMatchedMentors(id, 
+               matchResults.putAll(organizationService.getMatchedMentors(student.getUserObjectId().toString(), 
                 organization.getId().toString(),
                 organization.getPrograms().get(0).getProgramName()));
                

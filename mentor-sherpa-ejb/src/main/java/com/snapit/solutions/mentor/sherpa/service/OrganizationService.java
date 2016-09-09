@@ -5,8 +5,10 @@ package com.snapit.solutions.mentor.sherpa.service;
 
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 import java.util.Map;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -25,5 +27,7 @@ public interface OrganizationService {
     public Organization findByOrganizationName(String name);
 
     public void assignNewMentorToStudent(String studentID, String orgId, String mentorId, String programName);
+    
+    public Map<ObjectId, Mentor> findAssignedMentorForStudents(List<Student> studentList);
 
 }

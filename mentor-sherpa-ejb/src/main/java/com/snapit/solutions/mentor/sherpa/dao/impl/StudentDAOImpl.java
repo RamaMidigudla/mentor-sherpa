@@ -15,7 +15,10 @@ import org.springframework.stereotype.Repository;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
+import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import java.util.ArrayList;
+import java.util.Set;
+import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
 /**
@@ -59,4 +62,12 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
                 equal(DaoUtils.createObjectId(studentId)), ops);
            
     }
+
+    @Override
+    public List<Mentor> findMentorsByUserObjectIds(Set<String> studentUserObjectIds) {
+       Query<Mentor> query = getDatastore().createQuery(Mentor.class);
+       query.field("userObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(studentUserObjectIds));
+       return query.asList();
+    }
+    
 }
