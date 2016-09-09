@@ -19,7 +19,6 @@
                                     <th>Mentor Name</th>
                                     <th>Age</th>
                                     <th>Gender</th>
-                                    <th>Education</th>
                                     <th>Availability</th>
                                 </tr>
                             </thead>
@@ -29,7 +28,6 @@
                                     <td><a href="${contextPath}/organization/mentor/${mentor.name}">${mentor.name}</a></td>
                                     <td>${mentor.age}</td>
                                     <td>${mentor.gender}</td>
-                                    <td>${mentor.education}</td>
                                     <td><span class="label label-success">Available</span></td>
                                 </tr>
                             </c:forEach>
