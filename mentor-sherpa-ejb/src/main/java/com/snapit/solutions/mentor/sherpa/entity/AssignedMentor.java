@@ -20,7 +20,7 @@ public class AssignedMentor implements Serializable {
     
     private String programName;
     
-    private ObjectId mentorId;
+    private ObjectId mentorUserObjectId;
 
     public ObjectId getOrgId() {
         return orgId;
@@ -38,12 +38,12 @@ public class AssignedMentor implements Serializable {
         this.programName = programName;
     }
 
-    public ObjectId getMentorId() {
-        return mentorId;
+    public ObjectId getMentorUserObjectId() {
+        return mentorUserObjectId;
     }
 
-    public void setMentorId(ObjectId mentorId) {
-        this.mentorId = mentorId;
+    public void setMentorUserObjectId(ObjectId mentorUserObjectId) {
+        this.mentorUserObjectId = mentorUserObjectId;
     }
     
 }

@@ -62,4 +62,10 @@ public class CommonServiceUtils {
         Period period = Period.between(doB, today);
         return period.getYears();
     }
+    
+    public static <T> Set<T> createHashSet(T t){   
+       Set<T> hashSet = new HashSet();
+       hashSet.add(t);
+       return hashSet;   
+    }
 }

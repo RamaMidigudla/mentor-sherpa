@@ -69,7 +69,7 @@
                   <strong class="fa-stack-1x text-primary">${entry.value}</strong>
                 </span>
             </div>
-            <a href="${pageContext.request.contextPath}/organization/${student.id}/save/${entry.key.id}" class="btn btn-primary btn-block"><b>Assign</b></a>
+            <a href="${pageContext.request.contextPath}/organization/${student.userObjectId}/save/${entry.key.userObjectId}" class="btn btn-primary btn-block"><b>Assign</b></a>
           </div>
           </div>
         </div>

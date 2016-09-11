@@ -26,8 +26,8 @@ public interface OrganizationService {
     
     public Organization findByOrganizationName(String name);
 
-    public void assignNewMentorToStudent(String studentID, String orgId, String mentorId, String programName);
+    public void assignNewMentorToStudent(String studentUserObjectID, String orgId, String mentorUserObjectId, String programName);
     
-    public Map<ObjectId, Mentor> findAssignedMentorForStudents(List<Student> studentList);
+    public Map<Student, Mentor> findSignedUpStudentsAndAssignedMentors();
 
 }

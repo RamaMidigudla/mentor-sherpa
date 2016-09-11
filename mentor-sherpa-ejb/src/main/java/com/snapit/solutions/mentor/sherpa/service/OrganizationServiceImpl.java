@@ -92,8 +92,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void assignNewMentorToStudent(String studentID, String orgId, String mentorId, String programName) {
-        studentDAO.assignNewMentorToStudent(studentID, orgId, mentorId, programName);
+    public void assignNewMentorToStudent(String studentUserObjectID, String orgId, String mentorUserObjectID, String programName) {
+        studentDAO.assignNewMentorToStudent(studentUserObjectID, orgId, mentorUserObjectID, programName);
     }
 
     @Override
@@ -102,22 +102,25 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
     
     @Override
-    public Map<ObjectId, Mentor> findAssignedMentorForStudents(List<Student> studentList)
+    public Map<Student, Mentor> findSignedUpStudentsAndAssignedMentors()
     {
-        Map<ObjectId ,List<AssignedMentor>> studentToAssignedMentorMap = new HashMap();
-        for(Student student : studentList){
+       Map<Student, Mentor> studentMentorMap = new HashMap();
+       List<Student> studentList = studentDAO.findAll();
+       for(Student student : studentList){
            if(!student.getAssignedMentors().isEmpty()){
-           studentToAssignedMentorMap.put(student.getId(), student.getAssignedMentors());
+               for(AssignedMentor assignedMentor : student.getAssignedMentors()){
+                   List<Mentor> mentors = mentorDAO.findMentorsByUserObjectIds(
+                           CommonServiceUtils.createHashSet(assignedMentor.getMentorUserObjectId().toString()));
+                   for(Mentor mentor : mentors){
+                      studentMentorMap.put(student, mentor);
+                   }
+               }
            }
-        }
-        Map<ObjectId, Mentor> studentToMentorMap = new HashMap();
-        for (Map.Entry<ObjectId ,List<AssignedMentor>> entry : studentToAssignedMentorMap.entrySet()) {
-          for(AssignedMentor assignedMentor : entry.getValue()){
-             studentToMentorMap.put(entry.getKey(), mentorDAO.findById(assignedMentor.getMentorId().toString()));
-          }
-        }
-        return studentToMentorMap;
+           else{
+             studentMentorMap.put(student, new Mentor());
+           }    
+       }  
+        return studentMentorMap;   
     }
-    
-    
+
 }
