@@ -70,6 +70,13 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
     }
 
     @Override
+    public Student findStudentByUserObjectId(String studentUserObjectIds) {
+        Query<Student> query = getDatastore().createQuery(Student.class);
+        query.field("userObjectId").equal(DaoUtils.createObjectId(studentUserObjectIds));
+        return query.get();
+    }
+
+    @Override
     public void removeAssignedMentor(AssignedMentor assignedMentor,String studentUserObjectId) {    
         UpdateOperations<Student> ops = 
                 getDatastore().createUpdateOperations(Student.class).removeAll("assignedMentors", assignedMentor);
