@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
-import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import java.util.ArrayList;
 import java.util.Set;
 import org.mongodb.morphia.query.Query;
@@ -64,8 +63,8 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
     }
 
     @Override
-    public List<Mentor> findMentorsByUserObjectIds(Set<String> studentUserObjectIds) {
-        Query<Mentor> query = getDatastore().createQuery(Mentor.class);
+    public List<Student> findStudentByUserObjectIds(Set<String> studentUserObjectIds) {
+        Query<Student> query = getDatastore().createQuery(Student.class);
         query.field("userObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(studentUserObjectIds));
         return query.asList();
     }
@@ -76,5 +75,13 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
                 getDatastore().createUpdateOperations(Student.class).removeAll("assignedMentors", assignedMentor);
 	getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
                 equal(DaoUtils.createObjectId(studentUserObjectId)), ops);
+    }
+    
+    @Override
+    public List<Student> retrieveStudentsWithAssignedMentor(Set<String> mentorObjectIdSet)
+    {
+       Query<Student> query = getDatastore().createQuery(Student.class);
+       query.field("asignedMentors.mentorUserObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(mentorObjectIdSet)).disableValidation();
+       return query.asList(); 
     }
 }
