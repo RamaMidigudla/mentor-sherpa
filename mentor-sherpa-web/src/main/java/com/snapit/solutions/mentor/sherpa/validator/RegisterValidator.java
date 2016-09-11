@@ -62,7 +62,7 @@ public class RegisterValidator implements Validator {
         {
           errors.rejectValue("state", "registerForm.state.invalid");  
         }
-        if(!registerForm.getZipCode().matches(" ^\\d{5}$"))
+        if(!registerForm.getZipCode().matches("^[0-9]{5}(?:-[0-9]{4})?$"))
         {
           errors.rejectValue("zipCode", "registerForm.zipCode.invalid");  
         }
