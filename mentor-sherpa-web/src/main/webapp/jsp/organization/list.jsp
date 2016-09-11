@@ -40,7 +40,7 @@
                                         ${program.programName}</br>
                                     </c:forEach>
                                     </td>
-                                    <td><a href="${contextPath}/${mentorStudent}/signup/${organization.id}"><span class="label label-success">Signup</span></a></td>
+                                    <td><a href="${contextPath}/${mentorStudent}/signup/${organization.id}"><span class="btn btn-info">Signup</span></a></td>
                                 </tr>
                             </c:forEach>
                                

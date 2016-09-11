@@ -25,4 +25,10 @@ public interface MentorAndStudentResponseDAO extends DAO<MentorAndStudentRespons
     public List<MentorAndStudentResponse> findAll();
     
     public void saveMentor(MentorAndStudentResponse mentorAndStudentResponse);
+    
+    public List<MentorAndStudentResponse> retrieveResponse(String orgId, String resourceId, String programName);
+    
+    public List<MentorAndStudentResponse> retrieveByProgram(String orgId, String programName);
+    public List<MentorAndStudentResponse> retrieveByOrg(String orgId);
+
 }

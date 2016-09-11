@@ -13,6 +13,7 @@ import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
+import com.snapit.solutions.mentor.sherpa.model.StudentList;
 import com.snapit.solutions.mentor.sherpa.model.TestModel;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
@@ -57,6 +58,7 @@ public class OrganizationController {
         redirectAttr.addFlashAttribute("selectedProgramName", programSignupForm.getSelectedProgramName());
         return "redirect:/organization/student/list";
     }
+
     @RequestMapping(value = "/programs/add", method = RequestMethod.GET)
     public ModelAndView addPrograms(Model model) {
         return new ModelAndView("");
@@ -69,15 +71,33 @@ public class OrganizationController {
     }   
         
     @RequestMapping(value = "/mentor/list", method = RequestMethod.GET)
-    public ModelAndView showMentorList(Model model) {
-        List<Mentor> mentorList = mentorService.findall();
-        model.addAttribute(mentorList);
-        return new ModelAndView("mentorList");
+    public String showMentorList(Model model) {
+        List<Mentor> mentorList = mentorService.getAssignedMentorList(mentorService.findall());
+        List<Mentor> availableMentorList = mentorService.getUnassignedMentorList();
+        model.addAttribute("mentorList", mentorList);
+        model.addAttribute("availableMentorList", availableMentorList);
+        return "mentorList";
     }
     
     @RequestMapping(value = "/student/list", method = RequestMethod.GET)
     public ModelAndView showStudentList(@ModelAttribute String selectedProgramName, Model model) {
-        List<Student> studentList = studentService.findall();
+        Map<String, List<Student>> allStudents = studentService.findAllByOrg(getOrganizationId());
+        StudentList studentList = new StudentList();
+        if (allStudents != null && !allStudents.isEmpty()) {
+            for(String programName : allStudents.keySet()) {
+                List<Student> programStudentList = allStudents.get(programName);
+                Map<Student, Mentor> registeredStudentList = organizationService.findSignedUpStudentsAndAssignedMentors(programStudentList);
+                if (studentList.getRegisteredStudentList().get(programName) != null) {
+                    studentList.getRegisteredStudentList().get(programName).putAll(registeredStudentList);
+                } else {
+                    studentList.getRegisteredStudentList().put(programName, registeredStudentList);
+                }
+            }
+        }
+        List<Student> unSignedUpStudents = organizationService.findUnSignedUpStudents(studentService.findall());
+        if (unSignedUpStudents != null) {
+            studentList.setUnRegisteredStudents(unSignedUpStudents);
+        }
         model.addAttribute(selectedProgramName);
         model.addAttribute(studentList);
         return new ModelAndView("studentList");

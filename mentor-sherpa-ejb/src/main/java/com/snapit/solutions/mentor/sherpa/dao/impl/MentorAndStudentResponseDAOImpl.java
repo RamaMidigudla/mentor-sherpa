@@ -38,9 +38,33 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
     @Override
     public List<MentorAndStudentResponse> retrieveMentorsResponsebyOrgAndProgram(String orgId, String programName, String childId) {
          Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
+         query.field("orgId").equal(DaoUtils.createObjectId(orgId)).
+                and(query.criteria("programName").hasThisOne(programName).
+                and(query.criteria("mentorOrStudentId").notEqual(DaoUtils.createObjectId(childId))));
+        return query.asList();
+    }
+
+    @Override
+    public List<MentorAndStudentResponse> retrieveResponse(String orgId, String resourceId, String programName) {
+         Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
          query.field("orgId").equal(new ObjectId(orgId)).
                 and(query.criteria("programName").endsWithIgnoreCase(programName).
-                and(query.criteria("mentorOrStudentId").notEqual(new ObjectId(childId))));
+                and(query.criteria("mentorOrStudentId").equal(new ObjectId(resourceId))));
+        return query.asList();
+    }
+
+    @Override
+    public List<MentorAndStudentResponse> retrieveByProgram(String orgId, String programName) {
+         Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
+         query.field("orgId").equal(new ObjectId(orgId)).
+                and(query.criteria("programName").endsWithIgnoreCase(programName));
+        return query.asList();
+    }
+
+    @Override
+    public List<MentorAndStudentResponse> retrieveByOrg(String orgId) {
+         Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
+         query.field("orgId").equal(new ObjectId(orgId));
         return query.asList();
     }
 

@@ -100,7 +100,11 @@ public class MentorServiceImpl implements MentorService {
         
         List<Student> studentList = new ArrayList();
         for(String mentorId : mentorIdSet){
-            studentList.add(studentDAO.retrieveStudentsWithAssignedMentor(mentorId));
+            Student student = null;
+            student = studentDAO.retrieveStudentsWithAssignedMentor(mentorId);
+            if (student != null) {
+                studentList.add(student);
+            }
         }   
         List<Mentor> assignedMentorList = new ArrayList();
         Set<ObjectId> assignedMentorIdSet = new HashSet();

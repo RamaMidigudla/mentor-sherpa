@@ -38,7 +38,7 @@
               <li><a href="${pageContext.request.contextPath}/organization/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
           </ul>
         </li>
-        <li class="treeview">
+<!--        <li class="treeview">
           <a href="#programnav">
             <i class="fa fa-users"></i>
             <span>Programs</span>
@@ -47,7 +47,7 @@
           <ul class="treeview-menu">
               <li><a href="${pageContext.request.contextPath}/organization/programs/list"><i class="fa fa-circle-o"></i> Match Mentors</a></li>
           </ul>
-        </li>
+        </li>-->
         </sec:authorize>
         <%-- MENTOR Navigation --%>
         <sec:authorize access="hasRole('MENTOR')">

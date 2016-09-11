@@ -9,6 +9,7 @@ import com.snapit.solutions.mentor.sherpa.entity.SignedupOrganization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -23,4 +24,7 @@ public interface StudentService {
     public Student findById(String id);
 
     public List<QuestionOptions> getQuestionsForStudentToAnswer(SignedupOrganization InterestedOrganizations);
+    
+    public List<Student> findAllByProgramName(String orgId, String programName);
+    public Map<String, List<Student>>  findAllByOrg(String orgId);
 }

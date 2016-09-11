@@ -8,6 +8,7 @@ package com.snapit.solutions.mentor.sherpa.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
@@ -132,4 +133,71 @@ public class Student implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }  
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.userObjectId);
+        hash = 53 * hash + Objects.hashCode(this.assignedMentors);
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + this.age;
+        hash = 53 * hash + Objects.hashCode(this.gender);
+        hash = 53 * hash + Objects.hashCode(this.education);
+        hash = 53 * hash + Objects.hashCode(this.address);
+        hash = 53 * hash + Objects.hashCode(this.interestedOrganizations);
+        hash = 53 * hash + Objects.hashCode(this.interests);
+        hash = 53 * hash + Objects.hashCode(this.imageName);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        if (this.age != other.age) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.gender, other.gender)) {
+            return false;
+        }
+        if (!Objects.equals(this.education, other.education)) {
+            return false;
+        }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.imageName, other.imageName)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.userObjectId, other.userObjectId)) {
+            return false;
+        }
+        if (!Objects.equals(this.assignedMentors, other.assignedMentors)) {
+            return false;
+        }
+        if (!Objects.equals(this.interestedOrganizations, other.interestedOrganizations)) {
+            return false;
+        }
+        if (!Objects.equals(this.interests, other.interests)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

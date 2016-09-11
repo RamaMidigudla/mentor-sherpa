@@ -23,25 +23,27 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:if test="${not empty mentorList}">
                             <c:forEach items="${mentorList}" var="mentor">
                                 <tr>
                                     <td><a href="${contextPath}/organization/mentor/${mentor.name}">${mentor.name}</a></td>
                                     <td>${mentor.age}</td>
                                     <td>${mentor.gender}</td>
-                                    <td><span class="label label-success">Available</span></td>
+                                    <td><span class="label label-success">Assigned</span></td>
                                 </tr>
                             </c:forEach>
-                               
-                            </tbody>
-                            <tfoot>
+                             </c:if>
+                            <c:if test="${not empty availableMentorList}">
+                             <c:forEach items="${availableMentorList}" var="availableMentor">
                                 <tr>
-                                    <th>Mentor Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Education</th>
-                                    <th>Availability</th>
+                                    <td><a href="${contextPath}/organization/mentor/${availableMentor.name}">${availableMentor.name}</a></td>
+                                    <td>${availableMentor.age}</td>
+                                    <td>${availableMentor.gender}</td>
+                                    <td><span class="label label-info">Available</span></td>
                                 </tr>
-                            </tfoot>
+                            </c:forEach>
+                             </c:if>                              
+                            </tbody>
                         </table>
                     </div>
                     <!-- /.box-body -->

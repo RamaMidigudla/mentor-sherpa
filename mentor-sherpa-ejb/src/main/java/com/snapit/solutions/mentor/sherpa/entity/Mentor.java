@@ -8,6 +8,7 @@ package com.snapit.solutions.mentor.sherpa.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
@@ -145,4 +146,75 @@ public class Mentor implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.userObjectId);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.title);
+        hash = 59 * hash + this.age;
+        hash = 59 * hash + Objects.hashCode(this.gender);
+        hash = 59 * hash + Objects.hashCode(this.education);
+        hash = 59 * hash + Objects.hashCode(this.address);
+        hash = 59 * hash + Objects.hashCode(this.signedupOrganizations);
+        hash = 59 * hash + Objects.hashCode(this.interests);
+        hash = 59 * hash + Objects.hashCode(this.imageName);
+        hash = 59 * hash + Objects.hashCode(this.mentorQuestionAndResponses);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Mentor other = (Mentor) obj;
+        if (this.age != other.age) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.gender, other.gender)) {
+            return false;
+        }
+        if (!Objects.equals(this.education, other.education)) {
+            return false;
+        }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.imageName, other.imageName)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.userObjectId, other.userObjectId)) {
+            return false;
+        }
+        if (!Objects.equals(this.signedupOrganizations, other.signedupOrganizations)) {
+            return false;
+        }
+        if (!Objects.equals(this.interests, other.interests)) {
+            return false;
+        }
+        if (!Objects.equals(this.mentorQuestionAndResponses, other.mentorQuestionAndResponses)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

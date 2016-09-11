@@ -12,11 +12,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mentor Sherpa</title>
     </head>
-    <c:if test="${not empty infoMessage}">
+    <c:if test="${not empty successMessage}">
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Alert!</h4>
-            <c:out value="${infoMessage}" />
+            <h3><i class="icon fa fa-check"></i> Success!</h3>
+            <span class="info-box-content"><c:out value="${successMessage}" /></span>
+        </div>
+    </c:if>
+    <c:if test="${not empty infoMessage}">
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h3><i class="icon fa fa-check"></i> Information!</h3>
+            <span class="info-box-content"><c:out value="${infoMessage}" /></span>
         </div>
     </c:if>
      <h2>Welcome! Select an activity from Main Menu.</h2>

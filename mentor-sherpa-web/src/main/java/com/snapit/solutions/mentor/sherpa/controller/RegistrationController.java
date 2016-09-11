@@ -110,7 +110,8 @@ public class RegistrationController {
         mailSender.send(email);
             return "redirect:/login";
         } else {
-            result.reject("Oops! that email already exists. Try logging in!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Oops! that email already exists. Try logging in!");
+//            result.reject("Oops! that email already exists. Try logging in!");
         }
         return "register";
     }

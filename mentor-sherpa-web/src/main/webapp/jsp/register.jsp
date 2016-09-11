@@ -119,7 +119,7 @@
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="zipCode" class="form-control" name="zipCode" placeholder="5 digits">
+                                        <input type="zipCode" class="form-control" name="zipCode" placeholder="Zip Code 5 digits">
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
@@ -216,7 +216,7 @@
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="zipCode" class="form-control" name="zipCode" placeholder="5 digits">
+                                        <input type="zipCode" class="form-control" name="zipCode" placeholder="Zip Code 5 digits">
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">

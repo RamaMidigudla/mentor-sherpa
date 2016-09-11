@@ -17,12 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
-import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import junit.framework.Assert;
 import org.bson.types.ObjectId;
+import org.junit.Assert;
 
 
 /**
@@ -72,15 +71,23 @@ public class OrganizationDaoTest {
     @Test
     public void hello() {      
        Set<ObjectId> mentorIds = new HashSet<>();
-        mentorIds.add(new ObjectId("574a265d0243e21a831d66e5"));
-        mentorIds.add(new ObjectId("5781d0253008228a61fdc345"));
+//        mentorIds.add(new ObjectId("574a265d0243e21a831d66e5"));
+//        mentorIds.add(new ObjectId("5781d0253008228a61fdc345"));
         
 //        Set<String> mentorIds = new HashSet<>();
 //        mentorIds.add("574a265d0243e21a831d66e5");
 //        mentorIds.add("5781d0253008228a61fdc345");
      
-        Mentor mentors = mentorDAO.findById(new ObjectId("574a265d0243e21a831d66e5").toHexString());
-        Assert.assertNotNull(mentors);
+//        Mentor mentors = mentorDAO.findById(new ObjectId("574a265d0243e21a831d66e5").toHexString());
+//        Assert.assertNotNull(mentors);
+
+ Student student = childDAO.findStudentByUserObjectId("57b783d4253a0c9c03f9cc0e");
+ Assert.assertNull(student);
+ 
+
+
+        
+        
 
     }
    

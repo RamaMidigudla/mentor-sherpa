@@ -27,7 +27,7 @@ public class MentorAndStudentResponseServiceImpl implements MentorAndStudentResp
 
     @Override
     public boolean isResponseCaptured(String orgId, String resourceId, String programName) {
-         List<MentorAndStudentResponse> list = responseDao.retrieveMentorsResponsebyOrgAndProgram(orgId, programName, resourceId);         
+         List<MentorAndStudentResponse> list = responseDao.retrieveResponse(orgId, resourceId, programName);         
          return ((list != null || !list.isEmpty()) && list.size() > 0);         
     }
 }

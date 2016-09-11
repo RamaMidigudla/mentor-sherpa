@@ -37,7 +37,7 @@ public class RegisterForm {
     private String state;
     @Size (min=2,max=50)
     private String city;
-    @Size (min=2,max=5)
+    @Size (min=5,max=5)
     private String zipCode;
     
     

@@ -113,7 +113,7 @@ public class OrganizationServiceImpl implements OrganizationService {
        List<Student> signedUpStudents = getSignedUpStudents(fullStudentList, unSignedUpStudents);
        
        for(Student student : signedUpStudents){
-           if(!student.getAssignedMentors().isEmpty()){
+           if(student.getAssignedMentors() != null && !student.getAssignedMentors().isEmpty()){
                for(AssignedMentor assignedMentor : student.getAssignedMentors()){
                    Mentor mentor = mentorDAO.findMentorByUserObjectId(
                            assignedMentor.getMentorUserObjectId().toString());
@@ -121,7 +121,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                }
            }
            else{
-             studentMentorMap.put(student, new Mentor());
+             studentMentorMap.put(student, null);
            }    
        }  
         return studentMentorMap;   
