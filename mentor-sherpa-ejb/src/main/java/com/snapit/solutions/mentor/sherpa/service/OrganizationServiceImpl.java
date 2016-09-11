@@ -6,11 +6,13 @@ package com.snapit.solutions.mentor.sherpa.service;
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
+import com.snapit.solutions.mentor.sherpa.dao.QuestionOptionsDAO;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
+import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import java.util.ArrayList;
@@ -41,6 +43,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
     StudentDAO studentDAO;
     
+    @Autowired
+    QuestionOptionsDAO questionOptionsDAO;
+    
 
     @Override
     public List<Organization> listAllOrganizations() {
@@ -64,7 +69,15 @@ public class OrganizationServiceImpl implements OrganizationService {
          List<MentorAndStudentResponse> mentorResponseList = mentorAndStudentResponseDAO.
                                                                 retrieveMentorsResponsebyOrgAndProgram(orgId, programName, studentId);
          
-         Map<ObjectId, Integer> mentorToMatchPercentageMap = MatchingServiceImpl.match(studentResponse, mentorResponseList);
+         List<QuestionOptions> studentExecQuestions = questionOptionsDAO.retrieveQuestionsBasedOnExclusion(true, "student");
+         
+         List<QuestionOptions> mentorExecQuestions = questionOptionsDAO.retrieveQuestionsBasedOnExclusion(true, "mentor");
+         
+         
+         Map<ObjectId, Integer> mentorToMatchPercentageMap = MatchingServiceImpl.match(studentResponse, 
+                                                                                    mentorResponseList,
+                                                                                    studentExecQuestions,
+                                                                                    mentorExecQuestions);
          
          Set<ObjectId> mentorIds = mentorToMatchPercentageMap.keySet();
          

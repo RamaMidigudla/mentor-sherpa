@@ -40,7 +40,7 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
          Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
          query.field("orgId").equal(new ObjectId(orgId)).
                 and(query.criteria("programName").endsWithIgnoreCase(programName).
-                and(query.criteria("mentorOrStudentId").equal(new ObjectId(childId))));
+                and(query.criteria("mentorOrStudentId").notEqual(new ObjectId(childId))));
         return query.asList();
     }
 

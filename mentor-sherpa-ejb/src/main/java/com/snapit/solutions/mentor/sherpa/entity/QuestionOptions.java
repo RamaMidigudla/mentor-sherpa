@@ -7,7 +7,6 @@ package com.snapit.solutions.mentor.sherpa.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
@@ -37,6 +36,8 @@ public class QuestionOptions implements Serializable {
     private ObjectId orgId;
 
     private String questionCategory;
+    
+    private boolean exculdeInMatch;
     
     private int categoryOrder;
     
@@ -112,6 +113,12 @@ public class QuestionOptions implements Serializable {
     public void setProgramName(String programName) {
         this.programName = programName;
     }
-    
-    
+
+    public boolean isExculdeInMatch() {
+        return exculdeInMatch;
+    }
+
+    public void setExculdeInMatch(boolean exculdeInMatch) {
+        this.exculdeInMatch = exculdeInMatch;
+    } 
 }

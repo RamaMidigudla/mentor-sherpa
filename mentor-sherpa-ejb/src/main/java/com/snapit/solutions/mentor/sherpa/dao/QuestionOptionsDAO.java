@@ -30,4 +30,6 @@ public interface QuestionOptionsDAO extends DAO<QuestionOptions, ObjectId> {
     //TODO use this to retrevie questions for each category to display
     public List<QuestionOptions> retrieveRequiredQuestions(String orgId, String programName,String questionFor,String questionCategory);
     
+    public List<QuestionOptions> retrieveQuestionsBasedOnExclusion(boolean isExcluded, String questionFor);
+    
 }

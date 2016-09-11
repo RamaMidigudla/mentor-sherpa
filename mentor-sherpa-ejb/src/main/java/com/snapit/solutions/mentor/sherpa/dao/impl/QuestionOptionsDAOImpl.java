@@ -81,4 +81,11 @@ public class QuestionOptionsDAOImpl extends BasicDAO<QuestionOptions, ObjectId> 
         return query.asList();
     }
     
+    @Override
+    public List<QuestionOptions> retrieveQuestionsBasedOnExclusion(boolean isExcluded, String questionFor) {
+        Query<QuestionOptions> query = getDatastore().createQuery(QuestionOptions.class);
+        query.field("questionFor").equal(questionFor).
+                and(query.criteria("exculdeInMatch").equal(isExcluded));
+        return query.asList();
+    }   
 }
