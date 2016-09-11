@@ -7,6 +7,7 @@ package com.snapit.solutions.mentor.sherpa.service;
 
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +24,10 @@ public class MentorAndStudentResponseServiceImpl implements MentorAndStudentResp
     public void saveResponses(MentorAndStudentResponse mentorAndStudentResponse) {
         responseDao.saveMentor(mentorAndStudentResponse);
     }    
+
+    @Override
+    public boolean isResponseCaptured(String orgId, String resourceId, String programName) {
+         List<MentorAndStudentResponse> list = responseDao.retrieveMentorsResponsebyOrgAndProgram(orgId, programName, resourceId);         
+         return ((list != null || !list.isEmpty()) && list.size() > 0);         
+    }
 }

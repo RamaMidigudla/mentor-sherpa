@@ -106,7 +106,13 @@ public class StudentController {
     }
     
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
-    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
+    public String showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttributes) {
+        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean alreadySignedUp = mentorAndStudentResponseService.isResponseCaptured(programSignupForm.getOrganizationId(), activeUser.getUserId(), programSignupForm.getSelectedProgramName());
+        if (alreadySignedUp) {
+            redirectAttributes.addFlashAttribute("infoMessage", "You have already Signed up for the program - " + programSignupForm.getSelectedProgramName());
+            return "redirect:/";
+        }
         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
         List<QuestionOptions> questionsList = new ArrayList<>();
         questionsList.addAll(questionOptionsService.getStudentQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
@@ -124,7 +130,7 @@ public class StudentController {
         }
         model.addAttribute(organization);
         model.addAttribute("programSignupForm", programSignupForm);
-        return new ModelAndView("answerQuestions");
+        return "answerQuestions";
     }
 
     private void getQuestionOptionResponse(QuestionOptions question, List<QuestionOptionsAndResponses> questionOptionsAndResponses) {

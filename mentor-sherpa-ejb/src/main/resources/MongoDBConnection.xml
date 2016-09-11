@@ -17,8 +17,8 @@
 ">
     <context:annotation-config/>
     <bean id="connectionString" class="com.mongodb.MongoClientURI"> 
-        <!--<constructor-arg value="mongodb://ms-admin:msPass@localhost:27017/mentor-sherpa-db"/>--> 
-        <constructor-arg value="mongodb://ms-admin:msPass@ec2-54-167-236-170.compute-1.amazonaws.com:27017/mentor-sherpa-db"/>
+        <constructor-arg value="mongodb://ms-admin:msPass@localhost:27017/mentor-sherpa-db"/> 
+        <!--<constructor-arg value="mongodb://ms-admin:msPass@ec2-54-167-236-170.compute-1.amazonaws.com:27017/mentor-sherpa-db"/>-->
     </bean> 
     <bean id="mongoClient" class="com.mongodb.MongoClient"> 
         <constructor-arg ref="connectionString"/> 

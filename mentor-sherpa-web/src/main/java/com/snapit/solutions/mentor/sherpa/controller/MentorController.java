@@ -109,58 +109,15 @@ public class MentorController {
      * @param programSignupForm
      * @param model
      * @return
-     */
-//    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
-//    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
-//        Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
-//        if (organization != null && organization.getPrograms() != null) { //this should never happen. throw exception
-//            List<ObjectId> questionIdList = new ArrayList<>();
-//            List<Program> programList = organization.getPrograms();
-//            for (Program program : programList) {
-//                if (program.getProgramName().trim().equalsIgnoreCase(programSignupForm.getSelectedProgramName()) && program.getQuestionsIdList() != null) {
-//                    questionIdList.addAll(program.getQuestionsIdList());
-//                }
-//            }
-//            programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "mentor"));
-//            model.addAttribute(organization);
-//            model.addAttribute(programSignupForm);
-//        programSignupForm.setQuestionsList(questionOptionsService.findQuestionOptionsByQuestionFor(CommonServiceUtils.createSetOfStringIds(questionIdList), "mentor"));
-//        model.addAttribute(organization);
-//        model.addAttribute(programSignupForm);
-//        }
-//        return new ModelAndView("answerQuestions");
-//    }
-//    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
-//    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
-//        ProgramSignupForm newProgramSignupForm = new ProgramSignupForm();
-//        newProgramSignupForm.setOrganizationId(programSignupForm.getOrganizationId());
-//        newProgramSignupForm.setSelectedProgramName(programSignupForm.getSelectedProgramName());
-//         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
-//        List<QuestionOptions> questionsList = new ArrayList<>();
-//        questionsList.addAll(questionOptionsService.getMentorQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
-//        newProgramSignupForm.setQuestionsList(questionsList);
-//        for (QuestionOptions question : newProgramSignupForm.getQuestionsList()) {
-//            if (null == newProgramSignupForm.getUserSelection().get(question.getQuestionCategory())) {
-//                List<QuestionOptions> tempQuestionsList = new ArrayList<>();
-//                tempQuestionsList.add(question);
-//                newProgramSignupForm.getUserSelection().put(question.getQuestionCategory(), tempQuestionsList);
-//                // for JSTL
-//                List<QuestionResponse> qr = new ArrayList<>();
-//                newProgramSignupForm.getQuestionResponseMap().put(question.getQuestionCategory(), qr);
-//            } else {
-//                List<QuestionOptions> tempQuestionsList = newProgramSignupForm.getUserSelection().get(question.getQuestionCategory());
-//                tempQuestionsList.add(question);
-//                //for JSTL
-//                List<QuestionResponse> qr = newProgramSignupForm.getQuestionResponseMap().get(question.getQuestionCategory());
-//                qr.add(new QuestionResponse());
-//            }
-//        }
-//        model.addAttribute(organization);
-//        model.addAttribute("programSignupForm", newProgramSignupForm);
-//        return new ModelAndView("answerQuestions");
-//    }
+     */    
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
-    public ModelAndView showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model) {
+    public String showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttributes) {
+        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean alreadySignedUp = mentorAndStudentResponseService.isResponseCaptured(programSignupForm.getOrganizationId(), activeUser.getUserId(), programSignupForm.getSelectedProgramName());
+        if (alreadySignedUp) {
+            redirectAttributes.addFlashAttribute("infoMessage", "You have already Signed up for the program - " + programSignupForm.getSelectedProgramName());
+            return "redirect:/";
+        }
         Organization organization = organizationService.findOrganziationById(programSignupForm.getOrganizationId());
         List<QuestionOptions> questionsList = new ArrayList<>();
         questionsList.addAll(questionOptionsService.getMentorQuestions(programSignupForm.getOrganizationId(), programSignupForm.getSelectedProgramName()));
@@ -178,7 +135,7 @@ public class MentorController {
         }
         model.addAttribute(organization);
         model.addAttribute("programSignupForm", programSignupForm);
-        return new ModelAndView("answerQuestions");
+        return "answerQuestions";
     }
 
     private void getQuestionOptionResponse(QuestionOptions question, List<QuestionOptionsAndResponses> questionOptionsAndResponses) {
