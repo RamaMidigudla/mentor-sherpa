@@ -13,6 +13,7 @@ import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,20 +55,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization findOrganziationByUserId(String userId) {
         return organizationDao.findByUserId(userId);
 }
-//    @Override
-//    public List<String> getPrograms(String organizationId) {
-//        List<String> programNames = new ArrayList<>();
-//        Organization organization = organizationDao.findByUserId(organizationId);
-//        if (organizationId != null) {
-//            List<Program> programs = organization.getPrograms();
-//            if (programs != null && !programs.isEmpty()) {
-//                for (Program program : programs) {
-//                    programNames.add(program.getProgramName());
-//                }
-//            }
-//        }
-//        return programNames;
-//    }
+    
     @Override
     public Map<Mentor, Integer> getMatchedMentors(String studentId, String orgId, String programName) {
        
@@ -102,11 +90,15 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
     
     @Override
-    public Map<Student, Mentor> findSignedUpStudentsAndAssignedMentors()
+    public Map<Student, Mentor> findSignedUpStudentsAndAssignedMentors(List<Student> fullStudentList)
     {
        Map<Student, Mentor> studentMentorMap = new HashMap();
-       List<Student> studentList = studentDAO.findAll();
-       for(Student student : studentList){
+       
+       List<Student> unSignedUpStudents = findUnSignedUpStudents(fullStudentList);
+       
+       List<Student> signedUpStudents = getSignedUpStudents(fullStudentList, unSignedUpStudents);
+       
+       for(Student student : signedUpStudents){
            if(!student.getAssignedMentors().isEmpty()){
                for(AssignedMentor assignedMentor : student.getAssignedMentors()){
                    List<Mentor> mentors = mentorDAO.findMentorsByUserObjectIds(
@@ -122,5 +114,30 @@ public class OrganizationServiceImpl implements OrganizationService {
        }  
         return studentMentorMap;   
     }
+    
+    @Override
+    public List<Student> findUnSignedUpStudents(List<Student> fullStudentList){    
+        List<Student> unSignedUpStudents = new ArrayList();
+        for(Student student : fullStudentList){
+           MentorAndStudentResponse studentResponse = mentorAndStudentResponseDAO.
+                   retrieveByMentorStudentId(student.getUserObjectId().toString()); 
+           if(studentResponse == null){
+              unSignedUpStudents.add(student);
+           }
+        }
+        return unSignedUpStudents;
+    }
 
+    private List<Student> getSignedUpStudents(List<Student> fullStudentList,List<Student> unSignedUpStudents)
+    {  
+        List<Student> signedUpStudents = new ArrayList();     
+        for(Student student : fullStudentList){
+           if(!unSignedUpStudents.contains(student)){
+               signedUpStudents.add(student);
+           } 
+       }
+         return signedUpStudents;
+    }   
 }
+
+    

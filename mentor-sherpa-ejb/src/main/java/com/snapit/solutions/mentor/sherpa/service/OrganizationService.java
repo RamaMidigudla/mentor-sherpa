@@ -8,7 +8,6 @@ import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import java.util.List;
 import java.util.Map;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -28,6 +27,8 @@ public interface OrganizationService {
 
     public void assignNewMentorToStudent(String studentUserObjectID, String orgId, String mentorUserObjectId, String programName);
     
-    public Map<Student, Mentor> findSignedUpStudentsAndAssignedMentors();
-
+    public List<Student> findUnSignedUpStudents(List<Student> fullStudentList);
+  
+    public Map<Student, Mentor> findSignedUpStudentsAndAssignedMentors(List<Student> fullStudentList);
+    
 }

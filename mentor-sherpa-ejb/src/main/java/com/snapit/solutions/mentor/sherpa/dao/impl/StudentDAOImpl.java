@@ -16,6 +16,7 @@ import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import java.util.ArrayList;
 import java.util.Set;
 import org.mongodb.morphia.query.Query;
@@ -69,5 +70,14 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
        query.field("userObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(studentUserObjectIds));
        return query.asList();
     }
+    
+//    @Override
+//    public void removeAssignedMentor(String studentUserObjectId,String assignedMentorUserObjectId) {
+//       UpdateOperations<Student> ops = 
+//                getDatastore().createUpdateOperations(Student.class).removeAll("assignedMentors.mentorUserObjectId",assignedMentorUserObjectId);
+//	getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
+//                equal(DaoUtils.createObjectId(studentUserObjectId)), ops);
+//    }
+    
     
 }
