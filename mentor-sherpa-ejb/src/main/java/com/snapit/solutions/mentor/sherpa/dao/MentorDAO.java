@@ -55,5 +55,7 @@ public interface MentorDAO extends DAO<Mentor, ObjectId> {
     public List<Mentor> findMentorsByIds(Set<String> mentorIds);
     
     public List<Mentor> findMentorsByUserObjectIds(Set<String> mentorUserObjectIds);
+    
+    public Mentor findMentorByUserObjectId(String mentorUserObjectId);
 
 }

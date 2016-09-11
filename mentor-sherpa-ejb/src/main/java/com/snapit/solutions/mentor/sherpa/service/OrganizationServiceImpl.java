@@ -115,11 +115,9 @@ public class OrganizationServiceImpl implements OrganizationService {
        for(Student student : signedUpStudents){
            if(!student.getAssignedMentors().isEmpty()){
                for(AssignedMentor assignedMentor : student.getAssignedMentors()){
-                   List<Mentor> mentors = mentorDAO.findMentorsByUserObjectIds(
-                           CommonServiceUtils.createHashSet(assignedMentor.getMentorUserObjectId().toString()));
-                   for(Mentor mentor : mentors){
+                   Mentor mentor = mentorDAO.findMentorByUserObjectId(
+                           assignedMentor.getMentorUserObjectId().toString());
                       studentMentorMap.put(student, mentor);
-                   }
                }
            }
            else{

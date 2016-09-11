@@ -8,6 +8,7 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import java.util.List;
 import java.util.Set;
 import org.bson.types.ObjectId;
@@ -86,6 +87,15 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
         return query.asList();
     }
     
+    @Override
+    public Mentor findMentorByUserObjectId(String mentorUserObjectId) {
+        List<Mentor> mentors = findMentorsByUserObjectIds(CommonServiceUtils.createHashSet(mentorUserObjectId));
+        if(!mentors.isEmpty()){
+        return mentors.get(0);
+        }
+       else
+       return new Mentor();
+    }
     
       
 }
