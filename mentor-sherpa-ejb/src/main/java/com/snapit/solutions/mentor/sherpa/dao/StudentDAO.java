@@ -28,7 +28,7 @@ public interface StudentDAO extends DAO<Student, ObjectId> {
     
     public void removeAssignedMentor(AssignedMentor assignedMentor,String studentUserObjectId);
     
-    public List<Student> retrieveStudentsWithAssignedMentor(Set<String> mentorObjectIdSet);
+    public Student retrieveStudentsWithAssignedMentor(String mentorObjectIdSet);
 
     public Student findStudentByUserObjectId(String studentUserObjectIds);
 }

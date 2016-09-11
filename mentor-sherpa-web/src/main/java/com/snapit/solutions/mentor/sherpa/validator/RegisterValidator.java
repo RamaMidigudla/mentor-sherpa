@@ -39,9 +39,14 @@ public class RegisterValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "registerForm.firstName.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "registerForm.lastName.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId", "registerForm.emailId.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address1", "registerForm.adress1.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "city", "registerForm.city.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "state", "registerForm.state.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zipCode", "registerForm.zipCode.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "registerForm.password.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "registerForm.confPassword.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfBirth", "registerForm.dateOfBirth.empty");
+        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "registerForm.phoneNumber.empty");
         ValidationUtils.rejectIfEmpty(errors, "gender", "registerForm.gender.empty");
         
@@ -52,6 +57,16 @@ public class RegisterValidator implements Validator {
         if(!registerForm.getEmailId().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
             errors.rejectValue("emailId", "registerForm.emailId.invalid");
         }
+        if(!registerForm.getState().matches("AL|AK|AS|AZ|AR|CA|CO|CT|DE|DC|FM|FL|GA|GU|HI|ID|IL|IN|IA|KS|KY|LA|ME|MH|MD|MA|MI|MN|MS|MO|MT" +
+        "|NE|NV|NH|NJ|NM|NY|NC|ND|MP|OH|OK|OR|PW|PA|PR|RI|SC|SD|TN|TX|UT|VT|VI|VA|WA|WV|WI|WY"))
+        {
+          errors.rejectValue("state", "registerForm.state.invalid");  
+        }
+        if(!registerForm.getState().matches(" ^\\d{5}$"))
+        {
+          errors.rejectValue("zipCode", "registerForm.zipCode.invalid");  
+        }
+       
         //Business validation
         if (!password.equals(confirmPassword)) {
             errors.rejectValue("password","registerForm.password.missMatch");
