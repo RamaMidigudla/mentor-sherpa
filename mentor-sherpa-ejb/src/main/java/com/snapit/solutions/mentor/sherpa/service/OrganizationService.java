@@ -31,4 +31,6 @@ public interface OrganizationService {
   
     public Map<Student, Mentor> findSignedUpStudentsAndAssignedMentors(List<Student> fullStudentList);
     
+    public void removeAssignedMentor(String orgId, String programName, String mentorUserObjectId, String studentUserObjectId);
+    
 }

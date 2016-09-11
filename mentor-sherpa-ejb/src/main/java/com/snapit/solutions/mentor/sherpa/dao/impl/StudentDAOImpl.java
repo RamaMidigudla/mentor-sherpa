@@ -16,7 +16,6 @@ import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
-import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import java.util.ArrayList;
 import java.util.Set;
 import org.mongodb.morphia.query.Query;
@@ -49,35 +48,33 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
 
     @Override
     public void assignNewMentorToStudent(String studentUserObjectId, String orgId, String mentorUserObjectId, String programName) {
-        
+
         List<AssignedMentor> assignedMentors = new ArrayList();
         AssignedMentor assignedMentor = new AssignedMentor();
         assignedMentor.setProgramName(programName);
         assignedMentor.setOrgId(DaoUtils.createObjectId(orgId));
         assignedMentor.setMentorUserObjectId(DaoUtils.createObjectId(mentorUserObjectId));
         assignedMentors.add(assignedMentor);
-        
-        UpdateOperations<Student> ops = 
-                getDatastore().createUpdateOperations(Student.class).addAll("assignedMentors", assignedMentors, false);
-	getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
+
+        UpdateOperations<Student> ops
+                = getDatastore().createUpdateOperations(Student.class).addAll("assignedMentors", assignedMentors, false);
+        getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
                 equal(DaoUtils.createObjectId(studentUserObjectId)), ops);
-           
+
     }
 
     @Override
     public List<Mentor> findMentorsByUserObjectIds(Set<String> studentUserObjectIds) {
-       Query<Mentor> query = getDatastore().createQuery(Mentor.class);
-       query.field("userObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(studentUserObjectIds));
-       return query.asList();
+        Query<Mentor> query = getDatastore().createQuery(Mentor.class);
+        query.field("userObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(studentUserObjectIds));
+        return query.asList();
     }
-    
-//    @Override
-//    public void removeAssignedMentor(String studentUserObjectId,String assignedMentorUserObjectId) {
-//       UpdateOperations<Student> ops = 
-//                getDatastore().createUpdateOperations(Student.class).removeAll("assignedMentors.mentorUserObjectId",assignedMentorUserObjectId);
-//	getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
-//                equal(DaoUtils.createObjectId(studentUserObjectId)), ops);
-//    }
-    
-    
+
+    @Override
+    public void removeAssignedMentor(AssignedMentor assignedMentor,String studentUserObjectId) {    
+        UpdateOperations<Student> ops = 
+                getDatastore().createUpdateOperations(Student.class).removeAll("assignedMentors", assignedMentor);
+	getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
+                equal(DaoUtils.createObjectId(studentUserObjectId)), ops);
+    }
 }

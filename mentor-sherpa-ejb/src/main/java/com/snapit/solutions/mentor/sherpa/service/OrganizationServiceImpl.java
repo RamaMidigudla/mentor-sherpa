@@ -8,6 +8,7 @@ import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.dao.QuestionOptionsDAO;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
+import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
@@ -141,6 +142,15 @@ public class OrganizationServiceImpl implements OrganizationService {
         return unSignedUpStudents;
     }
 
+    @Override
+    public void removeAssignedMentor(String orgId, String programName, String mentorUserObjectId, String studentUserObjectId) {  
+        AssignedMentor assignedMentor = new AssignedMentor();
+        assignedMentor.setMentorUserObjectId(DaoUtils.createObjectId(mentorUserObjectId));
+        assignedMentor.setOrgId(DaoUtils.createObjectId(orgId));
+        assignedMentor.setProgramName(programName);
+        studentDAO.removeAssignedMentor(assignedMentor, studentUserObjectId);
+    }
+
     private List<Student> getSignedUpStudents(List<Student> fullStudentList,List<Student> unSignedUpStudents)
     {  
         List<Student> signedUpStudents = new ArrayList();     
@@ -150,7 +160,7 @@ public class OrganizationServiceImpl implements OrganizationService {
            } 
        }
          return signedUpStudents;
-    }   
+    } 
 }
 
     
