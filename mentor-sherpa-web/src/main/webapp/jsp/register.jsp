@@ -106,9 +106,25 @@
                                             </div>
                                         </div>
                                     </div>
+                                     <div class="form-group has-feedback">
+                                        <input type="address1" class="form-control" name="address1" placeholder="E.g. 2125 Chestnut St Apt 1">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input type="city" class="form-control" name="city" placeholder="City/Town">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
+                                     <div class="form-group has-feedback">
+                                        <input type="state" class="form-control" name="state" placeholder="E.g. CA/WA">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input type="zipCode" class="form-control" name="zipCode" placeholder="5 digits">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
                                     <div class="form-group has-feedback">
                                         <input type="email" class="form-control" name="emailId" placeholder="Email">
-                                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                        <span class="glyphicon glyphicon-email form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
                                         <input type="password" class="form-control" name="password" placeholder="Password">
@@ -186,6 +202,22 @@
                                     <div class="form-group has-feedback">
                                         <input type="email" class="form-control" name="emailId" placeholder="Email">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input type="address1" class="form-control" name="address1" placeholder="E.g. 2125 Chestnut St Apt 1">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input type="city" class="form-control" name="city" placeholder="City/Town">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
+                                     <div class="form-group has-feedback">
+                                        <input type="state" class="form-control" name="state" placeholder="E.g. CA/WA">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input type="zipCode" class="form-control" name="zipCode" placeholder="5 digits">
+                                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
                                         <input type="password" class="form-control" name="password" placeholder="Password">

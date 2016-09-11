@@ -39,6 +39,8 @@ public class Mentor implements Serializable {
     
     private String education = "";
     
+    private String address = "";
+    
     private List<SignedupOrganization>  signedupOrganizations = new ArrayList<>();
     
     private List<String>  interests = new ArrayList<>();
@@ -134,5 +136,13 @@ public class Mentor implements Serializable {
 
     public void setMentorQuestionAndResponses(QuestionResponse mentorQuestionAndResponses) {
         this.mentorQuestionAndResponses = mentorQuestionAndResponses;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

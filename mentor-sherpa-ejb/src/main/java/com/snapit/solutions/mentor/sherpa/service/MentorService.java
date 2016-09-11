@@ -25,5 +25,9 @@ public interface MentorService {
     public Mentor findById(String id);
     
     public List<QuestionOptions> getQuestionsForMentorToAnswer(SignedupOrganization InterestedOrganizations);
+    
+    public List<Mentor> getUnassignedMentorList();
+    
+    public List<Mentor> getAssignedMentorList(List<Mentor> fullMentorList);
   
 }

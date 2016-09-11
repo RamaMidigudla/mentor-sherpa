@@ -78,10 +78,10 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
     }
     
     @Override
-    public List<Student> retrieveStudentsWithAssignedMentor(Set<String> mentorObjectIdSet)
-    {
+    public Student retrieveStudentsWithAssignedMentor(String mentorObjectIdSet)
+    {   
        Query<Student> query = getDatastore().createQuery(Student.class);
-       query.field("asignedMentors.mentorUserObjectId").hasAnyOf(DaoUtils.createSetOfObjectIds(mentorObjectIdSet)).disableValidation();
-       return query.asList(); 
+       query.field("assignedMentors.mentorUserObjectId").equal(DaoUtils.createObjectId(mentorObjectIdSet));
+       return query.get();
     }
 }

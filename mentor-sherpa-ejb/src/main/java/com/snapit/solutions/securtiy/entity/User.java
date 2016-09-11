@@ -36,6 +36,8 @@ public class User implements Serializable {
     
     private String phoneNumber;
     
+    private String address;
+    
     private List<String> userRole;
     
     private String imageName;
@@ -118,6 +120,14 @@ public class User implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
     
 

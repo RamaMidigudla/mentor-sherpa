@@ -46,6 +46,10 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
         user.setGender(registerForm.getGender());
         user.setDateOfBirth(registerForm.getDateOfBirth());
         user.setPhoneNumber(registerForm.getPhoneNumber());
+        user.setAddress(CommonServiceUtils.getAddress(registerForm.getAddress1(), 
+                registerForm.getCity(), 
+                registerForm.getState(), 
+                registerForm.getZipCode()));         
         if (null != registerForm.getGender()) {
             user.setImageName(registerForm.getGender().equals("male") ? "avatar5.png" : "avatar2.png");
         }
@@ -69,6 +73,7 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
                 mentor.setImageName(user.getImageName());
                 mentor.setName(user.getFirstName() + " " + user.getLastName());
                 mentor.setAge(CommonServiceUtils.calculateAge(user.getDateOfBirth()));
+                mentor.setAddress(user.getAddress());
                 mentorService.createMentor(mentor);
             } else if (role.equals("STUDENT")) {
                 Student student = new Student();
@@ -77,6 +82,7 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
                 student.setImageName(user.getImageName());
                 student.setName(user.getFirstName() + " " + user.getLastName());
                 student.setAge(CommonServiceUtils.calculateAge(user.getDateOfBirth()));
+                student.setAddress(user.getAddress());
                 studentService.createMentor(student);
             }
         }

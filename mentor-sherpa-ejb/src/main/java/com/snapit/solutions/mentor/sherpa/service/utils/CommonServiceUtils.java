@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringJoiner;
 import org.bson.types.ObjectId;
 
 /**
@@ -67,5 +68,12 @@ public class CommonServiceUtils {
        Set<T> hashSet = new HashSet();
        hashSet.add(t);
        return hashSet;   
+    }   
+    
+    public static String getAddress(String address1,String city,String state,String zipCode){
+        StringJoiner joiner = new StringJoiner(",");
+        joiner.add(address1).add(city).add(state).add(zipCode);
+        return joiner.toString();
     }
+ 
 }
