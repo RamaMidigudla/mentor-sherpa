@@ -52,6 +52,14 @@
                                 <p>${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
                             </div>
                         </c:if>
+                        <c:if test="${not empty alertMessage}">
+
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <p>${alertMessage}</p>
+                            </div>
+                        </c:if>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="form-group has-feedback">
                         <input type="text" id="email" name="email" class="form-control" placeholder="Email">

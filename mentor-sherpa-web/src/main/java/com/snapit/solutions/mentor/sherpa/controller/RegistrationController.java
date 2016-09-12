@@ -110,10 +110,10 @@ public class RegistrationController {
         mailSender.send(email);
             return "redirect:/login";
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "Oops! that email already exists. Try logging in!");
+            redirectAttributes.addFlashAttribute("alertMessage", "Oops! that email already exists. Try logging in!");
 //            result.reject("Oops! that email already exists. Try logging in!");
+            return "redirect:/login";
         }
-        return "register";
     }
     private SimpleMailMessage constructRegistrationEmail(String emailId) {
         String message = "Welcome to Mentor Sherpa and Thank you for Registering with your email-id : " + emailId + ". Please notify us immedidately if you did not request this registration.";

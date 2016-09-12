@@ -67,8 +67,9 @@ public class LoginController {
 
         User user = userService.findByUserId(userEmail);
         if (user == null) {
-            redirectAttributes.addFlashAttribute("alertMessage", "Have you registered with this email id? " + userEmail + "Please try to again.");
-            throw new UserNotFoundException();
+            redirectAttributes.addFlashAttribute("alertMessage", "Have you registered with this email id - " + userEmail + "? </br> Please try again.");
+            return "redirect:/forgot";
+//            throw new UserNotFoundException();
         }
 
         String token = UUID.randomUUID().toString();
