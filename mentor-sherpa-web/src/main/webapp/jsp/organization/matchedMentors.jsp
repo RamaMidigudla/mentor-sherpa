@@ -22,7 +22,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/user5-128x128.jpg" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/${student.imageName}" alt="User profile picture">
 
               <h3 class="profile-username text-center">${student.name}</h3>
             </div>
@@ -32,14 +32,16 @@
       </div>
 
 
-  <c:forEach  items="${testModel.match}" var="entry">  
-    <div class="row">
+      <c:choose>
+      <c:when test="${not empty testModel.match}">
+     <c:forEach  items="${testModel.match}" var="entry">  
+ <div class="row">
          <div class="col-md-3">
 
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/graham.jpeg" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/${entry.key.imageName}" alt="User profile picture">
 
               <h3 class="profile-username text-center">${entry.key.name}</h3>
             <!-- /.box-header -->
@@ -58,6 +60,12 @@
           </div>
         </div>
  </c:forEach>  
+          </c:when>
+         <c:otherwise>
+              <h3 align="center">No Mentors available.</h3>
+         </c:otherwise>
+        </c:choose>
+        
   
         
  
