@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.BasicDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
+import java.util.Set;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,12 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
     @Override
     public void saveMentor(MentorAndStudentResponse mentorAndStudentResponse) {
         getDatastore().save(mentorAndStudentResponse);
+    }
+    
+    @Override
+    public List<MentorAndStudentResponse> retrieveByMentorStudentIds(Set<String> mentorOrStudentIds) {
+        Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
+        query.field("mentorOrStudentId").hasAnyOf(DaoUtils.createSetOfObjectIds(mentorOrStudentIds));
+        return query.asList();
     }
 }

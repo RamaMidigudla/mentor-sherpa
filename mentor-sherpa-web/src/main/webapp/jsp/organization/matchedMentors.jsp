@@ -25,22 +25,6 @@
               <img class="profile-user-img img-responsive img-circle" src="/mentor-sherpa-web/themes/AdminLTE/dist/img/user5-128x128.jpg" alt="User profile picture">
 
               <h3 class="profile-username text-center">${student.name}</h3>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-              <p class="text-muted">
-                5th Grade
-              </p>
-              <strong><i class="fa fa-pencil margin-r-5"></i>Interests</strong>
-              <p>
-                <span class="label label-danger">Cooking</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-warning">Sports</span>
-              </p>
-           </div>
-            <!-- /.box-body -->
-
             </div>
             <!-- /.box-body -->
           </div>
