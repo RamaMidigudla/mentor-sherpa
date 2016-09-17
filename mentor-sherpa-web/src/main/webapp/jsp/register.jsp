@@ -107,7 +107,7 @@
                                         </div>
                                     </div>
                                      <div class="form-group has-feedback">
-                                        <input type="address1" class="form-control" name="address1" placeholder="E.g. 2125 Chestnut St Apt 1">
+                                        <input type="address1" class="form-control" name="address1" placeholder="Address E.g. 2125 Chestnut St Apt 1">
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
@@ -115,7 +115,7 @@
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                      <div class="form-group has-feedback">
-                                        <input type="state" class="form-control" name="state" placeholder="E.g. CA/WA">
+                                        <input type="state" class="form-control" name="state" placeholder="State E.g. CA/WA">
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
@@ -134,20 +134,11 @@
                                         <input type="password" class="form-control" name="confirmPassword" placeholder="Retype password">
                                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xs-8">
-                                            <div class="checkbox icheck">
-                                                <label>
-                                                    <input type="checkbox" checked="true" disabled="true"> I agree to the <a href="#">terms</a>
-                                                </label>
-                                            </div>
-                                        </div>
                                         <!-- /.col -->
-                                        <div class="col-xs-4">
+                                        <div  class="col-xs-4">
                                             <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                                         </div>
                                         <!-- /.col -->
-                                    </div>
                                 </form:form>
                                 <a href="${pageContext.request.contextPath}/login" class="text-center">I already have a membership</a>
                             </div>
@@ -200,11 +191,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="email" class="form-control" name="emailId" placeholder="Email">
-                                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                                    </div>
-                                    <div class="form-group has-feedback">
-                                        <input type="address1" class="form-control" name="address1" placeholder="E.g. 2125 Chestnut St Apt 1">
+                                        <input type="address1" class="form-control" name="address1" placeholder="Address E.g. 2125 Chestnut St Apt 1">
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
@@ -212,12 +199,16 @@
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                      <div class="form-group has-feedback">
-                                        <input type="state" class="form-control" name="state" placeholder="E.g. CA/WA">
+                                        <input type="state" class="form-control" name="state" placeholder="State E.g. CA/WA">
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
                                         <input type="zipCode" class="form-control" name="zipCode" placeholder="Zip Code 5 digits">
                                         <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input type="email" class="form-control" name="emailId" placeholder="Email">
+                                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
                                         <input type="password" class="form-control" name="password" placeholder="Password">
@@ -228,13 +219,6 @@
                                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-8">
-                                            <div class="checkbox icheck">
-                                                <label>
-                                                    <input type="checkbox" checked="true" disabled="true"> I agree to the <a href="#">terms</a>
-                                                </label>
-                                            </div>
-                                        </div>
                                         <!-- /.col -->
                                         <div class="col-xs-4">
                                             <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
