@@ -33,4 +33,8 @@ public interface OrganizationService {
     
     public void removeAssignedMentor(String orgId, String programName, String mentorUserObjectId, String studentUserObjectId);
     
+    public Map<Organization,String> findSignedUporganizationToProgramName(String userId);
+    
+    public Map<Organization,String> findUnSignedUporganizationToProgramName(String userId);
+    
 }

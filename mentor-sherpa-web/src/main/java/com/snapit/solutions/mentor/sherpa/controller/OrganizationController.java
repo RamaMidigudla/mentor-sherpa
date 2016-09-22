@@ -14,7 +14,6 @@ import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
 import com.snapit.solutions.mentor.sherpa.model.StudentList;
-import com.snapit.solutions.mentor.sherpa.model.TestModel;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,10 +120,7 @@ public class OrganizationController {
                matchResults.putAll(organizationService.getMatchedMentors(student.getUserObjectId().toString(), 
                 organization.getId().toString(),
                 organization.getPrograms().get(0).getProgramName()));
-               
-        TestModel testModel = new TestModel();
-        testModel.setMatch(matchResults);
-        model.addAttribute(testModel);
+        model.addAttribute("matchResults", matchResults);
         model.addAttribute(student);
         return new ModelAndView("matchedMentors");
     }

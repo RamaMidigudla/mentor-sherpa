@@ -20,6 +20,7 @@ public class MentorAndStudentResponseServiceImpl implements MentorAndStudentResp
 
     @Autowired 
     public MentorAndStudentResponseDAO responseDao;
+    
     @Override
     public void saveResponses(MentorAndStudentResponse mentorAndStudentResponse) {
         responseDao.saveMentor(mentorAndStudentResponse);
@@ -29,5 +30,10 @@ public class MentorAndStudentResponseServiceImpl implements MentorAndStudentResp
     public boolean isResponseCaptured(String orgId, String resourceId, String programName) {
          List<MentorAndStudentResponse> list = responseDao.retrieveResponse(orgId, resourceId, programName);         
          return ((list != null || !list.isEmpty()) && list.size() > 0);         
+    }
+    
+    @Override
+    public MentorAndStudentResponse retrieveResponse(String userId) {
+         return responseDao.retrieveByMentorStudentId(userId);
     }
 }

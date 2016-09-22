@@ -14,5 +14,6 @@ import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 public interface MentorAndStudentResponseService {
     public void saveResponses(MentorAndStudentResponse mentorAndStudentResponse);
     public boolean isResponseCaptured(String orgId, String resourceId, String programName);
+    public MentorAndStudentResponse retrieveResponse(String userId);
     
 }

@@ -27,6 +27,7 @@ public interface MentorAndStudentResponseDAO extends DAO<MentorAndStudentRespons
     
     public void saveMentor(MentorAndStudentResponse mentorAndStudentResponse);
     
+    //TODO remove will always get one response per user for org and prog name
     public List<MentorAndStudentResponse> retrieveResponse(String orgId, String resourceId, String programName);
     
     public List<MentorAndStudentResponse> retrieveByProgram(String orgId, String programName);
@@ -34,5 +35,7 @@ public interface MentorAndStudentResponseDAO extends DAO<MentorAndStudentRespons
     public List<MentorAndStudentResponse> retrieveByOrg(String orgId);
     
     public List<MentorAndStudentResponse> retrieveByMentorStudentIds(Set<String> mentorOrStudentIds);
+    
+    public MentorAndStudentResponse retrieveUserResponse(String orgId, String mentorOrStudentId, String programName);
 
 }

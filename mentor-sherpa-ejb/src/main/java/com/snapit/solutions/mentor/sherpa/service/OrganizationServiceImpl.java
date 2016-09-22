@@ -13,6 +13,7 @@ import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
+import com.snapit.solutions.mentor.sherpa.entity.Program;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
@@ -170,7 +171,40 @@ public class OrganizationServiceImpl implements OrganizationService {
            } 
        }
          return signedUpStudents;
+    }
+
+    @Override
+    public Map<Organization,String> findSignedUporganizationToProgramName(String userId) {
+        return findorganizationToProgramName(userId, true);
+    }
+    
+   @Override
+    public Map<Organization,String> findUnSignedUporganizationToProgramName(String userId) {
+        return findorganizationToProgramName(userId, false);
     } 
+    
+    
+    private Map<Organization,String> findorganizationToProgramName(String userId, boolean signedUp) {
+        Map<Organization, String> organizationToProgramName = new HashMap();
+        List<Organization> orgList = listAllOrganizations();
+        for (Organization organization : orgList) {
+            List<Program> programList = organization.getPrograms();
+            for (Program program : programList) {
+              MentorAndStudentResponse mentorAndStudentResponse =  mentorAndStudentResponseDAO.retrieveUserResponse(
+                        CommonServiceUtils.createStringId(organization.getId()),
+                        userId,
+                        program.getProgramName());
+                if (signedUp && mentorAndStudentResponse != null) {
+                    organizationToProgramName.put(organization, program.getProgramName());
+                }
+                else if(!signedUp && mentorAndStudentResponse == null) {
+                organizationToProgramName.put(organization, program.getProgramName());
+                }
+            }
+        }
+        return organizationToProgramName;
+    } 
+    
 }
 
     
