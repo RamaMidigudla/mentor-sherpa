@@ -3,6 +3,7 @@
  */
 package com.snapit.solutions.security.dao.impl;
 
+import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.security.dao.UserDAO;
 import com.snapit.solutions.securtiy.entity.User;
 import org.bson.types.ObjectId;
@@ -28,10 +29,12 @@ public class UserDAOImpl extends BasicDAO<User, ObjectId>implements UserDAO {
     @Override
     public User findUserByUserName(String userId) {
         return getDatastore().find(User.class).field("email").equal(userId).get();
-//            return getDatastore().find(
-//                    User.class, 
-//                    "email", 
-//                    userId).get();      
-//        
     }
+    
+    @Override
+    public User findById(String id) {
+        return getDatastore().find(User.class).field("_id").
+                equal(DaoUtils.createObjectId(id)).get();
+    } 
+    
 }

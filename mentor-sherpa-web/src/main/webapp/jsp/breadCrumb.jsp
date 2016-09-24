@@ -9,6 +9,5 @@
         <h2>&nbsp;</h2>
       <ol class="breadcrumb">
         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-        <li class="active">Dashboard</li>
       </ol>
     </section>

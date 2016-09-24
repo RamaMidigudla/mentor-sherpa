@@ -19,6 +19,8 @@ import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
+import com.snapit.solutions.securtiy.entity.User;
+import com.snapit.solutions.securtiy.service.UserService;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +43,10 @@ public class OrganizationController {
     
     @Autowired
     OrganizationService organizationService;
+    
+    @Autowired
+    UserService userService;
+    
 
     @RequestMapping(value = "/programs/list", method = RequestMethod.GET)
     public ModelAndView programs(Model model) {
@@ -62,11 +68,11 @@ public class OrganizationController {
     public ModelAndView addPrograms(Model model) {
         return new ModelAndView("");
     }
-    @RequestMapping(value = "/mentor/{name}", method = RequestMethod.GET)
-    public String showMentor(@PathVariable String name, Model model) {
-        Mentor mentor = mentorService.findByMentorName(name);
-        model.addAttribute(mentor);
-        return "mentorProfile";
+    @RequestMapping(value = "/viewProfile/{id}", method = RequestMethod.GET)
+    public String showMentor(@PathVariable String id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute(user);
+        return "profile";
     }   
         
     @RequestMapping(value = "/mentor/list", method = RequestMethod.GET)

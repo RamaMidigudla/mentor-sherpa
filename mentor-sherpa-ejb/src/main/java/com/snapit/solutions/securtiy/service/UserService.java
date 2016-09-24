@@ -14,6 +14,7 @@ import javax.ejb.Remote;
 @Remote
 public interface UserService {
     public User findByUserId(String userId);
+    public User findById(String id);
     public void registerUser(User user);
     public void createPasswordResetTokenForUser(final User user, final String token);
     public PasswordResetToken getPasswordResetToken(final String id, final String token);

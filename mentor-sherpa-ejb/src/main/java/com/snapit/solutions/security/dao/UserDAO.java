@@ -13,4 +13,6 @@ import org.mongodb.morphia.dao.DAO;
  */
 public interface UserDAO extends DAO<User, ObjectId> {
     public User findUserByUserName(String userId);
+    
+    public User findById(String id);
 }

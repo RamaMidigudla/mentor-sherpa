@@ -26,5 +26,8 @@ public interface StudentService {
     public List<QuestionOptions> getQuestionsForStudentToAnswer(SignedupOrganization InterestedOrganizations);
     
     public List<Student> findAllByProgramName(String orgId, String programName);
+    
     public Map<String, List<Student>>  findAllByOrg(String orgId);
+    
+    public Student findByUserId(String userId);
 }

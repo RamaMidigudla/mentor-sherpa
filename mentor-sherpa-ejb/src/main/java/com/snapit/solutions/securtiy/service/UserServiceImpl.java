@@ -10,7 +10,6 @@ import com.snapit.solutions.security.dao.UserDAO;
 import com.snapit.solutions.securtiy.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mongodb.morphia.Key;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +57,10 @@ public class UserServiceImpl implements UserService {
             userDAO.save(user);
         }
     }
+
+    @Override
+    public User findById(String id) {
+       return userDAO.findById(id);
+    }   
 
 }

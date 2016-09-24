@@ -3,7 +3,6 @@
  */
 package com.snapit.solutions.mentor.sherpa.controller;
 
-import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,24 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/mentor")
 public class MentorController extends AbstractMentorStudentController {
 
-    /**
-     * Show Mentor by mentor id.
-     *
-     * @param id
-     * @param model
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showMentor(@PathVariable String id, Model model) {
-        Mentor mentor = mentorService.findById(id);
-        if (mentor != null) {
-            model.addAttribute(mentor);
-        } else {
-            model.addAttribute(new Mentor()); // We should be throwing Exception.
-        }
-        return "mentorProfile";
-    }
-
+        return showProfile(id,model);
+    }   
     /**
      * Show Questions for a Program.
      *
