@@ -124,7 +124,7 @@ public class LoginController {
                 user, null);//, userDetailsService.loadUserByUsername(user.getEmail()).getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        return "redirect:updatePassword";
+        return "redirect:/updatePassword";
     }
 
     @RequestMapping(value = "/updatePassword", method = RequestMethod.GET)

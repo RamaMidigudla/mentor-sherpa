@@ -43,7 +43,7 @@
             <div class="login-box-body">
                 <p class="login-box-msg">Forgot Password</p>
 
-                <form:form always-use-default-target="true" action="forgot" method="post">
+                <form:form action="forgot" method="post">
                         <c:if test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 
                             <div class="alert alert-danger alert-dismissible">
@@ -70,7 +70,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4">
-                            <button type="submit" onclick="resetPass()" class="btn btn-primary btn-block btn-flat">Reset</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Reset</button>
                         </div>
                         <!-- /.col -->
                     </div>
