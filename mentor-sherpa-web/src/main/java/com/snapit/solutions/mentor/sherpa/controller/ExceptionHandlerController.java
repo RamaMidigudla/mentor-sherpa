@@ -25,8 +25,6 @@ public class ExceptionHandlerController {
         mav.addObject("datetime", new Date());
         mav.addObject("exception", e);
         mav.addObject("url", request.getRequestURL());
-//        System.out.println("Exception: " + e.getMessage());
-//        System.out.println("Exception: " + e.toString());
         return "error";
     }
 }    

@@ -70,9 +70,9 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
     }
 
     @Override
-    public Student findStudentByUserObjectId(String studentUserObjectIds) {
+    public Student findStudentByUserObjectId(String studentUserObjectId) {
         Query<Student> query = getDatastore().createQuery(Student.class);
-        query.field("userObjectId").equal(DaoUtils.createObjectId(studentUserObjectIds));
+        query.field("userObjectId").equal(DaoUtils.createObjectId(studentUserObjectId));
         return query.get();
     }
 

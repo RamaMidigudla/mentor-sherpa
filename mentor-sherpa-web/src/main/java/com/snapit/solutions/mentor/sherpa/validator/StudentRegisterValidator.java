@@ -5,9 +5,6 @@ package com.snapit.solutions.mentor.sherpa.validator;
 
 import com.snapit.solutions.mentor.sherpa.model.StudentRegisterForm;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
 
 /**
  *

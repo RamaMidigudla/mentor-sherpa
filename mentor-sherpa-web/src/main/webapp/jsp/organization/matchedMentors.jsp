@@ -33,8 +33,8 @@
 
 
       <c:choose>
-      <c:when test="${not empty testModel.match}">
-     <c:forEach  items="${testModel.match}" var="entry">  
+      <c:when test="${not empty matchResults}">
+     <c:forEach  items="${matchResults}" var="entry">  
  <div class="row">
          <div class="col-md-3">
 

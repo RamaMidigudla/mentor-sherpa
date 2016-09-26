@@ -16,10 +16,13 @@ import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
 import com.snapit.solutions.mentor.sherpa.service.QuestionOptionsService;
 import com.snapit.solutions.mentor.sherpa.service.StudentService;
 import com.snapit.solutions.mentor.sherpa.validator.QuestionResponseValidator;
+import com.snapit.solutions.securtiy.entity.User;
+import com.snapit.solutions.securtiy.service.UserService;
 import com.snapit.solutions.web.security.AuthUser;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +47,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public abstract class AbstractMentorStudentController {
     @Autowired
     MentorService mentorService;
-    
+    @Autowired
+    UserService userService;
     @Autowired
     StudentService studentService;
     @Autowired
@@ -60,20 +64,27 @@ public abstract class AbstractMentorStudentController {
     public void initMentorBinder(WebDataBinder webDataBinder) {
         webDataBinder.setValidator(questionResponseValidator);
     }
+    
+    
+    public String showProfile(String id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute(user);
+        return "profile";
+    }   
 
     @RequestMapping(value = "/programs/list", method = RequestMethod.GET)
     public ModelAndView showCurrentPrograms( Model model) {
-        List<Organization> mentorList = organizationService.listAllOrganizations();
-        model.addAttribute(mentorList);
+        AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Map<Organization,String> signedUpOrgList = organizationService.
+                findSignedUporganizationToProgramName(
+                activeUser.getAuthorizedUser().getId().toString());
+       Map<Organization,String> unsignedUpOrgList = organizationService.
+               findUnSignedUporganizationToProgramName(
+                activeUser.getAuthorizedUser().getId().toString());
+        model.addAttribute("signedUpOrgList",signedUpOrgList);
+        model.addAttribute("unsignedUpOrgList" ,unsignedUpOrgList);
         return new ModelAndView("organizationList");
     }    
-
-//    @RequestMapping(value = "/programs/{org}", method = RequestMethod.GET)
-//    public ModelAndView showCurrentPrograms(@PathVariable String org, Model model) {
-//        List<Organization> mentorList = organizationService.listAllOrganizations();
-//        model.addAttribute(mentorList);
-//        return new ModelAndView("organizationList");
-//    }    
 
     @RequestMapping(value = "/programs/new", method = RequestMethod.GET)
     public ModelAndView showNewPrograms(Model model) {
@@ -171,6 +182,14 @@ public abstract class AbstractMentorStudentController {
         mentorAndStudentResponseService.saveResponses(studentResponse);
         redirectAttr.addFlashAttribute("successMessage", UIMessages.SIGNUP_SUCCESS_INFO);
         return "redirect:/";
+    }
+    
+    @RequestMapping(value = "/viewResponse", method = RequestMethod.GET)
+    public String showRespnses(Model model) {
+      AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      MentorAndStudentResponse mentorAndStudentResponse = mentorAndStudentResponseService.retrieveResponse(activeUser.getAuthorizedUser().getId().toString());
+      model.addAttribute(mentorAndStudentResponse);
+      return "responseList";
     }
     
     @RequestMapping(value = "/signup/save", method = RequestMethod.GET)

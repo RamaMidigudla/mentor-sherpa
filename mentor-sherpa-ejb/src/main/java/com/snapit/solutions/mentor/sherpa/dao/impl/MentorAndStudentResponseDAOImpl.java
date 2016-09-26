@@ -46,6 +46,7 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
     }
 
     @Override
+    //TODO remove this and use retrieveUserResponse
     public List<MentorAndStudentResponse> retrieveResponse(String orgId, String resourceId, String programName) {
          Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
          query.field("orgId").equal(new ObjectId(orgId)).
@@ -53,6 +54,16 @@ public class MentorAndStudentResponseDAOImpl extends BasicDAO<MentorAndStudentRe
                 and(query.criteria("mentorOrStudentId").equal(new ObjectId(resourceId))));
         return query.asList();
     }
+    
+    @Override
+    public MentorAndStudentResponse retrieveUserResponse(String orgId, String mentorOrStudentId, String programName) {
+        Query<MentorAndStudentResponse> query = getDatastore().createQuery(MentorAndStudentResponse.class);
+         query.field("orgId").equal(new ObjectId(orgId)).
+                and(query.criteria("programName").endsWithIgnoreCase(programName).
+                and(query.criteria("mentorOrStudentId").equal(DaoUtils.createObjectId(mentorOrStudentId))));
+        return query.get();
+    }
+    
 
     @Override
     public List<MentorAndStudentResponse> retrieveByProgram(String orgId, String programName) {

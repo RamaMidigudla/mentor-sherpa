@@ -51,17 +51,17 @@
         <put-attribute name="title" value="Mentor Sherpa -- Student List"></put-attribute>
         <put-attribute name="body" value="/jsp/student/list.jsp"></put-attribute>
     </definition>
-    <definition name="mentorProfile" extends="base.definition">
+    <definition name="profile" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa -- Mentor Profile"></put-attribute>
-        <put-attribute name="body" value="/jsp/mentor/profile.jsp"></put-attribute>
-    </definition>
-    <definition name="studentProfile" extends="base.definition">
-        <put-attribute name="title" value="Mentor Sherpa -- Student Profile"></put-attribute>
-        <put-attribute name="body" value="/jsp/student/profile.jsp"></put-attribute>
+        <put-attribute name="body" value="/jsp/user/profile.jsp"></put-attribute>
     </definition>
     <definition name="matchedMentors" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa -- Assign Mentor"></put-attribute>
         <put-attribute name="body" value="/jsp/organization/matchedMentors.jsp"></put-attribute>
+    </definition>
+     <definition name="responseList" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- View Response"></put-attribute>
+        <put-attribute name="body" value="/jsp/program/userReponse.jsp"></put-attribute>
     </definition>
     <definition name="error" template="/jsp/error.jsp">
         <put-attribute name="title" value="Mentor Sherpa | Error"></put-attribute>

@@ -27,23 +27,44 @@
                             <thead>
                                 <tr>
                                     <th>Organization Name</th>
-                                    <th>Available Programs</th>
-                                    <th>Select to Signup</th>
+                                    <th>Programs</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${organizationList}" var="organization">
+                             <c:if test="${not empty unsignedUpOrgList}">
+                            <c:forEach items="${unsignedUpOrgList}" var="entry">
                                 <tr>
-                                    <td>${organization.organizationName}</td>
+                                    <td>${entry.key.organizationName}</td>
                                     <td>
-                                    <c:forEach items="${organization.programs}" var="program">
-                                        ${program.programName}</br>
-                                    </c:forEach>
+                                    ${entry.value}
                                     </td>
-                                    <td><a href="${contextPath}/${mentorStudent}/signup/${organization.id}"><span class="btn btn-info">Signup</span></a></td>
+                                    <td>
+                                    <label class="text-aqua">Available for Signup</label>
+                                    </td>
+                                    <td>
+                                        <a href="${contextPath}/${mentorStudent}/signup/${entry.key.id}"><span class="btn btn-info btn-xs">Signup</span></a>
+                                    </td>
                                 </tr>
                             </c:forEach>
-                               
+                             </c:if>
+                            <c:if test="${not empty signedUpOrgList}">
+                            <c:forEach items="${signedUpOrgList}" var="entry">
+                                <tr>
+                                    <td>${entry.key.organizationName}</td>
+                                    <td>
+                                    ${entry.value}
+                                    </td>
+                                    <td>
+                                     <label class="text-green"><i class="fa fa-check"></i>Signed Up</label>
+                                     </td>
+                                    <td> 
+                                        <a href="${contextPath}/${mentorStudent}/viewResponse"><span class="btn btn-success btn-xs">View Response</span></a>
+                                    </td>
+                                </tr>
+                            </c:forEach> 
+                            </c:if>
                             </tbody>
                         </table>
                     </div>

@@ -98,4 +98,10 @@ public class StudentServiceImpl implements StudentService {
             }
             return studentMap;
     }
+
+    @Override
+    public Student findByUserId(String userId) {
+       return studentDAO.findStudentByUserObjectId(userId);
+    } 
+    
 }

@@ -8,6 +8,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <sec:authentication var="user" property="principal" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <div class="row">
     <div class="col-xs-12">          
@@ -31,8 +32,8 @@
                             <c:forEach items="${studentList.registeredStudentList}" var="entry">
                                 <c:if test="${not empty entry.value}"> 
                                     <c:forEach items="${entry.value}" var="student">
-                                        <tr>
-                                            <td>${student.key.name}</td>
+                                        <tr> 
+                                            <td><a href="${contextPath}/organization/viewProfile/${student.key.userObjectId}">${student.key.name}</a></td>
                                             <td>${student.key.age}</td>
                                             <td>${student.key.gender}</td>
                                             <td>${entry.key}</td>

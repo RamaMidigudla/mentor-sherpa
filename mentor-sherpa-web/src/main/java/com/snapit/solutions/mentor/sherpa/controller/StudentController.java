@@ -3,7 +3,6 @@
  */
 package com.snapit.solutions.mentor.sherpa.controller;
 
-import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +22,7 @@ public class StudentController extends AbstractMentorStudentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showStudent(@PathVariable String id, Model model) {
-        Student student = studentService.findById(id);
-        if (student != null) {
-            model.addAttribute(student);
-        } else {
-            model.addAttribute(new Student());  // We should be throwing Exception
-        }
-        return "studentProfile";
+        return showProfile(id,model);
     }   
         
     @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
