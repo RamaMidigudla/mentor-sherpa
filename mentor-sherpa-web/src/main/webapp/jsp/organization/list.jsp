@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <sec:authentication var="user" property="principal" />
 <sec:authorize access="hasRole('MENTOR')">
@@ -35,6 +36,9 @@
                             <tbody>
                              <c:if test="${not empty unsignedUpOrgList}">
                             <c:forEach items="${unsignedUpOrgList}" var="entry">
+                                 <form:form class="form-horizontal" commandName="programSignupForm">
+                                 <form:hidden path="organizationId" value="${entry.key.id}" /> 
+                                 <form:hidden path="selectedProgramName" value="${entry.value}"/> 
                                 <tr>
                                     <td>${entry.key.organizationName}</td>
                                     <td>
@@ -44,9 +48,10 @@
                                     <label class="text-aqua">Available for Signup</label>
                                     </td>
                                     <td>
-                                        <a href="${contextPath}/${mentorStudent}/signup/${entry.key.id}"><span class="btn btn-info btn-xs">Signup</span></a>
+                                        <button type="submit" class="btn btn-info btn-xs">Signup</button>
                                     </td>
                                 </tr>
+                                </form:form>
                             </c:forEach>
                              </c:if>
                             <c:if test="${not empty signedUpOrgList}">
@@ -60,7 +65,7 @@
                                      <label class="text-green"><i class="fa fa-check"></i>Signed Up</label>
                                      </td>
                                     <td> 
-                                        <a href="${contextPath}/${mentorStudent}/viewResponse"><span class="btn btn-success btn-xs">View Response</span></a>
+                                        <a href="${contextPath}/${mentorStudent}/viewResponse/${user.userId}"><span class="btn btn-success btn-xs">View Response</span></a>
                                     </td>
                                 </tr>
                             </c:forEach> 

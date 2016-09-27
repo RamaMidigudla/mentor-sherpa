@@ -81,6 +81,8 @@ public abstract class AbstractMentorStudentController {
        Map<Organization,String> unsignedUpOrgList = organizationService.
                findUnSignedUporganizationToProgramName(
                 activeUser.getAuthorizedUser().getId().toString());
+        ProgramSignupForm programSignupForm = new ProgramSignupForm();
+        model.addAttribute(programSignupForm);
         model.addAttribute("signedUpOrgList",signedUpOrgList);
         model.addAttribute("unsignedUpOrgList" ,unsignedUpOrgList);
         return new ModelAndView("organizationList");
@@ -92,18 +94,8 @@ public abstract class AbstractMentorStudentController {
         model.addAttribute(mentorList);
         return new ModelAndView("newPrograms");
     }    
-
-    @RequestMapping(value = "/signup/{id}", method = RequestMethod.GET)
-    public ModelAndView showPrograms(@PathVariable String id, Model model) {
-        Organization organization = organizationService.findOrganziationById(id);
-        model.addAttribute(organization);
-        ProgramSignupForm programSignupForm = new ProgramSignupForm();
-        programSignupForm.setOrganizationId(id);
-        model.addAttribute(programSignupForm);
-        return new ModelAndView("selectProgram");
-    }
     
-    public String showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model, boolean student, RedirectAttributes redirectAttributes) {
+    public String showQuestions(@ModelAttribute ProgramSignupForm programSignupForm, Model model, boolean student, RedirectAttributes redirectAttributes) {
         AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean alreadySignedUp = mentorAndStudentResponseService.isResponseCaptured(programSignupForm.getOrganizationId(), activeUser.getUserId(), programSignupForm.getSelectedProgramName());
         if (alreadySignedUp) {
@@ -153,7 +145,7 @@ public abstract class AbstractMentorStudentController {
      * @param redirectAttr
      * @return 
      */
-    @RequestMapping(value = "/signup/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/programs/save", method = RequestMethod.POST)
     public String saveQuestionResponses(@Validated @ModelAttribute ProgramSignupForm programSignupForm, BindingResult result, Model model, RedirectAttributes redirectAttr) {
 
         if (result.hasErrors()) {
@@ -184,10 +176,9 @@ public abstract class AbstractMentorStudentController {
         return "redirect:/";
     }
     
-    @RequestMapping(value = "/viewResponse", method = RequestMethod.GET)
-    public String showRespnses(Model model) {
-      AuthUser activeUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      MentorAndStudentResponse mentorAndStudentResponse = mentorAndStudentResponseService.retrieveResponse(activeUser.getAuthorizedUser().getId().toString());
+    @RequestMapping(value = "viewResponse/{id}", method = RequestMethod.GET)
+    public String showResponses(@PathVariable String id,Model model) {
+      MentorAndStudentResponse mentorAndStudentResponse = mentorAndStudentResponseService.retrieveResponse(id);
       model.addAttribute(mentorAndStudentResponse);
       return "responseList";
     }
@@ -200,6 +191,5 @@ public abstract class AbstractMentorStudentController {
         }
         return modelMap;
     }
-
     
 }
