@@ -25,8 +25,8 @@ public class StudentController extends AbstractMentorStudentController {
         return showProfile(id,model);
     }   
         
-    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
-    public String showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttributes) {
-        return showQuestions(id, programSignupForm, model, true, redirectAttributes);
+    @RequestMapping(value = "programs/list", method = RequestMethod.POST)
+    public String showQuestions(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttributes) {
+        return showQuestions(programSignupForm, model, true, redirectAttributes);
     }
 }

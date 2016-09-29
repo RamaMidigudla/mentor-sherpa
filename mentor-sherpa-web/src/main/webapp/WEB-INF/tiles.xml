@@ -35,10 +35,6 @@
         <put-attribute name="title" value="Mentor Sherpa -- Student List"></put-attribute>
         <put-attribute name="body" value="/jsp/organization/list.jsp"></put-attribute>
     </definition>
-    <definition name="selectProgram" extends="base.definition">
-        <put-attribute name="title" value="Mentor Sherpa -- Program Signup"></put-attribute>
-        <put-attribute name="body" value="/jsp/program/signup.jsp"></put-attribute>
-    </definition>
     <definition name="answerQuestions" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa -- Program Signup -- Answer Questions"></put-attribute>
         <put-attribute name="body" value="/jsp/program/signupQuestions.jsp"></put-attribute>

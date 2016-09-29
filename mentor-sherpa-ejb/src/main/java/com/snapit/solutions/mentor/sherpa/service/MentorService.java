@@ -28,6 +28,8 @@ public interface MentorService {
     
     public List<Mentor> getUnassignedMentorList();
     
-    public List<Mentor> getAssignedMentorList(List<Mentor> fullMentorList);
+    public List<Mentor> getAssignedMentorList(List<Mentor> signedUpMentorList);
+    
+    public List<Mentor> getSignedUpMentorList(List<Mentor> fullMentorList);
   
 }

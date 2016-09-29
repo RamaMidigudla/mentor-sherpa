@@ -33,8 +33,14 @@
                                 <c:if test="${not empty entry.value}"> 
                                     <c:forEach items="${entry.value}" var="student">
                                         <tr> 
-                                            <td><a href="${contextPath}/organization/viewProfile/${student.key.userObjectId}">${student.key.name}</a></td>
-                                            <td>${student.key.age}</td>
+                                            <td>
+                                            <a href="${contextPath}/organization/viewProfile/${student.key.userObjectId}">${student.key.name}</a>
+                                            &rarr;
+                                            <a href="${contextPath}/organization/viewResponse/${student.key.userObjectId}"><span class="btn btn-success btn-xs">View Response</span></a>
+                                            </td>
+                                            <td>
+                                            ${student.key.age}
+                                            </td>
                                             <td>${student.key.gender}</td>
                                             <td>${entry.key}</td>
                                             <c:choose>
@@ -44,7 +50,11 @@
                                                     </sec:authorize>
                                                 </c:when>
                                                 <c:otherwise> <%-- Mentor has been assigned --%>
-                                                    <td>${student.value.name}</td>
+                                                <td>
+                                                <a href="${contextPath}/organization/viewProfile/${student.value.userObjectId}">${student.value.name}</a>
+                                                &rarr; 
+                                                <a href="${contextPath}/organization/viewResponse/${student.value.userObjectId}"><span class="btn btn-success btn-xs">View Response</span></a>
+                                                </td>
                                                 </c:otherwise>
                                             </c:choose>
                                         </tr>

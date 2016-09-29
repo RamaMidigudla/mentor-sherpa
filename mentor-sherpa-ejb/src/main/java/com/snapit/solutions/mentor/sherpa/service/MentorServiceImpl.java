@@ -11,6 +11,7 @@ import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
 import com.snapit.solutions.mentor.sherpa.entity.SignedupOrganization;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.QuestionOptions;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
@@ -74,25 +75,25 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public List<Mentor> getUnassignedMentorList() {
-        
-        List<Mentor> fullMentorList = findall();
-        List<Mentor> assignedMentorList = getAssignedMentorList(fullMentorList);
-        
-        List<Mentor> unAssignedMentorList = new ArrayList();
-        for(Mentor mentor : fullMentorList){
-            if(!assignedMentorList.contains(mentor)){
-                unAssignedMentorList.add(mentor);     
-            }
-        }  
+    public List<Mentor> getUnassignedMentorList() {   
+        List<Mentor> signedUpMentorList = getSignedUpMentorList(findall()); 
+         List<Mentor> unAssignedMentorList = new ArrayList();
+        if(!signedUpMentorList.isEmpty()){
+            List<Mentor> assignedMentorList = getAssignedMentorList(signedUpMentorList);  
+            for(Mentor mentor : signedUpMentorList){
+                if(!assignedMentorList.contains(mentor)){
+                    unAssignedMentorList.add(mentor);     
+                }
+            } 
+        }
         return unAssignedMentorList;   
     }
     
     @Override
-    public List<Mentor> getAssignedMentorList(List<Mentor> fullMentorList) {
+    public List<Mentor> getAssignedMentorList(List<Mentor> signedUpMentorList) {
    
         Set<ObjectId> mentorObjectIdSet = new HashSet();
-        for(Mentor mentor : fullMentorList){
+        for(Mentor mentor : signedUpMentorList){
             mentorObjectIdSet.add(mentor.getUserObjectId());
         }
         
@@ -119,6 +120,19 @@ public class MentorServiceImpl implements MentorService {
           assignedMentorList.addAll(mentorDAO.findMentorsByUserObjectIds(CommonServiceUtils.createSetOfStringIds(assignedMentorIdSet)));
         }  
         return assignedMentorList;   
+    }
+
+    @Override
+    public List<Mentor> getSignedUpMentorList(List<Mentor> fullMentorList) {
+        List<Mentor> signedUpMentorList = new ArrayList();
+        for(Mentor mentor : fullMentorList){
+           MentorAndStudentResponse mentorResponse = mentorAndStudentResponseDAO.
+                   retrieveByMentorStudentId(mentor.getUserObjectId().toString());
+              if(mentorResponse != null){
+              signedUpMentorList.add(mentor);
+           }
+        }
+        return signedUpMentorList;
     }
     
     

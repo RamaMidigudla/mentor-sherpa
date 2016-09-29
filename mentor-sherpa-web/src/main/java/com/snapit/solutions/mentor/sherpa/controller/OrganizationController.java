@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
-import com.snapit.solutions.mentor.sherpa.model.ProgramSignupForm;
 import com.snapit.solutions.mentor.sherpa.model.StudentList;
+import com.snapit.solutions.mentor.sherpa.service.MentorAndStudentResponseService;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,23 +48,10 @@ public class OrganizationController {
     @Autowired
     UserService userService;
     
-
-    @RequestMapping(value = "/programs/list", method = RequestMethod.GET)
-    public ModelAndView programs(Model model) {
-        Organization organization = organizationService.findOrganziationById(getOrganizationId());
-        model.addAttribute(organization);
-        ProgramSignupForm programSignupForm = new ProgramSignupForm();
-        programSignupForm.setOrganizationId(getOrganizationId());
-        model.addAttribute(programSignupForm);
-        return new ModelAndView("selectProgram");
-    }
+    @Autowired
+    MentorAndStudentResponseService mentorAndStudentResponseService;
     
-    @RequestMapping(value = "/programs/list", method = RequestMethod.POST)
-    public String showQuestions(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttr) {
-        redirectAttr.addFlashAttribute("selectedProgramName", programSignupForm.getSelectedProgramName());
-        return "redirect:/organization/student/list";
-    }
-
+    
     @RequestMapping(value = "/programs/add", method = RequestMethod.GET)
     public ModelAndView addPrograms(Model model) {
         return new ModelAndView("");
@@ -77,7 +65,8 @@ public class OrganizationController {
         
     @RequestMapping(value = "/mentor/list", method = RequestMethod.GET)
     public String showMentorList(Model model) {
-        List<Mentor> mentorList = mentorService.getAssignedMentorList(mentorService.findall());
+        List<Mentor> mentorList = mentorService.getAssignedMentorList(
+                mentorService.getSignedUpMentorList(mentorService.findall()));
         List<Mentor> availableMentorList = mentorService.getUnassignedMentorList();
         model.addAttribute("mentorList", mentorList);
         model.addAttribute("availableMentorList", availableMentorList);
@@ -108,16 +97,6 @@ public class OrganizationController {
         return new ModelAndView("studentList");
     }
     
-    @RequestMapping(value = "/{id}/select", method = RequestMethod.GET)
-    public ModelAndView showPrograms(@PathVariable String id, Model model) {
-        Organization organization = organizationService.findOrganziationById(getOrganizationId());
-        model.addAttribute(organization);
-        ProgramSignupForm programSignupForm = new ProgramSignupForm();
-        programSignupForm.setOrganizationId(id);
-        model.addAttribute(programSignupForm);
-        return new ModelAndView("selectProgram");
-    }
-    
     @RequestMapping(value = "/{id}/assign", method = RequestMethod.GET)
     public ModelAndView findMentors(@PathVariable String id,@ModelAttribute String selectedProgramName,Model model) {
         Organization organization = organizationService.findOrganziationById(getOrganizationId());
@@ -138,6 +117,13 @@ public class OrganizationController {
                 organization.getPrograms().get(0).getProgramName());
         redirectAttr.addFlashAttribute("infoMessage", "Your response was successfully saved.");
         return new ModelAndView("redirect:/");
+    }
+    
+    @RequestMapping(value = "viewResponse/{id}", method = RequestMethod.GET)
+    public String showResponses(@PathVariable String id,Model model) {
+      MentorAndStudentResponse mentorAndStudentResponse = mentorAndStudentResponseService.retrieveResponse(id);
+      model.addAttribute(mentorAndStudentResponse);
+      return "responseList";
     }
     
     private String getOrganizationId() {

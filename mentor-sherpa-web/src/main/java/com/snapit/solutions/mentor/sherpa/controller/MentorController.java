@@ -26,14 +26,12 @@ public class MentorController extends AbstractMentorStudentController {
     }   
     /**
      * Show Questions for a Program.
-     *
-     * @param id
      * @param programSignupForm
      * @param model
      * @return
      */    
-    @RequestMapping(value = "/signup/{id}", method = RequestMethod.POST)
-    public String showQuestions(@PathVariable String id, @ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttributes) {
-        return showQuestions(id, programSignupForm, model, false, redirectAttributes);
+    @RequestMapping(value = "programs/list", method = RequestMethod.POST)
+    public String showQuestions(@ModelAttribute ProgramSignupForm programSignupForm, Model model, RedirectAttributes redirectAttributes) {
+        return showQuestions(programSignupForm, model, false, redirectAttributes);
     }
 }
