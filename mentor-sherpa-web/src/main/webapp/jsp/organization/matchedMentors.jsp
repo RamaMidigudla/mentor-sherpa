@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <sec:authentication var="user" property="principal" />
 <sec:authorize access="hasRole('MENTOR')">
@@ -46,7 +47,7 @@
               <h3 class="profile-username text-center">${entry.key.name}</h3>
             <!-- /.box-header -->
             <div class="box-body text-center">
-                <span><b>Match Score</b></span>
+                <span><b><spring:message code="label.matchScore" /></b></span>
             </div>    
             <div class="box-body text-center">
                 <span class="fa-stack fa-4x">
@@ -55,14 +56,14 @@
                   <strong class="fa-stack-1x text-primary">${entry.value}</strong>
                 </span>
             </div>
-            <a href="${pageContext.request.contextPath}/organization/${student.userObjectId}/save/${entry.key.userObjectId}" class="btn btn-primary btn-block"><b>Assign</b></a>
+            <a href="${pageContext.request.contextPath}/organization/${student.userObjectId}/save/${entry.key.userObjectId}" class="btn btn-primary btn-block"><b><spring:message code="label.assign" /></b></a>
           </div>
           </div>
         </div>
  </c:forEach>  
           </c:when>
          <c:otherwise>
-              <h3 align="center">No Mentors available.</h3>
+              <h3 align="center"><spring:message code="label.header.nomentorsavailable" /></h3>
          </c:otherwise>
         </c:choose>
         

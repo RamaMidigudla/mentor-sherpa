@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="false"%>
 
 
@@ -21,11 +22,11 @@
 
               <ul class="list-group list-group-unbordered">
                <li class="list-group-item">
-                  <b>Email</b> <p class="pull-right text-light-blue">${user.email}</p>
+                  <b><spring:message code="label.email" /></b> <p class="pull-right text-light-blue">${user.email}</p>
                   
                 </li>
                  <li class="list-group-item"> 
-                  <b>Date of Birth</b>  <p class="pull-right text-light-blue">${user.dateOfBirth}</p>
+                  <b><spring:message code="label.dob" /></b>  <p class="pull-right text-light-blue">${user.dateOfBirth}</p>
                 </li>
               </ul>
             </div>
@@ -35,13 +36,13 @@
           <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Info</h3>
+              <h3 class="box-title"><spring:message code="label.title.info" /></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body"> 
-              <strong><i class="fa fa-home margin-r-5"></i>Address</strong>
+              <strong><i class="fa fa-home margin-r-5"></i><spring:message code="label.address" /></strong>
               <p class="text-muted text-light-blue">${user.address}</p>
-              <strong><i class="fa fa-phone margin-r-5"></i>Phone</strong>
+              <strong><i class="fa fa-phone margin-r-5"></i><spring:message code="label.phone" /></strong>
               <p class="text-muted text-light-blue">${user.phoneNumber}</p>
             </div>
             <!-- /.box-body -->

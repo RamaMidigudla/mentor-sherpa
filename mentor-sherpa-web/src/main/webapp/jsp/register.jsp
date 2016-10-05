@@ -52,13 +52,13 @@
     <body class="hold-transition register-page">
         <div class="register-box">
             <div class="register-logo">
-                <b>Mentor</b>Sherpa
+                <b><spring:message code="label.mentor" /></b><spring:message code="label.sherpa" />
             </div>
 
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs" id="navTabs">
-                    <li class="active"><a href="#mentor" data-toggle="tab">Mentor</a></li>
-                    <li><a href="#student" data-toggle="tab">Student/Mentee</a></li>
+                    <li class="active"><a href="#mentor" data-toggle="tab"><spring:message code="label.tile.header.mentor" /></a></li>
+                    <li><a href="#student" data-toggle="tab"><spring:message code="label.tile.header.student" /></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="mentor">
@@ -69,12 +69,12 @@
 
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                            <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.alert" /></h4>
                                             <form:errors path="*" />
                                         </div>
                                     </c:if>
                                 </spring:bind>
-                                <h2><b>Mentor</b> Registration</h2>
+                                <h2><b><spring:message code="label.mentor" /></b> <spring:message code="label.registration" /></h2>
 
                                 <div class="register-box-body">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -87,8 +87,8 @@
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="male" />  Male 
-                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="female" />  Female 
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="male" />  <spring:message code="label.radiobutton.male" /> 
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="female" />  <spring:message code="label.radiobutton.female" /> 
                                     </div>
                                     <div class="form-group has-feedback">
                                         <div class="input-group date">
@@ -136,11 +136,11 @@
                                     </div>
                                         <!-- /.col -->
                                         <div  class="col-xs-4">
-                                            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                                            <button type="submit" class="btn btn-primary btn-block btn-flat"><spring:message code="button.label.register" /></button>
                                         </div>
                                         <!-- /.col -->
                                 </form:form>
-                                <a href="${pageContext.request.contextPath}/login" class="text-center">I already have a membership</a>
+                                <a href="${pageContext.request.contextPath}/login" class="text-center"><spring:message code="link.label.member" /></a>
                             </div>
                             <!-- /.form-box -->
                         </div>
@@ -221,12 +221,12 @@
                                     <div class="row">
                                         <!-- /.col -->
                                         <div class="col-xs-4">
-                                            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                                            <button type="submit" class="btn btn-primary btn-block btn-flat"><spring:message code="button.label.register" /></button>
                                         </div>
                                         <!-- /.col -->
                                     </div>
                                 </form:form>
-                                <a href="${pageContext.request.contextPath}/login" class="text-center">I already have a membership</a>
+                                <a href="${pageContext.request.contextPath}/login" class="text-center"><spring:message code="link.label.member" /></a>
                             </div>
                             <!-- /.form-box -->
 

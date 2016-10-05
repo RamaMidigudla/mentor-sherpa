@@ -37,18 +37,18 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="${pageContext.request.contextPath}/"><b>Mentor</b>Sherpa</a>
+                <a href="${pageContext.request.contextPath}/"><b><spring:message code="label.mentor" /></b><spring:message code="label.sherpa" /></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">Forgot Password</p>
+                <p class="login-box-msg"><spring:message code="pageTitle.updatePassword" /></p>
 
                 <form:form always-use-default-target="true" action="updatePassword" method="post">
                         <c:if test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.alert" /></h4>
                                 <p>${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
                             </div>
                         </c:if>
@@ -61,7 +61,7 @@
                         <input type="password" id="passConfirm" class="form-control" name="confirmPassword" placeholder="Retype New password">
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                         <span id="error" class="alert alert-error" style="display:none">
-                            <spring:message code="PasswordMatches.user"></spring:message>
+                            <spring:message code="PasswordMatches.user" />
                         </span>
                     </div>
                     <div class="row">
@@ -69,7 +69,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4">
-                            <button type="submit" onclick="savePass()" class="btn btn-primary btn-block btn-flat">Update</button>
+                            <button type="submit" onclick="savePass()" class="btn btn-primary btn-block btn-flat"><spring:message code="button.label.update" /></button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -84,8 +84,8 @@
                     </div>
                     <!-- /.social-auth-links -->
                 --%>
-                <a href="${pageContext.request.contextPath}/login">Login</a><br>
-                <a href="${pageContext.request.contextPath}/register" class="text-center">Register a new membership</a>
+                <a href="${pageContext.request.contextPath}/login"><spring:message code="link.label.login" /></a><br>
+                <a href="${pageContext.request.contextPath}/register" class="text-center"><spring:message code="link.label.register" /></a>
 
             </div>
             <!-- /.login-box-body -->

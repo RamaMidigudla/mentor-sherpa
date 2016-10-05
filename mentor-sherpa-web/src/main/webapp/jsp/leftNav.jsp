@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <sec:authentication var="user" property="principal" />
 <c:url var="mentorProfile" value="${pageContext.request.contextPath}/mentor/${user.userId}"></c:url>
@@ -15,27 +16,27 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="header">Main Menu</li>
+        <li class="header"><spring:message code="pageTitle.leftNav" /></li>
         <%-- ORGANIZATION Navigation --%>
         <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
         <li class="treeview">
           <a href="#mentornav">
             <i class="fa fa-users"></i>
-            <span>Mentors</span>
+            <span><spring:message code="label.header.mentor" /></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-              <li><a href="${pageContext.request.contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> Show Mentors</a></li>
+              <li><a href="${pageContext.request.contextPath}/organization/mentor/list"><i class="fa fa-circle-o"></i> <spring:message code="link.label.showMentors" /></a></li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#studentnav">
             <i class="fa fa-users"></i>
-            <span>Students</span>
+            <span><spring:message code="label.header.student" /></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-              <li><a href="${pageContext.request.contextPath}/organization/student/list"><i class="fa fa-circle-o"></i> Show Students</a></li>
+              <li><a href="${pageContext.request.contextPath}/organization/student/list"><i class="fa fa-circle-o"></i> <spring:message code="link.label.showStudents" /></a></li>
           </ul>
         </li>
 <!--        <li class="treeview">
@@ -54,11 +55,11 @@
         <li class="treeview">
           <a href="#programnav">
             <i class="fa fa-users"></i>
-            <span>Programs</span>
+            <span><spring:message code="label.header.program" /></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/mentor/programs/list"><i class="fa fa-circle-o"></i> Sign up</a></li>
+            <li><a href="${pageContext.request.contextPath}/mentor/programs/list"><i class="fa fa-circle-o"></i> <spring:message code="link.label.signup" /></a></li>
           </ul>
 <!--          <ul class="treeview-menu">
             <li><a href="${pageContext.request.contextPath}/mentor/programs/bbbs"><i class="fa fa-circle-o"></i> BBBS - Aces</a></li>
@@ -80,10 +81,10 @@
         <li class="treeview">
           <a href="#programnav">
             <i class="fa fa-users"></i>
-            <span>Programs</span>
+            <span><spring:message code="label.header.program" /></span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/student/programs/list"><i class="fa fa-circle-o"></i> Sign up</a></li>
+            <li><a href="${pageContext.request.contextPath}/student/programs/list"><i class="fa fa-circle-o"></i> <spring:message code="link.label.signup" /></a></li>
           </ul>
         </li>
 <!--          <ul class="treeview-menu">

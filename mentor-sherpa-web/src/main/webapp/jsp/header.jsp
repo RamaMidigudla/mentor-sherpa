@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="false"%>
 
 <header class="main-header">
@@ -12,9 +13,9 @@
     <!-- Logo -->
     <a href="${pageContext.request.contextPath}/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>M</b>S</span>
+      <span class="logo-mini"><b><spring:message code="label.minilogo.mentor" /></b><spring:message code="label.minilogo.sherpa" /></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Mentor</b>Sherpa</span>
+      <span class="logo-lg"><b><spring:message code="label.mentor" /></b><spring:message code="label.sherpa" /></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -262,17 +263,17 @@
               <li class="user-footer">
                 <div class="pull-left">
                     <sec:authorize access="hasRole('MENTOR')">
-                        <a href="${pageContext.request.contextPath}/mentor/${user.userId}" class="btn btn-default btn-flat">Profile</a>                        
+                        <a href="${pageContext.request.contextPath}/mentor/${user.userId}" class="btn btn-default btn-flat"><spring:message code="link.label.profile" /></a>                        
                     </sec:authorize>
                     <sec:authorize access="hasRole('STUDENT')">
-                        <a href="${pageContext.request.contextPath}/student/${user.userId}" class="btn btn-default btn-flat">Profile</a>
+                        <a href="${pageContext.request.contextPath}/student/${user.userId}" class="btn btn-default btn-flat"><spring:message code="link.label.profile" /></a>
                     </sec:authorize>
                 </div>
                   <c:url var="logoutAction" value="/logout"></c:url>
                 <div class="pull-right">
                     <form action="${logoutAction}" method="post">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <input class="btn btn-default btn-flat" type="submit" value="Sign out" />
+                        <input class="btn btn-default btn-flat" type="submit" value="<spring:message code="button.label.logout" />" />
                     </form>
                 </div>
               </li>

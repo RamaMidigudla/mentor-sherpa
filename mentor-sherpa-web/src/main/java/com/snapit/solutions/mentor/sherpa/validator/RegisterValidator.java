@@ -39,7 +39,7 @@ public class RegisterValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "registerForm.firstName.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "registerForm.lastName.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId", "registerForm.emailId.empty");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address1", "registerForm.adress1.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address1", "registerForm.address.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "city", "registerForm.city.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "state", "registerForm.state.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zipCode", "registerForm.zipCode.empty");

@@ -37,18 +37,18 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="${pageContext.request.contextPath}/"><b>Mentor</b>Sherpa</a>
+                <a href="${pageContext.request.contextPath}/"><b><spring:message code="label.mentor" /></b><spring:message code="label.sherpa" /></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg"><spring:message code="label.header.login" /></p>
 
                 <form:form always-use-default-target="true" action="login" method="post">
                         <c:if test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.alert" /></h4>
                                 <p>Please provide a valid Email/password ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
                             </div>
                         </c:if>
@@ -56,7 +56,7 @@
 
                             <div class="alert alert-success alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Success!</h4>
+                                <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.success" /></h4>
                                 <p>${successMessage}</p>
                             </div>
                         </c:if>
@@ -64,7 +64,7 @@
 
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.alert" /></h4>
                                 <p>${alertMessage}</p>
                             </div>
                         </c:if>
@@ -81,13 +81,13 @@
                         <div class="col-xs-8">
                             <div class="checkbox icheck">
                                 <label>
-                                    <input type="checkbox" name="_spring_security_remember_me"> Remember Me
+                                    <input type="checkbox" name="_spring_security_remember_me"> <spring:message code="label.checkbox.rememberMe" />
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat"><spring:message code="button.label.signin" /></button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -102,8 +102,8 @@
                     </div>
                     <!-- /.social-auth-links -->
                 --%>
-                <a href="${pageContext.request.contextPath}/forgot">I forgot my password</a><br>
-                <a href="${pageContext.request.contextPath}/register" class="text-center">Register a new membership</a>
+                <a href="${pageContext.request.contextPath}/forgot"><spring:message code="link.label.forgotPassword" /></a><br>
+                <a href="${pageContext.request.contextPath}/register" class="text-center"><spring:message code="link.label.register" /></a>
 
             </div>
             <!-- /.login-box-body -->

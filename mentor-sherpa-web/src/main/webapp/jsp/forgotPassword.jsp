@@ -8,6 +8,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,18 +38,18 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="${pageContext.request.contextPath}/"><b>Mentor</b>Sherpa</a>
+                <a href="${pageContext.request.contextPath}/"><b><spring:message code="label.mentor" /></b><spring:message code="label.sherpa" /></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">Forgot Password</p>
+                <p class="login-box-msg"><spring:message code="pageTitle.forgotPassword" /></p>
 
                 <form:form action="forgot" method="post">
                         <c:if test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.alert" /></h4>
                                 <p>${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>
                             </div>
                         </c:if>
@@ -56,7 +57,7 @@
 
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.alert" /></h4>
                                 <p>${alertMessage}</p>
                             </div>
                         </c:if>
@@ -70,7 +71,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Reset</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat"><spring:message code="button.label.reset" /></button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -85,8 +86,8 @@
                     </div>
                     <!-- /.social-auth-links -->
                 --%>
-                <a href="${pageContext.request.contextPath}/login">Login</a><br>
-                <a href="${pageContext.request.contextPath}/register" class="text-center">Register a new membership</a>
+                <a href="${pageContext.request.contextPath}/login"><spring:message code="link.label.login" /></a><br>
+                <a href="${pageContext.request.contextPath}/register" class="text-center"><spring:message code="link.label.register" /></a>
 
             </div>
             <!-- /.login-box-body -->

@@ -6,12 +6,13 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="container">
     <c:if test="${not empty errorMessage}">
         <div class="alert alert-error alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Alert!</h4>
+            <h4><i class="icon fa fa-check"></i> <spring:message code="error.label.header.alert" /></h4>
             <c:out value="${errorMessage}" />
         </div>
     </c:if>
@@ -25,7 +26,7 @@
 
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <h4><i class="icon fa fa-ban"></i> <spring:message code="error.label.header.alert" /></h4>
                                 <form:errors path="*" />
                             </div>
                         </c:if>
@@ -35,10 +36,10 @@
                     <form:hidden path="selectedProgramName" />
                     <c:choose>
                         <c:when test="${empty programSignupForm.questionResponseMap}">
-                            <h3 class="box-title">There are no special requirements for - <c:out value="${programSignupForm.selectedProgramName}"></c:out>. Just hit Save!</h3>
+                            <h3 class="box-title"><spring:message code="label.header.noQuestions" arguments="${programSignupForm.selectedProgramName}"/></h3>
                         </c:when>
                         <c:otherwise>
-                            <h3 class="box-title">Answer Questions for the Program - <c:out value="${programSignupForm.selectedProgramName}"></c:out></h3>
+                            <h3 class="box-title"><spring:message code="label.header.questions" arguments="${programSignupForm.selectedProgramName}"/></h3>
 
                                 <div class="box-body">
                                     <div class="box-group" id="accordion">
@@ -103,8 +104,8 @@
 
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="reset" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-info pull-right">Save</button>
+                            <button type="reset" class="btn btn-default"><spring:message code="button.label.cancel" /></button>
+                            <button type="submit" class="btn btn-info pull-right"><spring:message code="button.label.save" /></button>
                         </div>
                         <!-- /.box-footer -->
                     </form:form>

@@ -5,22 +5,24 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
         <div class="row">
             <div class="col-xs-12">          
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Select A Program</h3>
+                        <h3 class="box-title"><spring:message code="pageTitle.selectAProgram" /></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table id="Mentor List" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Mentor Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Education</th>
+                                    <th><spring:message code="list.table.header.mentorName" /></th>
+                                    <th><spring:message code="list.table.header.age" /></th>
+                                    <th><spring:message code="list.table.header.gender" /></th>
+                                    <th><spring:message code="list.table.header.education" /></th>
                                     <!--<th>Availability</th>-->
                                 </tr>
                             </thead>
