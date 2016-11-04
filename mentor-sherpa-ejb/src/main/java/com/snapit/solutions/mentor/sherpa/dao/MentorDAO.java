@@ -5,6 +5,7 @@
  */
 package com.snapit.solutions.mentor.sherpa.dao;
 
+import com.snapit.solutions.mentor.sherpa.entity.AssignedUserInfo;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import java.util.List;
 import java.util.Set;
@@ -57,5 +58,9 @@ public interface MentorDAO extends DAO<Mentor, ObjectId> {
     public List<Mentor> findMentorsByUserObjectIds(Set<String> mentorUserObjectIds);
     
     public Mentor findMentorByUserObjectId(String mentorUserObjectId);
+    
+    public void assignStudentToMentor(String mentorUserObjectId, String orgId, String studentUserObjectId, String programName);
+    
+    public void removeAssignedStudent(AssignedUserInfo assignedUserInfo,String mentorUserObjectId);
 
 }

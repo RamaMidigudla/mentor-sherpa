@@ -17,9 +17,9 @@
                 <br>
                 <br>
                 <c:forEach  items="${mentorAndStudentResponse.questionAndResponses}" var="questionAndResponse">              
-                    <div class="box box-primary collapsed-box">
+                     <div class="box box-primary collapsed-box">
                         <div class="box-header with-border">
-                            <h4 class="box-title text-aqua">${questionAndResponse.question}</h4>
+                            <h4 class="box-title text-blue">${questionAndResponse.question}</h4>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>

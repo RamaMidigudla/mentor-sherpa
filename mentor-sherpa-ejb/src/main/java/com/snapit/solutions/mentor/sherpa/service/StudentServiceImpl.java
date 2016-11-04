@@ -37,7 +37,7 @@ public class StudentServiceImpl implements StudentService {
    QuestionOptionsService questionOptionsService;
    
    @Autowired
-   MentorAndStudentResponseDAO mentorAndStudentResponseServiceDao;
+   MentorAndStudentResponseDAO mentorAndStudentResponseDao;
     
     @Override
     public List<Student> findall() {
@@ -65,7 +65,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findAllByProgramName(String orgId, String programName) {
         List<Student> studentList = new ArrayList<>();
-            List<MentorAndStudentResponse> mentorStudentRespone = mentorAndStudentResponseServiceDao.retrieveByProgram(orgId, programName);
+            List<MentorAndStudentResponse> mentorStudentRespone = mentorAndStudentResponseDao.retrieveByProgram(orgId, programName);
             if (mentorStudentRespone != null && !mentorStudentRespone.isEmpty()) {
                 for(MentorAndStudentResponse mentorStudent : mentorStudentRespone) {
                     Student student = studentDAO.findById(mentorStudent.getMentorOrStudentId().toString());
@@ -80,7 +80,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Map<String, List<Student>> findAllByOrg(String orgId) {
         Map<String, List<Student>> studentMap = new HashMap<>();
-            List<MentorAndStudentResponse> mentorStudentRespone = mentorAndStudentResponseServiceDao.retrieveByOrg(orgId);
+            List<MentorAndStudentResponse> mentorStudentRespone = mentorAndStudentResponseDao.retrieveByOrg(orgId);
             if (mentorStudentRespone != null && !mentorStudentRespone.isEmpty()) {
                 for(MentorAndStudentResponse mentorStudent : mentorStudentRespone) {
                     Student student = null;
@@ -102,6 +102,44 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student findByUserId(String userId) {
        return studentDAO.findStudentByUserObjectId(userId);
-    } 
+    }
+    
+    @Override
+    public List<Student> getAssignedStudentList(List<Student> signedUpStudentList) {
+         List<Student> assignedStudentList = new ArrayList(); 
+         for(Student student : signedUpStudentList){
+             if(student.getAssignedUsersInfo()!= null && !student.getAssignedUsersInfo().isEmpty())
+            assignedStudentList.add(student);
+        }
+        return assignedStudentList; 
+    }
+
+    @Override
+    public List<Student> getSignedUpStudentList(List<Student> fullStudentList) {
+        List<Student> signedUpStudentList = new ArrayList();
+        for(Student student : fullStudentList){
+           MentorAndStudentResponse mentorResponse = mentorAndStudentResponseDao.
+                   retrieveByMentorStudentId(student.getUserObjectId().toString());
+              if(mentorResponse != null){
+              signedUpStudentList.add(student);
+           }
+        }
+        return signedUpStudentList;
+    }
+    
+    @Override
+    public List<Student> getUnassignedStudentList() {   
+        List<Student> signedUpStudentList = getSignedUpStudentList(findall()); 
+         List<Student> unAssignedSignedList = new ArrayList();
+        if(!signedUpStudentList.isEmpty()){
+            List<Student> assignedStudentList = getAssignedStudentList(signedUpStudentList);  
+            for(Student student : signedUpStudentList){
+                if(!assignedStudentList.contains(student)){
+                    unAssignedSignedList.add(student);     
+                }
+            } 
+        }
+        return unAssignedSignedList; 
+    }
     
 }

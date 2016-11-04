@@ -9,7 +9,7 @@ import com.snapit.solutions.mentor.sherpa.dao.OrganizationDAO;
 import com.snapit.solutions.mentor.sherpa.dao.QuestionOptionsDAO;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
-import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
+import com.snapit.solutions.mentor.sherpa.entity.AssignedUserInfo;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
@@ -51,6 +51,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     
     @Autowired
     MentorService mentorService;
+    
+    @Autowired
+    StudentService studentService;
     
 
     @Override
@@ -107,8 +110,9 @@ public class OrganizationServiceImpl implements OrganizationService {
    
 
     @Override
-    public void assignNewMentorToStudent(String studentUserObjectID, String orgId, String mentorUserObjectID, String programName) {
-        studentDAO.assignNewMentorToStudent(studentUserObjectID, orgId, mentorUserObjectID, programName);
+    public void assignNewMentorToStudent(String mentorUserObjectID, String orgId, String studentUserObjectID, String programName) {
+        mentorDAO.assignStudentToMentor(mentorUserObjectID, orgId, studentUserObjectID, programName);
+        studentDAO.assignNewMentorToStudent(mentorUserObjectID, orgId, studentUserObjectID, programName);
     }
 
     @Override
@@ -126,10 +130,10 @@ public class OrganizationServiceImpl implements OrganizationService {
        List<Student> signedUpStudents = getSignedUpStudents(fullStudentList, unSignedUpStudents);
        
        for(Student student : signedUpStudents){
-           if(student.getAssignedMentors() != null && !student.getAssignedMentors().isEmpty()){
-               for(AssignedMentor assignedMentor : student.getAssignedMentors()){
+           if(student.getAssignedUsersInfo() != null && !student.getAssignedUsersInfo().isEmpty()){
+               for(AssignedUserInfo assignedMentor : student.getAssignedUsersInfo()){
                    Mentor mentor = mentorDAO.findMentorByUserObjectId(
-                           assignedMentor.getMentorUserObjectId().toString());
+                           assignedMentor.getUserObjectId().toString());
                       studentMentorMap.put(student, mentor);
                }
            }
@@ -155,11 +159,21 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public void removeAssignedMentor(String orgId, String programName, String mentorUserObjectId, String studentUserObjectId) {  
-        AssignedMentor assignedMentor = new AssignedMentor();
-        assignedMentor.setMentorUserObjectId(DaoUtils.createObjectId(mentorUserObjectId));
-        assignedMentor.setOrgId(DaoUtils.createObjectId(orgId));
-        assignedMentor.setProgramName(programName);
-        studentDAO.removeAssignedMentor(assignedMentor, studentUserObjectId);
+        AssignedUserInfo assignedUserInfo = new AssignedUserInfo();
+        assignedUserInfo.setUserObjectId(DaoUtils.createObjectId(mentorUserObjectId));
+        assignedUserInfo.setOrgId(DaoUtils.createObjectId(orgId));
+        assignedUserInfo.setProgramName(programName);
+        studentDAO.removeAssignedMentor(assignedUserInfo, studentUserObjectId);
+    }
+    
+    @Override
+    public void removeAssignedStudent(String orgId, String programName, String mentorUserObjectId, String studentUserObjectId){
+        AssignedUserInfo assignedUserInfo = new AssignedUserInfo();
+        assignedUserInfo.setUserObjectId(DaoUtils.createObjectId(studentUserObjectId));
+        assignedUserInfo.setOrgId(DaoUtils.createObjectId(orgId));
+        assignedUserInfo.setProgramName(programName);
+        mentorDAO.removeAssignedStudent(assignedUserInfo, mentorUserObjectId);
+        
     }
 
     private List<Student> getSignedUpStudents(List<Student> fullStudentList,List<Student> unSignedUpStudents)
@@ -203,7 +217,86 @@ public class OrganizationServiceImpl implements OrganizationService {
             }
         }
         return organizationToProgramName;
-    } 
+    }
+    
+    @Override
+    public void assignNewStudentToMentor(String studentUserObjectID, String orgId, String mentorUserObjectId, String programName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Map<Student, Integer> getMatchedStudents(String mentorId, String orgId, String programName) {
+        MentorAndStudentResponse mentorResponse = mentorAndStudentResponseDAO.retrieveByMentorStudentId(mentorId);
+         
+         List<Student> unAssignedStudentList = studentService.getUnassignedStudentList();
+         Map<Student, Integer> studentMatchPercentageForMentor = new HashMap();
+         Set<ObjectId> unAssignedStudentIds = new HashSet();
+         if(unAssignedStudentList != null && !unAssignedStudentList.isEmpty())
+         {     
+            for(Student unAssignedStudent : unAssignedStudentList){
+                unAssignedStudentIds.add(unAssignedStudent.getUserObjectId());
+            }
+ 
+         List<MentorAndStudentResponse> studentResponseList = mentorAndStudentResponseDAO.retrieveByMentorStudentIds(CommonServiceUtils.createSetOfStringIds(unAssignedStudentIds));
+         
+         List<QuestionOptions> studentExecQuestions = questionOptionsDAO.retrieveQuestionsBasedOnExclusion(true, "student");
+         
+         List<QuestionOptions> mentorExecQuestions = questionOptionsDAO.retrieveQuestionsBasedOnExclusion(true, "mentor");
+         
+         
+         Map<ObjectId, Integer> mentorToMatchPercentageMap = MatchingServiceImpl.match(mentorResponse, 
+                                                                                    studentResponseList,
+                                                                                    studentExecQuestions,
+                                                                                    mentorExecQuestions);
+         
+         Set<ObjectId> studentIds = mentorToMatchPercentageMap.keySet();
+         
+         List<Student> studentList = studentDAO.findStudentByUserObjectIds(CommonServiceUtils.createSetOfStringIds(studentIds));
+
+         for(Student student : studentList){
+            studentMatchPercentageForMentor.put(student, mentorToMatchPercentageMap.get(student.getUserObjectId()));
+            }
+       }
+        
+      return studentMatchPercentageForMentor;  
+    }
+
+    @Override
+    public List<Mentor> findUnSignedUpMentors(List<Student> fullStudentList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Map<Mentor, Student> findSignedUpMentorsAndAssignedStudents(List<Mentor> fullMentorList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeAssignedStudents(String orgId, String programName, String mentorUserObjectId, String studentUserObjectId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Map<Mentor, List<Student>> findSignedUpMentorInfoByProgramName() {
+        List<Mentor> signedUpMentorList = mentorService.getSignedUpMentorList(mentorService.findall());
+        Map<Mentor, List<Student>> mentorToAssignedStudentsMap = new HashMap();
+        for (Mentor mentor : signedUpMentorList) {
+            Set<ObjectId> assignedStudentIds = new HashSet();
+            if (mentor.getAssignedUsersInfo() != null && !mentor.getAssignedUsersInfo().isEmpty()) {
+                for (AssignedUserInfo assignedUserInfo : mentor.getAssignedUsersInfo()) {
+                    assignedStudentIds.add(assignedUserInfo.getUserObjectId());
+                }
+
+            }
+            List<Student> studentList = new ArrayList();
+            if(!assignedStudentIds.isEmpty()){
+            studentList = studentDAO.findStudentByUserObjectIds(
+                    CommonServiceUtils.createSetOfStringIds(assignedStudentIds));
+            }
+            mentorToAssignedStudentsMap.put(mentor, studentList);
+        }
+        return mentorToAssignedStudentsMap;
+    }
     
 }
 

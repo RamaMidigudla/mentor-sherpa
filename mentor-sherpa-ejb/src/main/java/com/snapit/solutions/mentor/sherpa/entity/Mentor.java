@@ -48,6 +48,9 @@ public class Mentor implements Serializable {
     
     private String imageName = "";
     
+    @Embedded("assignedUsersInfo")
+    private List<AssignedUserInfo> assignedUsersInfo;
+    
     @Embedded("questionAndResponses")
     private QuestionResponse mentorQuestionAndResponses;
     
@@ -146,6 +149,15 @@ public class Mentor implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public List<AssignedUserInfo> getAssignedUsersInfo() {
+        return assignedUsersInfo;
+    }
+
+    public void setAssignedUsersInfo(List<AssignedUserInfo> assignedUsersInfo) {
+        this.assignedUsersInfo = assignedUsersInfo;
+    }
+    
 
     @Override
     public int hashCode() {

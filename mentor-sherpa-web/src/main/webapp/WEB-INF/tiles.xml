@@ -47,6 +47,14 @@
         <put-attribute name="title" value="Mentor Sherpa -- Student List"></put-attribute>
         <put-attribute name="body" value="/jsp/student/list.jsp"></put-attribute>
     </definition>
+     <definition name="bbbsStudentList" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- Student List"></put-attribute>
+        <put-attribute name="body" value="/jsp/student/bbbsStudentList.jsp"></put-attribute>
+    </definition>
+     <definition name="bbbsMentorList" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- Mentor List"></put-attribute>
+        <put-attribute name="body" value="/jsp/mentor/bbbsMentorList.jsp"></put-attribute>
+    </definition>
     <definition name="profile" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa -- Mentor Profile"></put-attribute>
         <put-attribute name="body" value="/jsp/user/profile.jsp"></put-attribute>
@@ -55,9 +63,17 @@
         <put-attribute name="title" value="Mentor Sherpa -- Assign Mentor"></put-attribute>
         <put-attribute name="body" value="/jsp/organization/matchedMentors.jsp"></put-attribute>
     </definition>
+    <definition name="bbbsmatchedMentors" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- Assign Mentor"></put-attribute>
+        <put-attribute name="body" value="/jsp/organization/bbbsmatchedMentors.jsp"></put-attribute>
+    </definition>
      <definition name="responseList" extends="base.definition">
         <put-attribute name="title" value="Mentor Sherpa -- View Response"></put-attribute>
         <put-attribute name="body" value="/jsp/program/userReponse.jsp"></put-attribute>
+    </definition>
+    <definition name="bbbsResponseList" extends="base.definition">
+        <put-attribute name="title" value="Mentor Sherpa -- View Response"></put-attribute>
+        <put-attribute name="body" value="/jsp/program/bbbsUserResponse.jsp"></put-attribute>
     </definition>
     <definition name="error" template="/jsp/error.jsp">
         <put-attribute name="title" value="Mentor Sherpa | Error"></put-attribute>

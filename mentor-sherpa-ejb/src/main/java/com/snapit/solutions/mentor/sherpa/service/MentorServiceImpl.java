@@ -8,7 +8,7 @@ package com.snapit.solutions.mentor.sherpa.service;
 import com.snapit.solutions.mentor.sherpa.dao.MentorAndStudentResponseDAO;
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
-import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
+import com.snapit.solutions.mentor.sherpa.entity.AssignedUserInfo;
 import com.snapit.solutions.mentor.sherpa.entity.SignedupOrganization;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
@@ -111,9 +111,9 @@ public class MentorServiceImpl implements MentorService {
         Set<ObjectId> assignedMentorIdSet = new HashSet();
         if(!studentList.isEmpty()){
             for(Student student : studentList){
-               if(student.getAssignedMentors() != null && !student.getAssignedMentors().isEmpty()){
-                   for(AssignedMentor assignedMentor : student.getAssignedMentors()){
-                   assignedMentorIdSet.add(assignedMentor.getMentorUserObjectId());
+               if(student.getAssignedUsersInfo() != null && !student.getAssignedUsersInfo().isEmpty()){
+                   for(AssignedUserInfo assignedMentor : student.getAssignedUsersInfo()){
+                   assignedMentorIdSet.add(assignedMentor.getUserObjectId());
                   }
                } 
             }

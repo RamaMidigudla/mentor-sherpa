@@ -27,7 +27,8 @@ public class Student implements Serializable {
     @Embedded("userObjectId")
     private ObjectId userObjectId;
     
-    private List<AssignedMentor> assignedMentors;
+    @Embedded("assignedUsersInfo")
+    private List<AssignedUserInfo> assignedUsersInfo;
     
     private String name = "";
     
@@ -118,12 +119,12 @@ public class Student implements Serializable {
         this.imageName = imageName;
     }
     
-    public List<AssignedMentor> getAssignedMentors() {
-        return assignedMentors;
+    public List<AssignedUserInfo> getAssignedUsersInfo() {
+        return assignedUsersInfo;
     }
 
-    public void setAssignedMentors(List<AssignedMentor> assignedMentors) {
-        this.assignedMentors = assignedMentors;
+    public void setAssignedUsersInfo(List<AssignedUserInfo> assignedUsersInfo) {
+        this.assignedUsersInfo = assignedUsersInfo;
     }
 
     public String getAddress() {
@@ -139,7 +140,7 @@ public class Student implements Serializable {
         int hash = 5;
         hash = 53 * hash + Objects.hashCode(this.id);
         hash = 53 * hash + Objects.hashCode(this.userObjectId);
-        hash = 53 * hash + Objects.hashCode(this.assignedMentors);
+        hash = 53 * hash + Objects.hashCode(this.assignedUsersInfo);
         hash = 53 * hash + Objects.hashCode(this.name);
         hash = 53 * hash + this.age;
         hash = 53 * hash + Objects.hashCode(this.gender);
@@ -187,7 +188,7 @@ public class Student implements Serializable {
         if (!Objects.equals(this.userObjectId, other.userObjectId)) {
             return false;
         }
-        if (!Objects.equals(this.assignedMentors, other.assignedMentors)) {
+        if (!Objects.equals(this.assignedUsersInfo, other.assignedUsersInfo)) {
             return false;
         }
         if (!Objects.equals(this.interestedOrganizations, other.interestedOrganizations)) {

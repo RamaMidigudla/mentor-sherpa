@@ -14,13 +14,13 @@ import org.mongodb.morphia.annotations.Embedded;
  * @author Ram
  */
 @Embedded
-public class AssignedMentor implements Serializable {
+public class AssignedUserInfo implements Serializable {
     
     private ObjectId orgId;
     
     private String programName;
     
-    private ObjectId mentorUserObjectId;
+    private ObjectId userObjectId;
 
     public ObjectId getOrgId() {
         return orgId;
@@ -38,12 +38,12 @@ public class AssignedMentor implements Serializable {
         this.programName = programName;
     }
 
-    public ObjectId getMentorUserObjectId() {
-        return mentorUserObjectId;
+    public ObjectId getUserObjectId() {
+        return userObjectId;
     }
 
-    public void setMentorUserObjectId(ObjectId mentorUserObjectId) {
-        this.mentorUserObjectId = mentorUserObjectId;
+    public void setUserObjectId(ObjectId userObjectId) {
+        this.userObjectId = userObjectId;
     }
     
 }

@@ -58,7 +58,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs" id="navTabs">
                     <li class="active"><a href="#mentor" data-toggle="tab"><spring:message code="label.tile.header.mentor" /></a></li>
-                    <li><a href="#student" data-toggle="tab"><spring:message code="label.tile.header.student" /></a></li>
+                    <li><a href="#student" data-toggle="tab"><spring:message code="pageTitle.student" /></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="mentor">
@@ -74,7 +74,7 @@
                                         </div>
                                     </c:if>
                                 </spring:bind>
-                                <h2><b><spring:message code="label.mentor" /></b> <spring:message code="label.registration" /></h2>
+                                <h2><b><spring:message code="label.tile.header.mentor" /></b> <spring:message code="label.registration" /></h2>
 
                                 <div class="register-box-body">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -87,8 +87,9 @@
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="male" />  <spring:message code="label.radiobutton.male" /> 
-                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="female" />  <spring:message code="label.radiobutton.female" /> 
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="Brother" />  <spring:message code="label.radiobutton.male" /> 
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="Couple" />  <spring:message code="label.radiobutton.female" />
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="Sister" />  <spring:message code="label.radiobutton.couple" /> 
                                     </div>
                                     <div class="form-group has-feedback">
                                         <div class="input-group date">
@@ -158,7 +159,7 @@
                                         </div>
                                     </c:if>
                                 </spring:bind>
-                                <h2><b>Student/Mentee</b> Registration</h2>
+                                <h2><b><spring:message code="label.tile.header.student" /></b> <spring:message code="label.registration" /></h2>
 
                                 <div class="register-box-body">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

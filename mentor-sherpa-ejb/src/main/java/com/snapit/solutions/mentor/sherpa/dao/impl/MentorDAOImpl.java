@@ -7,14 +7,18 @@ package com.snapit.solutions.mentor.sherpa.dao.impl;
 
 import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
+import com.snapit.solutions.mentor.sherpa.entity.AssignedUserInfo;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
+import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -95,6 +99,31 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
         }
        else
        return new Mentor();
+    }
+    
+    @Override
+    public void assignStudentToMentor(String mentorUserObjectId, String orgId, String studentUserObjectId, String programName) {
+
+        List<AssignedUserInfo> assignedUsersInfo = new ArrayList();
+        AssignedUserInfo assignedUserInfo = new AssignedUserInfo();
+        assignedUserInfo.setProgramName(programName);
+        assignedUserInfo.setOrgId(DaoUtils.createObjectId(orgId));
+        assignedUserInfo.setUserObjectId(DaoUtils.createObjectId(studentUserObjectId));
+        assignedUsersInfo.add(assignedUserInfo);
+
+        UpdateOperations<Mentor> ops
+                = getDatastore().createUpdateOperations(Mentor.class).addAll("assignedUsersInfo", assignedUsersInfo, false);
+        getDatastore().update(getDatastore().createQuery(Mentor.class).field("userObjectId").
+                equal(DaoUtils.createObjectId(mentorUserObjectId)), ops);
+
+    }
+    
+    @Override
+    public void removeAssignedStudent(AssignedUserInfo assignedUserInfo,String mentorUserObjectId) {    
+        UpdateOperations<Mentor> ops = 
+                getDatastore().createUpdateOperations(Mentor.class).removeAll("assignedUsersInfo", assignedUserInfo);
+	getDatastore().update(getDatastore().createQuery(Mentor.class).field("userObjectId").
+                equal(DaoUtils.createObjectId(mentorUserObjectId)), ops);
     }
     
       

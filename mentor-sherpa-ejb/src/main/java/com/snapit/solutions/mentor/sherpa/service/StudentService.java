@@ -30,4 +30,10 @@ public interface StudentService {
     public Map<String, List<Student>>  findAllByOrg(String orgId);
     
     public Student findByUserId(String userId);
+    
+    public List<Student> getAssignedStudentList(List<Student> signedUpStudentList);
+    
+     public List<Student> getSignedUpStudentList(List<Student> fullStudentList);
+     
+     public List<Student> getUnassignedStudentList();
 }

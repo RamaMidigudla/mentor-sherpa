@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.snapit.solutions.mentor.sherpa.dao.StudentDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
-import com.snapit.solutions.mentor.sherpa.entity.AssignedMentor;
+import com.snapit.solutions.mentor.sherpa.entity.AssignedUserInfo;
 import java.util.ArrayList;
 import java.util.Set;
 import org.mongodb.morphia.query.Query;
@@ -46,17 +46,17 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
     }
 
     @Override
-    public void assignNewMentorToStudent(String studentUserObjectId, String orgId, String mentorUserObjectId, String programName) {
+    public void assignNewMentorToStudent(String mentorUserObjectId, String orgId, String studentUserObjectId, String programName) {
 
-        List<AssignedMentor> assignedMentors = new ArrayList();
-        AssignedMentor assignedMentor = new AssignedMentor();
-        assignedMentor.setProgramName(programName);
-        assignedMentor.setOrgId(DaoUtils.createObjectId(orgId));
-        assignedMentor.setMentorUserObjectId(DaoUtils.createObjectId(mentorUserObjectId));
-        assignedMentors.add(assignedMentor);
+        List<AssignedUserInfo> assignedUsersInfo = new ArrayList();
+        AssignedUserInfo assignedUserInfo = new AssignedUserInfo();
+        assignedUserInfo.setProgramName(programName);
+        assignedUserInfo.setOrgId(DaoUtils.createObjectId(orgId));
+        assignedUserInfo.setUserObjectId(DaoUtils.createObjectId(mentorUserObjectId));
+        assignedUsersInfo.add(assignedUserInfo);
 
         UpdateOperations<Student> ops
-                = getDatastore().createUpdateOperations(Student.class).addAll("assignedMentors", assignedMentors, false);
+                = getDatastore().createUpdateOperations(Student.class).addAll("assignedUsersInfo", assignedUsersInfo, false);
         getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
                 equal(DaoUtils.createObjectId(studentUserObjectId)), ops);
 
@@ -77,9 +77,9 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
     }
 
     @Override
-    public void removeAssignedMentor(AssignedMentor assignedMentor,String studentUserObjectId) {    
+    public void removeAssignedMentor(AssignedUserInfo assignedUserInfo,String studentUserObjectId) {    
         UpdateOperations<Student> ops = 
-                getDatastore().createUpdateOperations(Student.class).removeAll("assignedMentors", assignedMentor);
+                getDatastore().createUpdateOperations(Student.class).removeAll("assignedUsersInfo", assignedUserInfo);
 	getDatastore().update(getDatastore().createQuery(Student.class).field("userObjectId").
                 equal(DaoUtils.createObjectId(studentUserObjectId)), ops);
     }
