@@ -37,7 +37,7 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="${pageContext.request.contextPath}/"><b><spring:message code="label.mentor" /></b><spring:message code="label.sherpa" /></a>
+                <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/themes/AdminLTE/dist/img/MSTransLogo.png" /></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">

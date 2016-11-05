@@ -24,7 +24,8 @@
                             <th><spring:message code="list.table.header.mentorName" /></th>
                             <th><spring:message code="list.table.header.age" /></th>
                             <th><spring:message code="list.table.header.gender" /></th>
-                            <th><spring:message code="list.table.header.status" /></th>
+                            <th><spring:message code="list.table.header.assignedTo" /></th>
+                            <th><spring:message code="list.table.header.action" /></th>
                         </tr>
                     </thead>
                     <tbody><c:if test="${not empty assignedMentorInfoMap}">
@@ -33,18 +34,6 @@
                                     <td>
                                      <a href="${contextPath}/organization/viewProfile/${entry.key.userObjectId}">${entry.key.name}</a>
                                      &rarr; &nbsp;
-                                     <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
-                                     <a href="${pageContext.request.contextPath}/organization/${entry.key.id}/assign">
-                                         <c:choose>
-                                             <c:when test="${not empty entry.value}">
-                                               <span class="btn bg-blue btn-sm margin"><spring:message code="link.label.assignMoreStudent"/></span>  
-                                             </c:when>
-                                             <c:otherwise>
-                                                <span class="btn bg-blue btn-sm margin"><spring:message code="link.label.assignStudent"/></span> 
-                                             </c:otherwise>
-                                         </c:choose>  
-                                     </a>
-                                     </sec:authorize>
                                     </td>
                                     <td>${entry.key.age}</td>
                                     <td>${entry.key.gender}</td>
@@ -63,9 +52,24 @@
                                                 </c:forEach> 
                                             </c:when>
                                             <c:otherwise>
-                                                <span class="label label-info"><spring:message code="label.available"/></span>
+                                                <b><spring:message code="label.noStudentsAssigned"/></b>
                                             </c:otherwise>
                                         </c:choose>
+                                     </td>
+                                     <td>
+                                     <sec:authorize access="hasRole('ORG_ADMIN') OR hasRole('ORG_USER')">
+                                     <a href="${pageContext.request.contextPath}/organization/${entry.key.id}/assign">
+                                         <c:choose>
+                                             <c:when test="${not empty entry.value}">
+                                               <span class="btn bg-blue btn-sm margin"><spring:message code="link.label.assignMoreStudent"/></span>  
+                                             </c:when>
+                                             <c:otherwise>
+                                                <span class="btn bg-blue btn-sm margin"><spring:message code="link.label.assignStudent"/></span> 
+                                             </c:otherwise>
+                                         </c:choose>  
+                                     </a>
+                                     </sec:authorize>
+                                         
                                      </td>
                                 </c:forEach>
                             </c:if>
