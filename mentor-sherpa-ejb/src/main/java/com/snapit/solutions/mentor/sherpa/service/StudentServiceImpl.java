@@ -128,6 +128,21 @@ public class StudentServiceImpl implements StudentService {
     }
     
     @Override
+    public List<Student> getUnassignedStudentList(String mentorGender) {   
+        List<Student> signedUpStudentList = getSignedUpStudentList(findStudentsByMentorGender(mentorGender)); 
+         List<Student> unAssignedSignedList = new ArrayList();
+        if(!signedUpStudentList.isEmpty()){
+            List<Student> assignedStudentList = getAssignedStudentList(signedUpStudentList);  
+            for(Student student : signedUpStudentList){
+                if(!assignedStudentList.contains(student)){
+                    unAssignedSignedList.add(student);     
+                }
+            } 
+        }
+        return unAssignedSignedList; 
+    }
+    
+    @Override
     public List<Student> getUnassignedStudentList() {   
         List<Student> signedUpStudentList = getSignedUpStudentList(findall()); 
          List<Student> unAssignedSignedList = new ArrayList();
@@ -140,6 +155,15 @@ public class StudentServiceImpl implements StudentService {
             } 
         }
         return unAssignedSignedList; 
+    }
+
+    @Override
+    public List<Student> findStudentsByMentorGender(String gender) {
+        if(gender.equals("female")){
+            return studentDAO.findStudentsByMentorGender("female");
+        }
+        else
+            return studentDAO.findStudentsByMentorGender("male");
     }
     
 }

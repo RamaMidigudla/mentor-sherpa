@@ -41,7 +41,7 @@ public interface OrganizationService {
 
     public void assignNewStudentToMentor(String studentUserObjectID, String orgId, String mentorUserObjectId, String programName);
 
-    public Map<Student, Integer> getMatchedStudents(String mentorId, String orgId, String programName);
+    public Map<Student, Integer> getMatchedStudents(String mentorId,String mentorGender, String orgId, String programName);
 
     public List<Mentor> findUnSignedUpMentors(List<Student> fullStudentList);
 

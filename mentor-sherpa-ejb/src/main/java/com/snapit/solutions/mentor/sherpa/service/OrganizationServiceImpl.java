@@ -225,10 +225,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Map<Student, Integer> getMatchedStudents(String mentorId, String orgId, String programName) {
+    public Map<Student, Integer> getMatchedStudents(String mentorId,String mentorGender, String orgId, String programName) {
         MentorAndStudentResponse mentorResponse = mentorAndStudentResponseDAO.retrieveByMentorStudentId(mentorId);
          
-         List<Student> unAssignedStudentList = studentService.getUnassignedStudentList();
+         List<Student> unAssignedStudentList = studentService.getUnassignedStudentList(mentorGender);
          Map<Student, Integer> studentMatchPercentageForMentor = new HashMap();
          Set<ObjectId> unAssignedStudentIds = new HashSet();
          if(unAssignedStudentList != null && !unAssignedStudentList.isEmpty())

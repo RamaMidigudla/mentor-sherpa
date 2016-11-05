@@ -163,7 +163,8 @@ public class OrganizationController {
         Organization organization = organizationService.findOrganziationById(getOrganizationId());
         Mentor mentor = mentorService.findById(id);
        Map<Student,Integer> matchResults = new HashMap<>();
-               matchResults.putAll(organizationService.getMatchedStudents(mentor.getUserObjectId().toString(), 
+               matchResults.putAll(organizationService.getMatchedStudents(mentor.getUserObjectId().toString(),
+                mentor.getGender(),
                 organization.getId().toString(),
                 organization.getPrograms().get(0).getProgramName()));
         model.addAttribute("matchResults", matchResults);

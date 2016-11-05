@@ -33,7 +33,11 @@ public interface StudentService {
     
     public List<Student> getAssignedStudentList(List<Student> signedUpStudentList);
     
-     public List<Student> getSignedUpStudentList(List<Student> fullStudentList);
+    public List<Student> getSignedUpStudentList(List<Student> fullStudentList);
+    
+    public List<Student> getUnassignedStudentList();
      
-     public List<Student> getUnassignedStudentList();
+    public List<Student> getUnassignedStudentList(String mentorGender);
+     
+    public List<Student> findStudentsByMentorGender(String gender);
 }

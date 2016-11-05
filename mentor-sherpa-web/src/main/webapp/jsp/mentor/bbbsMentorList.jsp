@@ -33,14 +33,14 @@
                                 <tr> 
                                     <td>
                                      <a href="${contextPath}/organization/viewProfile/${entry.key.userObjectId}">${entry.key.name}</a>
-                                     &rarr; &nbsp;
                                     </td>
                                     <td>${entry.key.age}</td>
                                     <td>${entry.key.gender}</td>
                                     <td>
                                         <c:choose>
                                             <c:when test="${not empty entry.value}">
-                                                <span class="label label-success"><spring:message code="label.assignedTo"/></span>
+                                                <label class="text-green"><b><spring:message code="label.assignedTo"/></b></label>
+                                                <br>
                                                 <c:forEach items="${entry.value}" var="assignedStudent">
                                                     <ul style="padding-left: 10px;">
                                                       <a href="${contextPath}/organization/viewProfile/${assignedStudent.userObjectId}">${assignedStudent.name}</a>
@@ -52,7 +52,7 @@
                                                 </c:forEach> 
                                             </c:when>
                                             <c:otherwise>
-                                                <b><spring:message code="label.noStudentsAssigned"/></b>
+                                                <label class="text-red"><b><spring:message code="label.noStudentsAssigned"/></b></label>
                                             </c:otherwise>
                                         </c:choose>
                                      </td>

@@ -91,4 +91,11 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
        query.field("assignedMentors.mentorUserObjectId").equal(DaoUtils.createObjectId(mentorObjectIdSet));
        return query.get();
     }
+
+    @Override
+    public List<Student> findStudentsByMentorGender(String gender) {
+       Query<Student> query = getDatastore().createQuery(Student.class);
+       query.field("gender").equal(gender);
+       return query.asList();
+    }
 }
