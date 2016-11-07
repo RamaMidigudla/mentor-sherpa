@@ -87,9 +87,9 @@
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="Brother" />  <spring:message code="label.radiobutton.male" /> 
-                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="Couple" />  <spring:message code="label.radiobutton.female" />
-                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="Sister" />  <spring:message code="label.radiobutton.couple" /> 
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="male" />  <spring:message code="label.radiobutton.male" /> 
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="couple" />  <spring:message code="label.radiobutton.female" />
+                                        <form:radiobutton class="minimal" path="gender" name="optionsRadios" id="optionsRadios" value="female" />  <spring:message code="label.radiobutton.couple" /> 
                                     </div>
                                     <div class="form-group has-feedback">
                                         <div class="input-group date">
