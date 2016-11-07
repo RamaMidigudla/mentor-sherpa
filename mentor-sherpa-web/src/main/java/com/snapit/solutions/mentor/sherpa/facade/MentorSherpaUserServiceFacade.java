@@ -51,7 +51,13 @@ public class MentorSherpaUserServiceFacade implements MentorSherpaUserService {
                 registerForm.getState(), 
                 registerForm.getZipCode()));         
         if (null != registerForm.getGender()) {
-            user.setImageName(registerForm.getGender().equals("male") ? "avatar5.png" : "avatar2.png");
+            if (registerForm.getGender().equalsIgnoreCase("male")) {
+                user.setImageName("avatar5.png" );
+            } else if (registerForm.getGender().equalsIgnoreCase("female")) {
+                user.setImageName("avatar2.png" );
+            }  else {
+                user.setImageName("");
+            }
         }
         userService.registerUser(user);
         createUserProfile(registerForm.getEmailId(), role);
