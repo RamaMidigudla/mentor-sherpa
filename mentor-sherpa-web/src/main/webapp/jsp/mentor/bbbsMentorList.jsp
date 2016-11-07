@@ -61,7 +61,7 @@
                                      <a href="${pageContext.request.contextPath}/organization/${entry.key.id}/assign">
                                          <c:choose>
                                              <c:when test="${not empty entry.value}">
-                                               <span class="btn bg-blue btn-sm margin"><spring:message code="link.label.assignMoreStudent"/></span>  
+                                               <span class="btn bg-olive btn-sm margin"><spring:message code="link.label.assignMoreStudent"/></span>  
                                              </c:when>
                                              <c:otherwise>
                                                 <span class="btn bg-blue btn-sm margin"><spring:message code="link.label.assignStudent"/></span> 

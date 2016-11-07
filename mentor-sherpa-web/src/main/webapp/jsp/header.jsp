@@ -231,7 +231,7 @@
                  <c:url var="userProfileImage" value="avatar2.png"></c:url>
              </c:if>
              <c:if test="${user.couple}">
-                 <c:url var="userProfileImage" value=""></c:url>
+                 <c:url var="userProfileImage" value="avatar5.png"></c:url>
              </c:if>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
