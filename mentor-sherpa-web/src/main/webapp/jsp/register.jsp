@@ -136,7 +136,7 @@
                                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                                     </div>
                                         <!-- /.col -->
-                                        <div  class="col-xs-4">
+                                        <div  class="col-xs-6">
                                             <button type="submit" class="btn btn-primary btn-block btn-flat"><spring:message code="button.label.register" /></button>
                                         </div>
                                         <!-- /.col -->
@@ -221,7 +221,7 @@
                                     </div>
                                     <div class="row">
                                         <!-- /.col -->
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-6">
                                             <button type="submit" class="btn btn-primary btn-block btn-flat"><spring:message code="button.label.register" /></button>
                                         </div>
                                         <!-- /.col -->

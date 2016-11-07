@@ -80,6 +80,18 @@ public class RegistrationController {
         model.addAttribute(studentRegisterForm);
     }
     
+    @RequestMapping(value = "/success", method = RequestMethod.GET)
+    public ModelAndView registerSuccess(Model model) {
+        initialize(model);
+        return new ModelAndView("registerSuccess");
+    }
+
+    @RequestMapping(value = "/failure", method = RequestMethod.GET)
+    public ModelAndView registerFailure(Model model) {
+        initialize(model);
+        return new ModelAndView("registerFailure");
+    }
+
     @RequestMapping(value = "/mentor", method = RequestMethod.POST)
     public String mentorRegistration(@Validated @ModelAttribute("mentorRegisterForm") MentorRegisterForm mentorRegisterForm, BindingResult result, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         return register(mentorRegisterForm, result, model, "MENTOR", redirectAttributes, request);
@@ -108,11 +120,11 @@ public class RegistrationController {
         SimpleMailMessage email
                 = constructRegistrationEmail(registerForm.getEmailId());
         mailSender.send(email);
-            return "redirect:/login";
+            return "redirect:success";
         } else {
             redirectAttributes.addFlashAttribute("alertMessage", "Oops! that email already exists. Try logging in!");
 //            result.reject("Oops! that email already exists. Try logging in!");
-            return "redirect:/login";
+            return "redirect:failure";
         }
     }
     private SimpleMailMessage constructRegistrationEmail(String emailId) {
