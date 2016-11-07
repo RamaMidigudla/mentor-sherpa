@@ -17,6 +17,7 @@
         <intercept-url pattern="/register/mentor" access="permitAll" />
         <intercept-url pattern="/register/student" access="permitAll" />
         <intercept-url pattern="/mentor/**" access="hasRole('MENTOR')" />
+        <intercept-url pattern="/organization/viewResponse/**" access="hasRole('ORG_ADMIN') OR hasRole('MENTOR') OR hasRole('STUDENT')" />
         <intercept-url pattern="/organization/**" access="hasRole('ORG_ADMIN')" />
         <intercept-url pattern="/organization/user/**" access="hasRole('ORG_USER')" />
         <intercept-url pattern="/student/**" access="hasRole('STUDENT')" />
