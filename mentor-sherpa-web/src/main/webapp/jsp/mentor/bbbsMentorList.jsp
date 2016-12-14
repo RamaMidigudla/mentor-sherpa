@@ -10,6 +10,11 @@
 <sec:authentication var="user" property="principal" />
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <div id="find_keyword">
     <div class="ui-widget"><input id="searchQuery" size="40" placeholder="Enter a Name to Search..." type="text" name="tagQuery"  onFocus="inputFocus(this)" onBlur="inputBlur(this)"></div>
 </div>
