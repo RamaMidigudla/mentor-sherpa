@@ -13,6 +13,7 @@ import com.snapit.solutions.mentor.sherpa.entity.Mentor;
 import com.snapit.solutions.mentor.sherpa.entity.MentorAndStudentResponse;
 import com.snapit.solutions.mentor.sherpa.entity.Organization;
 import com.snapit.solutions.mentor.sherpa.entity.Student;
+import com.snapit.solutions.mentor.sherpa.model.AutoCompleteHelper;
 import com.snapit.solutions.mentor.sherpa.service.MentorAndStudentResponseService;
 import com.snapit.solutions.mentor.sherpa.service.MentorService;
 import com.snapit.solutions.mentor.sherpa.service.OrganizationService;
@@ -22,11 +23,14 @@ import com.snapit.solutions.mentor.sherpa.service.StudentService;
 import com.snapit.solutions.securtiy.entity.User;
 import com.snapit.solutions.securtiy.service.UserService;
 import com.snapit.solutions.web.security.AuthUser;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -193,4 +197,35 @@ public class OrganizationController {
         redirectAttr.addFlashAttribute("infoMessage", "You have successfully removed assigned student");
         return new ModelAndView("redirect:/");
     }
+    
+    @RequestMapping(value = "/auto/student",  method = RequestMethod.GET)
+    public @ResponseBody List getStudentList(@RequestParam("term") String query) {
+      List<Student> sList = studentService.getSignedUpStudentList(studentService.findall());
+         List<AutoCompleteHelper> result = new ArrayList();
+         for(Student student : sList){
+             if(student.getName().contains(query)){
+             AutoCompleteHelper acH = new AutoCompleteHelper();
+             acH.setName(student.getName());
+             acH.setObjectId(student.getUserObjectId().toString());
+             result.add(acH);
+             } 
+         }
+       return result;
+    }
+    
+     @RequestMapping(value = "/auto/mentor",  method = RequestMethod.GET)
+    public @ResponseBody List getMentorList(@RequestParam("term") String query) {
+      List<Mentor> sList = mentorService.getSignedUpMentorList(mentorService.findall());
+         List<AutoCompleteHelper> result = new ArrayList();
+         for(Mentor mentor : sList){
+             if(mentor.getName().contains(query)){
+             AutoCompleteHelper acH = new AutoCompleteHelper();
+             acH.setName(mentor.getName());
+             acH.setObjectId(mentor.getUserObjectId().toString());
+             result.add(acH);
+             } 
+         }
+       return result;
+    }
+    
 }

@@ -6,6 +6,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div id="find_keyword">
+    <div class="ui-widget"><input id="searchQuery" size="40" placeholder="Enter a Name to Search..." type="text" name="tagQuery"  onFocus="inputFocus(this)" onBlur="inputBlur(this)"></div>
+</div>
+
+<br/>
+<br/>
         <div class="row">
             <div class="col-xs-12">          
                 <div class="box box-primary">
@@ -52,3 +63,45 @@
                 <!-- /.box -->
             </div>
         </div>
+
+                                
+<script>var ctx = "${pageContext.request.contextPath}"</script>
+
+<script type="text/javascript">
+	function inputFocus(i){
+		if(i.value==i.defaultValue){ i.value=""; i.style.color="#000"; }
+	}
+	function inputBlur(i){
+		if(i.value==""){ i.value=i.defaultValue; i.style.color="#848484"; }
+	}
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    //attach autocomplete
+    $("#searchQuery").autocomplete({
+        minLength: 1,
+        delay: 500,
+        //define callback to format results
+        source: function (request, response) {
+            $.getJSON("${contextPath}/organization/auto/student", request, function(result) {
+                response($.map(result, function(item) {
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.name,
+                        // following property gets entered in the textbox
+                        value: item.name,
+                        
+                        profile_url: ctx + "/organization/viewProfile/" + item.objectId
+                       
+                    }
+                }));
+            });
+        },
+                 select: function( event, ui ) {
+                     
+        window.location.href = ui.item.profile_url;
+    }
+    }); 
+});
+</script>

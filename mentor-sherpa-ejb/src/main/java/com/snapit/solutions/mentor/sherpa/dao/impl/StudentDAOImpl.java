@@ -42,7 +42,7 @@ public class StudentDAOImpl extends BasicDAO<Student, ObjectId> implements Stude
 
     @Override
     public List<Student> findAll() {
-        return getDatastore().find(Student.class).asList();
+        return getDatastore().find(Student.class).order("name").asList();
     }
 
     @Override

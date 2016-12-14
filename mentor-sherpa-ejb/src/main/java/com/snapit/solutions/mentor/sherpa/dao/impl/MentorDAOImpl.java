@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +9,6 @@ import com.snapit.solutions.mentor.sherpa.dao.MentorDAO;
 import com.snapit.solutions.mentor.sherpa.dao.utils.DaoUtils;
 import com.snapit.solutions.mentor.sherpa.entity.AssignedUserInfo;
 import com.snapit.solutions.mentor.sherpa.entity.Mentor;
-import com.snapit.solutions.mentor.sherpa.entity.Student;
 import com.snapit.solutions.mentor.sherpa.service.utils.CommonServiceUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class MentorDAOImpl extends BasicDAO<Mentor, ObjectId> implements MentorD
 
     @Override
     public List<Mentor> findAll() {
-        return getDatastore().find(Mentor.class).asList();
+        return getDatastore().find(Mentor.class).order("name").asList();
     }
 
     @Override
