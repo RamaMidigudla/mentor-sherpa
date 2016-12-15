@@ -127,14 +127,17 @@ public class OrganizationController {
     public String showMentor(@PathVariable String id, Model model) {
         User user = userService.findById(id);
         MentorAndStudentResponse mentorAndStudentResponse = mentorAndStudentResponseService.retrieveResponse(id);
+        model.addAttribute(mentorAndStudentResponse);
         model.addAttribute(user);
         return "profile";
     }   
     
     @RequestMapping(value = "viewResponse/{id}", method = RequestMethod.GET)
     public String showResponses(@PathVariable String id,Model model) {
+      User user = userService.findById(id);
       MentorAndStudentResponse mentorAndStudentResponse = mentorAndStudentResponseService.retrieveResponse(id);
       model.addAttribute(mentorAndStudentResponse);
+      model.addAttribute(user);
       return "bbbsResponseList";
     }
     

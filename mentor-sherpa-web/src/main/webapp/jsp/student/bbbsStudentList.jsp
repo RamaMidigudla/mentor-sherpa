@@ -12,6 +12,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <div id="find_keyword">
+     <label><spring:message code="label.search" /></label>
     <div class="ui-widget"><input id="searchQuery" size="40" placeholder="Enter a Name to Search..." type="text" name="tagQuery"  onFocus="inputFocus(this)" onBlur="inputBlur(this)"></div>
 </div>
 

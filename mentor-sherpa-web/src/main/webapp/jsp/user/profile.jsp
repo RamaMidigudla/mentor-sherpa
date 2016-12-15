@@ -22,8 +22,10 @@
                 <li class="list-group-item">
                   <b><spring:message code="label.dob" /></b>  <p class="pull-right text-light-blue">${user.dateOfBirth}</p>
                 </li>
-              </ul>                                 
+              </ul>
+             <c:if test="${not empty mentorAndStudentResponse}">
             <a href="${contextPath}/organization/viewResponse/${user.id}"><span class="btn btn-primary btn-block"><spring:message code="link.label.viewResponse" /></span></a>
+             </c:if>
             </div>
             <!-- /.box-body -->
           </div>

@@ -9,7 +9,7 @@
         <!-- Horizontal Form -->
         <div class="box box-info">
             <div class="box-header with-border">
-                <b class="box-title">Your response to ${mentorAndStudentResponse.programName} program</b>
+                <b class="box-title">${user.firstName} ${user.lastName} response to ${mentorAndStudentResponse.programName} program</b>
                 <br>
                 <br>
                 <!-- Post -->
